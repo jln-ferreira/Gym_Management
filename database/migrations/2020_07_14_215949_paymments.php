@@ -18,6 +18,8 @@ class Paymments extends Migration
             $table->integer('student_id')->unsigned();
             $table->date('date_paymment');
             $table->integer('item_id')->unsigned();
+            $table->integer('quantity');
+            $table->double('final_value');
             $table->text('comment');
 
             $table->timestamps();

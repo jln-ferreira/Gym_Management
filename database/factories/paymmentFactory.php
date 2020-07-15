@@ -11,13 +11,15 @@ use Faker\Generator as Faker;
 
 $factory->define(Paymment::class, function (Faker $faker) {
     return [
-        'student_id' => function(){
+        'student_id'    => function(){
         	return Student::all()->random();
         },
         'date_paymment' => $faker->dateTime,
-        'item_id' => function(){
+        'item_id'       => function(){
         	return Item::all()->random();
         },
+        'quantity'      => $faker->numberBetween($min = 1, $max = 10),
+        'final_value'   => $faker->numberBetween($min = 100, $max = 1500),
         'comment'       => $faker->text,
     ];
 });

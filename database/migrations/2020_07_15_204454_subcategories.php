@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Items extends Migration
+class Subcategories extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class Items extends Migration
      */
     public function up()
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('subcategories', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('subcategory_id')->unsigned();
             $table->string('name');
-            $table->integer('value');
 
             $table->timestamps();
         });

@@ -13,4 +13,10 @@ class Item extends Model
     {
         return $this->hasMany(Paymment::class);
     }
+
+    // Item < subcategory
+    public function subcategory()
+    {
+        return $this->belongsTo(Subcategory::class);
+    }
 }
