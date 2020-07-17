@@ -17,6 +17,8 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('gym_name');
+
 
             //Login
             $table->timestamp('email_verified_at')->nullable();
