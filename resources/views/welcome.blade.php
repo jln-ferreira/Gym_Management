@@ -17,6 +17,9 @@
         <!-- Styles -->
         <link href="css/welcomePage.css" rel="stylesheet">
 
+        <!-- Scripts -->
+        <script src="{{ mix('js/app.js') }}" defer></script>
+
     </head>
     <body>
         <div class="container-fluid">
@@ -32,25 +35,8 @@
             @endif
         </div>
 
-        <div id="root">
-            <h1>LARAVEL</h1>
-
+        <div id="app">
+            <welcome></welcome>
         </div>
-
-        <!-- ----------VUE---------- -->
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <script>
-
-            new Vue({
-                el: '#root',
-                data:{
-
-                },
-                methods: {
-
-                }
-            })
-
-        </script>
     </body>
 </html>

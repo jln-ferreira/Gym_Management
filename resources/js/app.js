@@ -18,7 +18,7 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
+Vue.component('welcome', require('./components/welcome_Page/welcome.vue').default);
 Vue.component('main-component', require('./components/MainComponent.vue').default);
 
 /**
