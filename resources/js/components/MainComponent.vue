@@ -21,8 +21,8 @@
         },
         created(){
             axios.get('/api/user')
-            .then(response => console.log(response.data));
-
+            .then(response => console.log(response.data))
+            // .catch(error => console.log(error));
         }
     }
 </script>
