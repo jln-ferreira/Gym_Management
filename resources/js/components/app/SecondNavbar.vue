@@ -93,13 +93,13 @@ export default {
         place-content: center;
     }
     @media only screen and (max-width: 767px) {
-        .second-nav{
-            display:none;
+        .collapse:not(.show) {
+            display: none;
         }
     }
     @media only screen and (min-width: 767px) {
-        .second-nav{
-            display:flex;
+        .collapse:not(.show) {
+            display: flex;
         }
     }
 
