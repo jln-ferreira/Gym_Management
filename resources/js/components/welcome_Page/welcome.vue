@@ -8,8 +8,8 @@
 
 <script>
 // import components
-import middleComponent from './component_welcome/middleComponent.vue'
-import footerComponent from './component_welcome/footerComponent.vue'
+import middleComponent from './component_welcome/MiddleComponent.vue'
+import footerComponent from './component_welcome/FooterComponent.vue'
 
 export default {
 

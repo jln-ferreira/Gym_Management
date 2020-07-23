@@ -57,6 +57,7 @@
 
             {{-- VUE CONPONENTS - SERVICE | ABOUT | CONTACT --}}
             <welcome></welcome>
+
         </div>
     </body>
 </html>
