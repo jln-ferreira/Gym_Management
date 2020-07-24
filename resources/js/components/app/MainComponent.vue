@@ -1,6 +1,9 @@
 <template>
     <div class="container-fluid">
         <SecondNavbar />
+
+        <!-- ----- [routes of MAIN PAGE] ----- -->
+        <router-view></router-view>
     </div>
 
 </template>
