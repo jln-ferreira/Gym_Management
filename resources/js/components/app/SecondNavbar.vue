@@ -7,7 +7,7 @@
             <router-link to="/students" class="list-group-item list-group-item-action"><i class="fa fa-graduation-cap" aria-hidden="true"></i> My Student</router-link>
         </div>
         <div class="shadow-sm col-sm-2">
-            <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-cash" aria-hidden="true"></i> Finance</a>
+            <router-link to="/finances" class="list-group-item list-group-item-action"><i class="fa fa-cash" aria-hidden="true"></i> Finance</router-link>
         </div>
         <div class="shadow-sm col-sm-2">
             <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-coins" aria-hidden="true"></i> Costs</a>
