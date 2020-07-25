@@ -1,10 +1,15 @@
 <template>
-  <h1>This is students page</h1>
+    <newStudent></newStudent>
 </template>
 
 <script>
-export default {
+// import components
+import newStudent from './components/newStudent.vue'
 
+export default {
+    components: {
+        newStudent
+    },
 }
 </script>
 

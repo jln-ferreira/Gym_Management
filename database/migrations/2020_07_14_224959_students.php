@@ -20,6 +20,7 @@ class Students extends Migration
             $table->integer('age');
             $table->text('address');
             $table->integer('belt_id')->unsigned();
+            $table->string('status');
 
             //graduation
             $table->integer('total_attendance');

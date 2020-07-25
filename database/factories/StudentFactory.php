@@ -16,6 +16,7 @@ $factory->define(Student::class, function (Faker $faker) {
         'belt_id' => function(){
         	return Belt::all()->random();
         },
+        'status' => $faker->randomElement(['Trial', 'Student', 'Professor']),
         'total_attendance'      => $faker->randomDigit,
         'attendance_graduation' => $faker->randomDigit,
 
