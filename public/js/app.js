@@ -1924,14 +1924,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     SecondNavbar: _SecondNavbar_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  },
-  created: function created() {
-    axios.get('/api/user').then(function (response) {
-      return console.log(response.data);
-    }); // .catch(error => console.log(error));
   }
 });
 
@@ -1959,6 +1951,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/dashboard/Dashboard.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/app/dashboard/Dashboard.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -1998,6 +2007,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 // import components
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2021,7 +2037,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    axios.get('/api/student').then(function (response) {
+      return console.log(response.data);
+    }); // .catch(error => console.log(error));
+  }
+});
 
 /***/ }),
 
@@ -6536,7 +6564,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Fix Container - css */\n.container-fluid {\n    padding-right: 0px !important;\n    padding-left: 0px !important;\n}\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Fix Container - css */\n.container-fluid {\n    padding-right: 0px !important;\n    padding-left: 0px !important;\n}\n.col-sm-2{\n    padding-right: 0px !important;\n    padding-left: 0px !important;\n}\n.row{\n    margin-right: 0px !important;\n    margin-left: 0px !important;\n}\n\n/* header of all pages - DASHBOARD STUDENTS FINANCES COSTS */\n.header-pages{\n    text-align: center;\n}\n\n", ""]);
 
 // exports
 
@@ -6555,7 +6583,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* FIX app.css */\n.col-sm-2{\n        padding-right: 0px !important;\n        padding-left: 0px !important;\n}\n\n/* [SECOND NAVBAR] */\n.second-nav{\n        place-content: center;\n}\n@media only screen and (max-width: 767px) {\n.collapse:not(.show) {\n            display: none;\n}\n}\n@media only screen and (min-width: 767px) {\n.collapse:not(.show) {\n            display: flex;\n}\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* [SECOND NAVBAR] */\n.second-nav{\n        place-content: center;\n}\n@media only screen and (max-width: 767px) {\n.collapse:not(.show) {\n            display: none;\n}\n}\n@media only screen and (min-width: 767px) {\n.collapse:not(.show) {\n            display: flex;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -38367,7 +38395,27 @@ var render = function() {
       attrs: { id: "sidebar" }
     },
     [
-      _vm._m(0),
+      _c(
+        "div",
+        { staticClass: "shadow-sm col-sm-2" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "list-group-item list-group-item-action",
+              attrs: { to: "/" }
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-home",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v(" Main Page")
+            ]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "div",
@@ -38384,7 +38432,7 @@ var render = function() {
                 staticClass: "fa fa-graduation-cap",
                 attrs: { "aria-hidden": "true" }
               }),
-              _vm._v(" My Student")
+              _vm._v(" My Students")
             ]
           )
         ],
@@ -38406,39 +38454,18 @@ var render = function() {
                 staticClass: "fa fa-cash",
                 attrs: { "aria-hidden": "true" }
               }),
-              _vm._v(" Finance")
+              _vm._v(" Finances")
             ]
           )
         ],
         1
       ),
       _vm._v(" "),
-      _vm._m(1)
+      _vm._m(0)
     ]
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "shadow-sm col-sm-2" }, [
-      _c(
-        "a",
-        {
-          staticClass: "list-group-item list-group-item-action",
-          attrs: { href: "#" }
-        },
-        [
-          _c("i", {
-            staticClass: "fa fa-home",
-            attrs: { "aria-hidden": "true" }
-          }),
-          _vm._v(" Main Page")
-        ]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -38461,6 +38488,30 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/dashboard/Dashboard.vue?vue&type=template&id=1c439460&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/app/dashboard/Dashboard.vue?vue&type=template&id=1c439460& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("h1", [_vm._v("THIS IS DASHBOARD")])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -38506,9 +38557,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("newStudent")
+  return _c("div", [_vm._m(0), _vm._v(" "), _c("newStudent")], 1)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "pt-4 pb-2" }, [
+      _c("h1", { staticClass: "header-pages font-weight-bold" }, [
+        _vm._v("Students")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -38530,9 +38592,30 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("This is form new student component")])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "container" }, [
+      _c("hr"),
+      _vm._v(" "),
+      _c("div", { staticClass: "btn btn-primary" }, [
+        _c("i", {
+          staticClass: "fa fa-graduation-cap",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" New Student "),
+        _c("i", {
+          staticClass: "fa fa-minus",
+          attrs: { "aria-hidden": "true" }
+        })
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -54066,6 +54149,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/app/dashboard/Dashboard.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/app/dashboard/Dashboard.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Dashboard_vue_vue_type_template_id_1c439460___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Dashboard.vue?vue&type=template&id=1c439460& */ "./resources/js/components/app/dashboard/Dashboard.vue?vue&type=template&id=1c439460&");
+/* harmony import */ var _Dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Dashboard.vue?vue&type=script&lang=js& */ "./resources/js/components/app/dashboard/Dashboard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Dashboard_vue_vue_type_template_id_1c439460___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Dashboard_vue_vue_type_template_id_1c439460___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/app/dashboard/Dashboard.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/app/dashboard/Dashboard.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/app/dashboard/Dashboard.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Dashboard.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/dashboard/Dashboard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/app/dashboard/Dashboard.vue?vue&type=template&id=1c439460&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/app/dashboard/Dashboard.vue?vue&type=template&id=1c439460& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_1c439460___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Dashboard.vue?vue&type=template&id=1c439460& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/dashboard/Dashboard.vue?vue&type=template&id=1c439460&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_1c439460___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_1c439460___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/app/finances/Finances.vue":
 /*!***********************************************************!*\
   !*** ./resources/js/components/app/finances/Finances.vue ***!
@@ -54492,21 +54644,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _components_app_students_Students__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/app/students/Students */ "./resources/js/components/app/students/Students.vue");
-/* harmony import */ var _components_app_finances_Finances__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/app/finances/Finances */ "./resources/js/components/app/finances/Finances.vue");
+/* harmony import */ var _components_app_dashboard_Dashboard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/app/dashboard/Dashboard */ "./resources/js/components/app/dashboard/Dashboard.vue");
+/* harmony import */ var _components_app_students_Students__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/app/students/Students */ "./resources/js/components/app/students/Students.vue");
+/* harmony import */ var _components_app_finances_Finances__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/app/finances/Finances */ "./resources/js/components/app/finances/Finances.vue");
 
  // components
+
 
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: [{
+    path: '/',
+    component: _components_app_dashboard_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"]
+  }, {
     path: '/students',
-    component: _components_app_students_Students__WEBPACK_IMPORTED_MODULE_2__["default"]
+    component: _components_app_students_Students__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {
     path: '/finances',
-    component: _components_app_finances_Finances__WEBPACK_IMPORTED_MODULE_3__["default"]
+    component: _components_app_finances_Finances__WEBPACK_IMPORTED_MODULE_4__["default"]
   }]
 }));
 

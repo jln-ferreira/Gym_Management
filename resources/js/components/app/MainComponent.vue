@@ -16,14 +16,6 @@ export default {
 
     components: {
         SecondNavbar,
-    },
-    mounted() {
-        console.log('Component mounted.')
-    },
-    created(){
-        axios.get('/api/user')
-        .then(response => console.log(response.data))
-        // .catch(error => console.log(error));
     }
 }
 </script>
@@ -34,6 +26,18 @@ export default {
         padding-right: 0px !important;
         padding-left: 0px !important;
     }
+    .col-sm-2{
+        padding-right: 0px !important;
+        padding-left: 0px !important;
+    }
+    .row{
+        margin-right: 0px !important;
+        margin-left: 0px !important;
+    }
 
+    /* header of all pages - DASHBOARD STUDENTS FINANCES COSTS */
+    .header-pages{
+        text-align: center;
+    }
 
 </style>

@@ -14,4 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/user', 'UserController@show');
+// -----[STUDENTS]-----
+Route::resource('student', 'StudentController');
