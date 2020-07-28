@@ -9,21 +9,27 @@ class Student extends Model
     protected $guarded = [];
 
     // ------- RELATIONSHIP -------
-    // User > Graduation
+    // student > Graduation
     public function graduation()
     {
         return $this->hasMany(Graduation::class);
     }
 
-    // User > belt
+    // student > belt
     public function belt()
     {
         return $this->belongsTo(Belt::class);
     }
 
-    // User > Paymment
+    // student > Paymment
     public function paymment()
     {
         return $this->hasMany(Paymment::class);
+    }
+
+    // student > responsable
+    public function responsable()
+    {
+        return $this->hasMany(Responsable::class);
     }
 }

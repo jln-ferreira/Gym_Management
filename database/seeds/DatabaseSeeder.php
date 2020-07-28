@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 
 use App\Student;
+use App\Responsable;
 use App\Paymment;
 use App\Belt;
 use App\Graduation;
@@ -23,7 +24,8 @@ class DatabaseSeeder extends Seeder
         factory(Subcategory::class,10)->create();
         factory(Item::class,10)->create();
         factory(Cost::class,40)->create();
-        factory(Student::class,10)->create();
+        factory(Student::class,50)->create();
+        factory(Responsable::class,20)->create();
         factory(Paymment::class,50)->create();
         factory(Graduation::class,5)->create();
     }

@@ -25,14 +25,14 @@
                     <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" required>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-5">
                         <label for="belt">Belt</label>
                         <select id="belt" class="form-control" required>
                             <option selected>Choose...</option>
                             <option>...</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <label for="status">Status</label>
                         <select id="status" class="form-control" required>
                             <option selected>Choose...</option>
@@ -41,8 +41,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Example textarea</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <label for="comments">Comments</label>
+                    <textarea class="form-control" id="comments" rows="3"></textarea>
                 </div>
                 <button type="submit" class="btn btn-success">Add Student</button>
             </form>

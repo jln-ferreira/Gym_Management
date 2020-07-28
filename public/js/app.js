@@ -38705,7 +38705,7 @@ var staticRenderFns = [
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-row" }, [
-            _c("div", { staticClass: "form-group col-md-4" }, [
+            _c("div", { staticClass: "form-group col-md-5" }, [
               _c("label", { attrs: { for: "belt" } }, [_vm._v("Belt")]),
               _vm._v(" "),
               _c(
@@ -38724,7 +38724,7 @@ var staticRenderFns = [
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group col-md-4" }, [
+            _c("div", { staticClass: "form-group col-md-3" }, [
               _c("label", { attrs: { for: "status" } }, [_vm._v("Status")]),
               _vm._v(" "),
               _c(
@@ -38745,13 +38745,11 @@ var staticRenderFns = [
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "exampleFormControlTextarea1" } }, [
-              _vm._v("Example textarea")
-            ]),
+            _c("label", { attrs: { for: "comments" } }, [_vm._v("Comments")]),
             _vm._v(" "),
             _c("textarea", {
               staticClass: "form-control",
-              attrs: { id: "exampleFormControlTextarea1", rows: "3" }
+              attrs: { id: "comments", rows: "3" }
             })
           ]),
           _vm._v(" "),
