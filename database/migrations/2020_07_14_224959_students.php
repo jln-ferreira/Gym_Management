@@ -17,10 +17,11 @@ class Students extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->integer('age');
+            $table->date('databirth');
             $table->text('address');
             $table->integer('belt_id')->unsigned();
             $table->string('status');
+            $table->text('comment');
 
             //graduation
             $table->integer('total_attendance');
