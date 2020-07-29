@@ -2087,6 +2087,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      visibleNewStudent: false
+    };
+  },
+  methods: {
+    toggleNewStudent: function toggleNewStudent() {
+      return this.visibleNewStudent = !this.visibleNewStudent;
+    },
+    faChanging: function faChanging() {
+      return this.visibleNewStudent == true ? "fa fa-minus" : "fa fa-plus";
+    }
+  },
   created: function created() {
     axios.get('/api/student').then(function (response) {
       return console.log(response.data);
@@ -38637,129 +38650,141 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("section", { staticClass: "container" }, [
+    _c("hr"),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "btn btn-primary",
+        on: {
+          click: function($event) {
+            return _vm.toggleNewStudent()
+          }
+        }
+      },
+      [
+        _c("i", {
+          staticClass: "fa fa-graduation-cap",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" New Student "),
+        _c("i", { class: _vm.faChanging(), attrs: { "aria-hidden": "true" } })
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.visibleNewStudent,
+            expression: "visibleNewStudent"
+          }
+        ],
+        staticClass: "mt-1 shadow-sm p-4 mb-4 bg-white"
+      },
+      [_vm._m(0)]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "container" }, [
-      _c("hr"),
+    return _c("form", [
+      _c("div", { staticClass: "form-row" }, [
+        _c("div", { staticClass: "form-group col-md-6" }, [
+          _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "name",
+              placeholder: "Name",
+              required: ""
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-6" }, [
+          _c("label", { attrs: { for: "birthdate" } }, [_vm._v("Birthdate")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "date", id: "birthdate", required: "" }
+          })
+        ])
+      ]),
       _vm._v(" "),
-      _c("div", { staticClass: "btn btn-primary" }, [
-        _c("i", {
-          staticClass: "fa fa-graduation-cap",
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v(" New Student "),
-        _c("i", {
-          staticClass: "fa fa-minus",
-          attrs: { "aria-hidden": "true" }
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "inputAddress" } }, [_vm._v("Address")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            id: "inputAddress",
+            placeholder: "1234 Main St",
+            required: ""
+          }
         })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "mt-1 shadow-sm p-4 mb-4 bg-white" }, [
-        _c("form", [
-          _c("div", { staticClass: "form-row" }, [
-            _c("div", { staticClass: "form-group col-md-6" }, [
-              _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "name",
-                  placeholder: "Name",
-                  required: ""
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group col-md-6" }, [
-              _c("label", { attrs: { for: "birthdate" } }, [
-                _vm._v("Birthdate")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "date", id: "birthdate", required: "" }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "inputAddress" } }, [
-              _vm._v("Address")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control",
-              attrs: {
-                type: "text",
-                id: "inputAddress",
-                placeholder: "1234 Main St",
-                required: ""
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-row" }, [
-            _c("div", { staticClass: "form-group col-md-5" }, [
-              _c("label", { attrs: { for: "belt" } }, [_vm._v("Belt")]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  staticClass: "form-control",
-                  attrs: { id: "belt", required: "" }
-                },
-                [
-                  _c("option", { attrs: { selected: "" } }, [
-                    _vm._v("Choose...")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("...")])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group col-md-3" }, [
-              _c("label", { attrs: { for: "status" } }, [_vm._v("Status")]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  staticClass: "form-control",
-                  attrs: { id: "status", required: "" }
-                },
-                [
-                  _c("option", { attrs: { selected: "" } }, [
-                    _vm._v("Choose...")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("...")])
-                ]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "comments" } }, [_vm._v("Comments")]),
-            _vm._v(" "),
-            _c("textarea", {
-              staticClass: "form-control",
-              attrs: { id: "comments", rows: "3" }
-            })
-          ]),
+      _c("div", { staticClass: "form-row" }, [
+        _c("div", { staticClass: "form-group col-md-5" }, [
+          _c("label", { attrs: { for: "belt" } }, [_vm._v("Belt")]),
           _vm._v(" "),
           _c(
-            "button",
-            { staticClass: "btn btn-success", attrs: { type: "submit" } },
-            [_vm._v("Add Student")]
+            "select",
+            {
+              staticClass: "form-control",
+              attrs: { id: "belt", required: "" }
+            },
+            [
+              _c("option", { attrs: { selected: "" } }, [_vm._v("Choose...")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("...")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-3" }, [
+          _c("label", { attrs: { for: "status" } }, [_vm._v("Status")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              staticClass: "form-control",
+              attrs: { id: "status", required: "" }
+            },
+            [
+              _c("option", { attrs: { selected: "" } }, [_vm._v("Choose...")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("...")])
+            ]
           )
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "comments" } }, [_vm._v("Comments")]),
+        _vm._v(" "),
+        _c("textarea", {
+          staticClass: "form-control",
+          attrs: { id: "comments", rows: "3" }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [_vm._v("Add Student")]
+      )
     ])
   }
 ]

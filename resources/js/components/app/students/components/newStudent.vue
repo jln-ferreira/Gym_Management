@@ -2,13 +2,13 @@
     <section class="container">
         <hr>
         <!-- [button toggle] -->
-        <div class="btn btn-primary">
-            <i class="fa fa-graduation-cap" aria-hidden="true"></i> New Student <i class="fa fa-minus" aria-hidden="true"></i>
+        <div class="btn btn-primary" @click="toggleNewStudent()">
+            <i class="fa fa-graduation-cap" aria-hidden="true"></i> New Student <i :class="faChanging()" aria-hidden="true"></i>
         </div>
         <!-- [end button] -->
 
         <!-- [card new student] -->
-        <div class="mt-1 shadow-sm p-4 mb-4 bg-white">
+        <div class="mt-1 shadow-sm p-4 mb-4 bg-white" v-show="visibleNewStudent">
             <form>
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -53,6 +53,19 @@
 
 <script>
 export default {
+    data(){
+        return{
+            visibleNewStudent: false
+        }
+    },
+    methods:{
+        toggleNewStudent(){
+            return this.visibleNewStudent = !this.visibleNewStudent
+        },
+        faChanging(){
+            return (this.visibleNewStudent == true) ? "fa fa-minus" : "fa fa-plus"
+        }
+    },
     created(){
         axios.get('/api/student')
         .then(response => console.log(response.data))
