@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 // -----[STUDENTS]-----
 Route::resource('student', 'StudentController');
+
+// -----[BELTS]-----
+Route::resource('belt', 'BeltController');
