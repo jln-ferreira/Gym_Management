@@ -38,18 +38,22 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $student = Student::create([
-            'name' => $request->input('nameStudent'),
-            'email' => $request->input('emailStudent'),
-            'address' => $request->input('addressStudent'),
-            'belt_id' => $request->input('beltStudent'),
-            'status' => $request->input('statusStudent'),
-            'databirth' => $request->input('birthDateStudent'),
-            'comment' => $request->input('commentStudent')
-        ]);
-        return response()->json([
-            'message' => "foi?"
-        ]);
+        try {
+                $student = Student::create([
+                'name' => $request->input('nameStudent'),
+                'email' => $request->input('emailStudent'),
+                'address' => $request->input('addressStudent'),
+                'belt_id' => $request->input('beltStudent'),
+                'status' => $request->input('statusStudent'),
+                'databirth' => $request->input('birthDateStudent'),
+                'comment' => $request->input('commentStudent')
+            ]);
+            return response("Student added", 200);
+
+        } catch (\Throwable $th) {
+           return response('Something Wrong?', 500);
+        }
+
     }
 
     /**

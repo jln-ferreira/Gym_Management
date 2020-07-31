@@ -6,16 +6,19 @@
         </div>
         <!-- end HEADER -->
         <newStudent></newStudent>
+        <allStudents></allStudents>
     </div>
 </template>
 
 <script>
 // import components
 import newStudent from './components/newStudent.vue'
+import allStudents from './components/allStudents.vue'
 
 export default {
     components: {
-        newStudent
+        newStudent,
+        allStudents
     },
 }
 </script>

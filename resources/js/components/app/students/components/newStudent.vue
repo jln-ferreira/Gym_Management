@@ -91,15 +91,18 @@ export default {
                     birthDateStudent: this.FormStudent.birthDateStudent,
                     commentStudent: this.FormStudent.commentStudent
                 })
-                .then(response => console.log(response.data))
-                .catch(error => console.log(error))
+                .then(response => {
+                    this.visibleNewStudent = false
+                    alert(response.data)
+                })
+                .catch(error => alert(error.response.data))
             }
     },
     created(){
         // Fetch all [Belts] from DB
         axios.get('/api/belt')
         .then(response => this.beltList = response.data)
-        .catch(error => console.log(error))
+        .catch(error => console.log(error.data))
     }
 }
 </script>
