@@ -2084,6 +2084,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2092,11 +2096,12 @@ __webpack_require__.r(__webpack_exports__);
       statusList: ["Student", "Trial", "Professor"],
       // ---[POST]---
       FormStudent: {
-        nameStudent: "",
-        birthDateStudent: "",
+        nameStudent: '',
+        emailStudent: "",
         addressStudent: "",
         beltStudent: "",
         statusStudent: "",
+        birthDateStudent: "",
         commentStudent: ""
       }
     };
@@ -2109,22 +2114,28 @@ __webpack_require__.r(__webpack_exports__);
       return this.visibleNewStudent == true ? "fa fa-minus" : "fa fa-plus";
     },
     addNewPost: function addNewPost() {
-      var _this = this;
-
       //-----[POST]------
-      axios.post('/post', this.post).then(function (response) {
-        return _this.beltList = response.data;
+      axios.post('/api/student', {
+        nameStudent: this.FormStudent.nameStudent,
+        emailStudent: this.FormStudent.emailStudent,
+        addressStudent: this.FormStudent.addressStudent,
+        beltStudent: this.FormStudent.beltStudent,
+        statusStudent: this.FormStudent.statusStudent,
+        birthDateStudent: this.FormStudent.birthDateStudent,
+        commentStudent: this.FormStudent.commentStudent
+      }).then(function (response) {
+        return console.log(response.data);
       })["catch"](function (error) {
         return console.log(error);
       });
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this = this;
 
     // Fetch all [Belts] from DB
     axios.get('/api/belt').then(function (response) {
-      return _this2.beltList = response.data;
+      return _this.beltList = response.data;
     })["catch"](function (error) {
       return console.log(error);
     });
@@ -38712,6 +38723,7 @@ var render = function() {
         _c(
           "form",
           {
+            attrs: { method: "post" },
             on: {
               submit: function($event) {
                 $event.preventDefault()
@@ -38752,27 +38764,20 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group col-md-6" }, [
-                _c("label", { attrs: { for: "birthdate" } }, [
-                  _vm._v("Birthdate")
-                ]),
+                _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.FormStudent.birthDateStudent,
-                      expression: "FormStudent.birthDateStudent"
+                      value: _vm.FormStudent.emailStudent,
+                      expression: "FormStudent.emailStudent"
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: {
-                    type: "date",
-                    id: "birthdate",
-                    min: _vm.minDate,
-                    required: ""
-                  },
-                  domProps: { value: _vm.FormStudent.birthDateStudent },
+                  attrs: { type: "email", id: "email", required: "" },
+                  domProps: { value: _vm.FormStudent.emailStudent },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
@@ -38780,7 +38785,7 @@ var render = function() {
                       }
                       _vm.$set(
                         _vm.FormStudent,
-                        "birthDateStudent",
+                        "emailStudent",
                         $event.target.value
                       )
                     }
@@ -38866,14 +38871,17 @@ var render = function() {
                   _vm._l(_vm.beltList, function(belt) {
                     return _c("option", {
                       key: belt.id,
-                      domProps: { textContent: _vm._s(belt.name) }
+                      domProps: {
+                        value: belt.id,
+                        textContent: _vm._s(belt.name)
+                      }
                     })
                   }),
                   0
                 )
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group col-md-3" }, [
+              _c("div", { staticClass: "form-group col-md-2" }, [
                 _c("label", { attrs: { for: "status" } }, [_vm._v("Status")]),
                 _vm._v(" "),
                 _c(
@@ -38912,11 +38920,43 @@ var render = function() {
                   _vm._l(_vm.statusList, function(status) {
                     return _c("option", {
                       key: status.id,
-                      domProps: { textContent: _vm._s(status) }
+                      domProps: { value: status, textContent: _vm._s(status) }
                     })
                   }),
                   0
                 )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group offset-md-2 col-md-3" }, [
+                _c("label", { attrs: { for: "birthdate" } }, [
+                  _vm._v("Birthdate")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.FormStudent.birthDateStudent,
+                      expression: "FormStudent.birthDateStudent"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "date", id: "birthdate", required: "" },
+                  domProps: { value: _vm.FormStudent.birthDateStudent },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.FormStudent,
+                        "birthDateStudent",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
               ])
             ]),
             _vm._v(" "),

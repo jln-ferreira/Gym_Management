@@ -21,11 +21,11 @@ class Students extends Migration
             $table->text('address');
             $table->integer('belt_id')->unsigned();
             $table->string('status');
-            $table->text('comment');
+            $table->text('comment')->nullable();
 
             //graduation
-            $table->integer('total_attendance');
-            $table->integer('attendance_graduation');
+            $table->integer('total_attendance')->default(0);
+            $table->integer('attendance_graduation')->default(0);
 
             //foreing key
 
