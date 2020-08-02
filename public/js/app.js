@@ -2115,15 +2115,16 @@ __webpack_require__.r(__webpack_exports__);
       visibleNewStudent: false,
       beltList: Array,
       statusList: ["Student", "Trial", "Professor"],
+      errors: {},
       // ---[POST]---
       FormStudent: {
-        nameStudent: '',
-        emailStudent: "",
-        addressStudent: "",
-        beltStudent: "",
-        statusStudent: "",
-        birthDateStudent: "",
-        commentStudent: ""
+        name: '',
+        email: "",
+        address: "",
+        belt_id: "",
+        status: "",
+        databirth: "",
+        comment: ""
       }
     };
   },
@@ -2139,18 +2140,17 @@ __webpack_require__.r(__webpack_exports__);
 
       //-----[POST]------
       axios.post('/api/student', {
-        nameStudent: this.FormStudent.nameStudent,
-        emailStudent: this.FormStudent.emailStudent,
-        addressStudent: this.FormStudent.addressStudent,
-        beltStudent: this.FormStudent.beltStudent,
-        statusStudent: this.FormStudent.statusStudent,
-        birthDateStudent: this.FormStudent.birthDateStudent,
-        commentStudent: this.FormStudent.commentStudent
+        name: this.FormStudent.name,
+        email: this.FormStudent.email,
+        address: this.FormStudent.address,
+        belt_id: this.FormStudent.belt_id,
+        status: this.FormStudent.status,
+        databirth: this.FormStudent.databirth,
+        comment: this.FormStudent.comment
       }).then(function (response) {
-        _this.visibleNewStudent = false;
-        alert(response.data);
+        return alert(response.response);
       })["catch"](function (error) {
-        return alert(error.response.data);
+        return _this.errors = error.response.data.errors;
       });
     }
   },
@@ -2161,7 +2161,7 @@ __webpack_require__.r(__webpack_exports__);
     axios.get('/api/belt').then(function (response) {
       return _this2.beltList = response.data;
     })["catch"](function (error) {
-      return console.log(error.data);
+      return console.log(error);
     });
   }
 });
@@ -38793,23 +38793,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.FormStudent.nameStudent,
-                      expression: "FormStudent.nameStudent"
+                      value: _vm.FormStudent.name,
+                      expression: "FormStudent.name"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { type: "text", id: "name", required: "" },
-                  domProps: { value: _vm.FormStudent.nameStudent },
+                  domProps: { value: _vm.FormStudent.name },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(
-                        _vm.FormStudent,
-                        "nameStudent",
-                        $event.target.value
-                      )
+                      _vm.$set(_vm.FormStudent, "name", $event.target.value)
                     }
                   }
                 })
@@ -38823,23 +38819,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.FormStudent.emailStudent,
-                      expression: "FormStudent.emailStudent"
+                      value: _vm.FormStudent.email,
+                      expression: "FormStudent.email"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { type: "email", id: "email", required: "" },
-                  domProps: { value: _vm.FormStudent.emailStudent },
+                  domProps: { value: _vm.FormStudent.email },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(
-                        _vm.FormStudent,
-                        "emailStudent",
-                        $event.target.value
-                      )
+                      _vm.$set(_vm.FormStudent, "email", $event.target.value)
                     }
                   }
                 })
@@ -38856,8 +38848,8 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.FormStudent.addressStudent,
-                    expression: "FormStudent.addressStudent"
+                    value: _vm.FormStudent.address,
+                    expression: "FormStudent.address"
                   }
                 ],
                 staticClass: "form-control",
@@ -38867,17 +38859,13 @@ var render = function() {
                   placeholder: "1234 Main St",
                   required: ""
                 },
-                domProps: { value: _vm.FormStudent.addressStudent },
+                domProps: { value: _vm.FormStudent.address },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(
-                      _vm.FormStudent,
-                      "addressStudent",
-                      $event.target.value
-                    )
+                    _vm.$set(_vm.FormStudent, "address", $event.target.value)
                   }
                 }
               })
@@ -38894,8 +38882,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.FormStudent.beltStudent,
-                        expression: "FormStudent.beltStudent"
+                        value: _vm.FormStudent.belt_id,
+                        expression: "FormStudent.belt_id"
                       }
                     ],
                     staticClass: "form-control",
@@ -38912,7 +38900,7 @@ var render = function() {
                           })
                         _vm.$set(
                           _vm.FormStudent,
-                          "beltStudent",
+                          "belt_id",
                           $event.target.multiple
                             ? $$selectedVal
                             : $$selectedVal[0]
@@ -38943,8 +38931,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.FormStudent.statusStudent,
-                        expression: "FormStudent.statusStudent"
+                        value: _vm.FormStudent.status,
+                        expression: "FormStudent.status"
                       }
                     ],
                     staticClass: "form-control",
@@ -38961,7 +38949,7 @@ var render = function() {
                           })
                         _vm.$set(
                           _vm.FormStudent,
-                          "statusStudent",
+                          "status",
                           $event.target.multiple
                             ? $$selectedVal
                             : $$selectedVal[0]
@@ -38980,7 +38968,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group offset-md-2 col-md-3" }, [
-                _c("label", { attrs: { for: "birthdate" } }, [
+                _c("label", { attrs: { for: "databirth" } }, [
                   _vm._v("Birthdate")
                 ]),
                 _vm._v(" "),
@@ -38989,13 +38977,13 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.FormStudent.birthDateStudent,
-                      expression: "FormStudent.birthDateStudent"
+                      value: _vm.FormStudent.databirth,
+                      expression: "FormStudent.databirth"
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "date", id: "birthdate", required: "" },
-                  domProps: { value: _vm.FormStudent.birthDateStudent },
+                  attrs: { type: "date", id: "databirth", required: "" },
+                  domProps: { value: _vm.FormStudent.databirth },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
@@ -39003,7 +38991,7 @@ var render = function() {
                       }
                       _vm.$set(
                         _vm.FormStudent,
-                        "birthDateStudent",
+                        "databirth",
                         $event.target.value
                       )
                     }
@@ -39020,23 +39008,19 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.FormStudent.commentStudent,
-                    expression: "FormStudent.commentStudent"
+                    value: _vm.FormStudent.comment,
+                    expression: "FormStudent.comment"
                   }
                 ],
                 staticClass: "form-control",
                 attrs: { id: "comments", rows: "3" },
-                domProps: { value: _vm.FormStudent.commentStudent },
+                domProps: { value: _vm.FormStudent.comment },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(
-                      _vm.FormStudent,
-                      "commentStudent",
-                      $event.target.value
-                    )
+                    _vm.$set(_vm.FormStudent, "comment", $event.target.value)
                   }
                 }
               })
