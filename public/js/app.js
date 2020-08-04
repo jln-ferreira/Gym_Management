@@ -2058,6 +2058,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -38757,36 +38769,64 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("section", { staticClass: "container" }, [
+    _c("div", { staticClass: "bg-white" }, [
+      _c(
+        "table",
+        { staticClass: "table table-striped", attrs: { id: "table_student" } },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(this.studentList, function(student) {
+              return _c("tr", { key: student.id }, [
+                _c("td", [_vm._v(_vm._s(student.name))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(student.email))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(student.databirth))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(student.address))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(student.belt_id))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(student.total_attendance))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(student.attendance_graduation))]),
+                _vm._v(" "),
+                _c("td")
+              ])
+            }),
+            0
+          )
+        ]
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "container" }, [
-      _c("div", { staticClass: "bg-white" }, [
-        _c(
-          "table",
-          { staticClass: "table table-hover", attrs: { id: "table_student" } },
-          [
-            _c("thead", [
-              _c("tr", [
-                _c("th", [_vm._v("Column 1")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("Column 2")])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tbody", [
-              _c("tr", [
-                _c("td", [_vm._v("Row 1 Data 1")]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Row 1 Data 2")])
-              ])
-            ])
-          ]
-        )
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Data Birth")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Adress")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Belt")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Attendance")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Next")]),
+        _vm._v(" "),
+        _c("th")
       ])
     ])
   }

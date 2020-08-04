@@ -1,17 +1,29 @@
 <template>
   <section class="container">
       <div class="bg-white">
-         <table id="table_student" class="table table-hover">
+         <table id="table_student" class="table table-striped">
             <thead>
                 <tr>
-                    <th>Column 1</th>
-                    <th>Column 2</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Data Birth</th>
+                    <th>Adress</th>
+                    <th>Belt</th>
+                    <th>Attendance</th>
+                    <th>Next</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Row 1 Data 1</td>
-                    <td>Row 1 Data 2</td>
+                <tr v-for="student in this.studentList" v-bind:key="student.id">
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.email }}</td>
+                    <td>{{ student.databirth }}</td>
+                    <td>{{ student.address }}</td>
+                    <td>{{ student.belt_id }}</td>
+                    <td>{{ student.total_attendance }}</td>
+                    <td>{{ student.attendance_graduation }}</td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
