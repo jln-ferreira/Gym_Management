@@ -5,7 +5,7 @@
             <h1 class="header-pages font-weight-bold">Students</h1>
         </div>
         <!-- end HEADER -->
-        <newStudent></newStudent>
+        <newStudent class="mb-2"></newStudent>
         <allStudents></allStudents>
     </div>
 </template>

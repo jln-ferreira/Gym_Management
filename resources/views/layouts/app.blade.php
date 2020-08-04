@@ -70,4 +70,5 @@
             </main>
         </div>
     </body>
+</script>
 </html>

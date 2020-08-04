@@ -2041,7 +2041,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      studentList: Array
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    // Fetch all [Belts] from DB
+    axios.get('/api/student').then(function (response) {
+      return _this.studentList = response.data;
+    })["catch"](function (error) {
+      return console.log(error);
+    });
+  }
+});
 
 /***/ }),
 
@@ -2109,6 +2142,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2118,7 +2158,7 @@ __webpack_require__.r(__webpack_exports__);
       errors: {},
       // ---[POST]---
       FormStudent: {
-        name: '',
+        name: "",
         email: "",
         address: "",
         belt_id: "",
@@ -38674,7 +38714,13 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_vm._m(0), _vm._v(" "), _c("newStudent"), _vm._v(" "), _c("allStudents")],
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("newStudent", { staticClass: "mb-2" }),
+      _vm._v(" "),
+      _c("allStudents")
+    ],
     1
   )
 }
@@ -38711,9 +38757,40 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "container" }, [_vm._v("meuovo")])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "container" }, [
+      _c("div", { staticClass: "bg-white" }, [
+        _c(
+          "table",
+          { staticClass: "table table-hover", attrs: { id: "table_student" } },
+          [
+            _c("thead", [
+              _c("tr", [
+                _c("th", [_vm._v("Column 1")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Column 2")])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tbody", [
+              _c("tr", [
+                _c("td", [_vm._v("Row 1 Data 1")]),
+                _vm._v(" "),
+                _c("td", [_vm._v("Row 1 Data 2")])
+              ])
+            ])
+          ]
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -38785,91 +38862,130 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "form-row" }, [
-              _c("div", { staticClass: "form-group col-md-6" }, [
-                _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.FormStudent.name,
-                      expression: "FormStudent.name"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", id: "name", required: "" },
-                  domProps: { value: _vm.FormStudent.name },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+              _c(
+                "div",
+                { staticClass: "form-group col-md-6" },
+                [
+                  _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.FormStudent.name,
+                        expression: "FormStudent.name"
                       }
-                      _vm.$set(_vm.FormStudent, "name", $event.target.value)
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "name", required: "" },
+                    domProps: { value: _vm.FormStudent.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.FormStudent, "name", $event.target.value)
+                      }
                     }
-                  }
-                })
-              ]),
+                  }),
+                  _vm._v(" "),
+                  _vm._l(this.errors.name, function(error) {
+                    return _c(
+                      "small",
+                      { key: error, staticClass: "text-danger" },
+                      [_vm._v(_vm._s(error))]
+                    )
+                  })
+                ],
+                2
+              ),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group col-md-6" }, [
-                _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.FormStudent.email,
-                      expression: "FormStudent.email"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "email", id: "email", required: "" },
-                  domProps: { value: _vm.FormStudent.email },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+              _c(
+                "div",
+                { staticClass: "form-group col-md-6" },
+                [
+                  _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.FormStudent.email,
+                        expression: "FormStudent.email"
                       }
-                      _vm.$set(_vm.FormStudent, "email", $event.target.value)
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "email", id: "email", required: "" },
+                    domProps: { value: _vm.FormStudent.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.FormStudent, "email", $event.target.value)
+                      }
                     }
-                  }
-                })
-              ])
+                  }),
+                  _vm._v(" "),
+                  _vm._l(this.errors.email, function(error) {
+                    return _c(
+                      "small",
+                      { key: error, staticClass: "text-danger" },
+                      [_vm._v(_vm._s(error))]
+                    )
+                  })
+                ],
+                2
+              )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "inputAddress" } }, [
-                _vm._v("Address")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.FormStudent.address,
-                    expression: "FormStudent.address"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "inputAddress",
-                  placeholder: "1234 Main St",
-                  required: ""
-                },
-                domProps: { value: _vm.FormStudent.address },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("label", { attrs: { for: "inputAddress" } }, [
+                  _vm._v("Address")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.FormStudent.address,
+                      expression: "FormStudent.address"
                     }
-                    _vm.$set(_vm.FormStudent, "address", $event.target.value)
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "inputAddress",
+                    placeholder: "1234 Main St",
+                    required: ""
+                  },
+                  domProps: { value: _vm.FormStudent.address },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.FormStudent, "address", $event.target.value)
+                    }
                   }
-                }
-              })
-            ]),
+                }),
+                _vm._v(" "),
+                _vm._l(this.errors.address, function(error) {
+                  return _c(
+                    "small",
+                    { key: error, staticClass: "text-danger" },
+                    [_vm._v(_vm._s(error))]
+                  )
+                })
+              ],
+              2
+            ),
             _vm._v(" "),
             _c("div", { staticClass: "form-row" }, [
               _c("div", { staticClass: "form-group col-md-5" }, [
@@ -38908,16 +39024,26 @@ var render = function() {
                       }
                     }
                   },
-                  _vm._l(_vm.beltList, function(belt) {
-                    return _c("option", {
-                      key: belt.id,
-                      domProps: {
-                        value: belt.id,
-                        textContent: _vm._s(belt.name)
-                      }
+                  [
+                    _vm._l(_vm.beltList, function(belt) {
+                      return _c("option", {
+                        key: belt.id,
+                        domProps: {
+                          value: belt.id,
+                          textContent: _vm._s(belt.name)
+                        }
+                      })
+                    }),
+                    _vm._v(" "),
+                    _vm._l(this.errors.belt_id, function(error) {
+                      return _c(
+                        "small",
+                        { key: error, staticClass: "text-danger" },
+                        [_vm._v(_vm._s(error))]
+                      )
                     })
-                  }),
-                  0
+                  ],
+                  2
                 )
               ]),
               _vm._v(" "),
@@ -38957,74 +39083,112 @@ var render = function() {
                       }
                     }
                   },
-                  _vm._l(_vm.statusList, function(status) {
-                    return _c("option", {
-                      key: status.id,
-                      domProps: { value: status, textContent: _vm._s(status) }
+                  [
+                    _vm._l(_vm.statusList, function(status) {
+                      return _c("option", {
+                        key: status.id,
+                        domProps: { value: status, textContent: _vm._s(status) }
+                      })
+                    }),
+                    _vm._v(" "),
+                    _vm._l(this.errors.status, function(error) {
+                      return _c(
+                        "small",
+                        { key: error, staticClass: "text-danger" },
+                        [_vm._v(_vm._s(error))]
+                      )
                     })
-                  }),
-                  0
+                  ],
+                  2
                 )
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group offset-md-2 col-md-3" }, [
-                _c("label", { attrs: { for: "databirth" } }, [
-                  _vm._v("Birthdate")
+              _c(
+                "div",
+                { staticClass: "form-group offset-md-2 col-md-3" },
+                [
+                  _c("label", { attrs: { for: "databirth" } }, [
+                    _vm._v("Birthdate")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.FormStudent.databirth,
+                        expression: "FormStudent.databirth"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "date", id: "databirth", required: "" },
+                    domProps: { value: _vm.FormStudent.databirth },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.FormStudent,
+                          "databirth",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._l(this.errors.databirth, function(error) {
+                    return _c(
+                      "small",
+                      { key: error, staticClass: "text-danger" },
+                      [_vm._v(_vm._s(error))]
+                    )
+                  })
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("label", { attrs: { for: "comments" } }, [
+                  _vm._v("Comments")
                 ]),
                 _vm._v(" "),
-                _c("input", {
+                _c("textarea", {
                   directives: [
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.FormStudent.databirth,
-                      expression: "FormStudent.databirth"
+                      value: _vm.FormStudent.comment,
+                      expression: "FormStudent.comment"
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "date", id: "databirth", required: "" },
-                  domProps: { value: _vm.FormStudent.databirth },
+                  attrs: { id: "comments", rows: "3" },
+                  domProps: { value: _vm.FormStudent.comment },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(
-                        _vm.FormStudent,
-                        "databirth",
-                        $event.target.value
-                      )
+                      _vm.$set(_vm.FormStudent, "comment", $event.target.value)
                     }
                   }
+                }),
+                _vm._v(" "),
+                _vm._l(this.errors.comment, function(error) {
+                  return _c(
+                    "small",
+                    { key: error, staticClass: "text-danger" },
+                    [_vm._v(_vm._s(error))]
+                  )
                 })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "comments" } }, [_vm._v("Comments")]),
-              _vm._v(" "),
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.FormStudent.comment,
-                    expression: "FormStudent.comment"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { id: "comments", rows: "3" },
-                domProps: { value: _vm.FormStudent.comment },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.FormStudent, "comment", $event.target.value)
-                  }
-                }
-              })
-            ]),
+              ],
+              2
+            ),
             _vm._v(" "),
             _c(
               "button",

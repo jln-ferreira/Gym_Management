@@ -40,9 +40,9 @@ class StudentController extends Controller
     {
         try{
             $validation = $this->validate($request, [
-                'name'      => 'required|max:255',
-                'email'     => 'required|unique:students|max:255',
-                'address'   =>'required|max:255',
+                'name'      => 'required|max:255|min:4',
+                'email'     => 'required|email|unique:students|max:127',
+                'address'   => 'required|max:127',
                 'belt_id'   => 'required',
                 'status'    => 'required',
                 'databirth' => 'required|date',
