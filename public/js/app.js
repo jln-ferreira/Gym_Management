@@ -2068,8 +2068,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2161,6 +2159,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2172,6 +2177,7 @@ __webpack_require__.r(__webpack_exports__);
       FormStudent: {
         name: "",
         email: "",
+        phoneNumber: "",
         address: "",
         belt_id: "",
         status: "",
@@ -2187,6 +2193,16 @@ __webpack_require__.r(__webpack_exports__);
     faChanging: function faChanging() {
       return this.visibleNewStudent == true ? "fa fa-minus" : "fa fa-plus";
     },
+    resetForm: function resetForm() {
+      this.FormStudent.name = "";
+      this.FormStudent.email = "";
+      this.FormStudent.phoneNumber = "";
+      this.FormStudent.address = "";
+      this.FormStudent.belt_id = "";
+      this.FormStudent.status = "";
+      this.FormStudent.databirth = "";
+      this.FormStudent.comment = "";
+    },
     addNewPost: function addNewPost() {
       var _this = this;
 
@@ -2194,13 +2210,16 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/api/student', {
         name: this.FormStudent.name,
         email: this.FormStudent.email,
+        phoneNumber: this.FormStudent.phoneNumber,
         address: this.FormStudent.address,
         belt_id: this.FormStudent.belt_id,
         status: this.FormStudent.status,
         databirth: this.FormStudent.databirth,
         comment: this.FormStudent.comment
       }).then(function (response) {
-        return alert(response.response);
+        alert(response.data);
+
+        _this.resetForm();
       })["catch"](function (error) {
         return _this.errors = error.response.data.errors;
       });
@@ -38770,7 +38789,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("section", { staticClass: "container" }, [
-    _c("div", { staticClass: "bg-white" }, [
+    _c("div", { staticClass: "bg-white shadow-sm" }, [
       _c(
         "table",
         { staticClass: "table table-striped", attrs: { id: "table_student" } },
@@ -38785,17 +38804,13 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(student.email))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(student.databirth))]),
+                _c("td", [_vm._v(_vm._s(student.phoneNumber))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(student.address))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(student.belt_id))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(student.total_attendance))]),
+                _c("td", [_vm._v(_vm._s(student.belt.name))]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(student.attendance_graduation))]),
                 _vm._v(" "),
-                _c("td")
+                _vm._m(1, true)
               ])
             }),
             0
@@ -38816,17 +38831,26 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Email")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Data Birth")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Adress")]),
+        _c("th", [_vm._v("Phone Number")]),
         _vm._v(" "),
         _c("th", [_vm._v("Belt")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Attendance")]),
         _vm._v(" "),
         _c("th", [_vm._v("Next")]),
         _vm._v(" "),
         _c("th")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("a", { attrs: { href: "" } }, [
+        _c("i", {
+          staticClass: "fas fa-wrench fa-lg text-success",
+          attrs: { title: "Edit" }
+        })
       ])
     ])
   }
@@ -38981,54 +39005,150 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "form-group" },
-              [
-                _c("label", { attrs: { for: "inputAddress" } }, [
-                  _vm._v("Address")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.FormStudent.address,
-                      expression: "FormStudent.address"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    id: "inputAddress",
-                    placeholder: "1234 Main St",
-                    required: ""
-                  },
-                  domProps: { value: _vm.FormStudent.address },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+            _c("div", { staticClass: "form-row" }, [
+              _c(
+                "div",
+                { staticClass: "form-group col-md-3" },
+                [
+                  _c("label", { attrs: { for: "phoneNumber" } }, [
+                    _vm._v("Phone Number")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.FormStudent.phoneNumber,
+                        expression: "FormStudent.phoneNumber"
                       }
-                      _vm.$set(_vm.FormStudent, "address", $event.target.value)
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "phoneNumber", required: "" },
+                    domProps: { value: _vm.FormStudent.phoneNumber },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.FormStudent,
+                          "phoneNumber",
+                          $event.target.value
+                        )
+                      }
                     }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._l(this.errors.address, function(error) {
-                  return _c(
-                    "small",
-                    { key: error, staticClass: "text-danger" },
-                    [_vm._v(_vm._s(error))]
-                  )
-                })
-              ],
-              2
-            ),
+                  }),
+                  _vm._v(" "),
+                  _vm._l(this.errors.phoneNumber, function(error) {
+                    return _c(
+                      "small",
+                      { key: error, staticClass: "text-danger" },
+                      [_vm._v(_vm._s(error))]
+                    )
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "form-group col-md-3" },
+                [
+                  _c("label", { attrs: { for: "databirth" } }, [
+                    _vm._v("Birthdate")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.FormStudent.databirth,
+                        expression: "FormStudent.databirth"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "date", id: "databirth", required: "" },
+                    domProps: { value: _vm.FormStudent.databirth },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.FormStudent,
+                          "databirth",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._l(this.errors.databirth, function(error) {
+                    return _c(
+                      "small",
+                      { key: error, staticClass: "text-danger" },
+                      [_vm._v(_vm._s(error))]
+                    )
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "form-group col-md-6" },
+                [
+                  _c("label", { attrs: { for: "inputAddress" } }, [
+                    _vm._v("Address")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.FormStudent.address,
+                        expression: "FormStudent.address"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "inputAddress",
+                      placeholder: "1234 Main St",
+                      required: ""
+                    },
+                    domProps: { value: _vm.FormStudent.address },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.FormStudent,
+                          "address",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._l(this.errors.address, function(error) {
+                    return _c(
+                      "small",
+                      { key: error, staticClass: "text-danger" },
+                      [_vm._v(_vm._s(error))]
+                    )
+                  })
+                ],
+                2
+              )
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-row" }, [
-              _c("div", { staticClass: "form-group col-md-5" }, [
+              _c("div", { staticClass: "form-group col-md-6" }, [
                 _c("label", { attrs: { for: "belt" } }, [_vm._v("Belt")]),
                 _vm._v(" "),
                 _c(
@@ -39141,52 +39261,7 @@ var render = function() {
                   ],
                   2
                 )
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "form-group offset-md-2 col-md-3" },
-                [
-                  _c("label", { attrs: { for: "databirth" } }, [
-                    _vm._v("Birthdate")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.FormStudent.databirth,
-                        expression: "FormStudent.databirth"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "date", id: "databirth", required: "" },
-                    domProps: { value: _vm.FormStudent.databirth },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.FormStudent,
-                          "databirth",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm._l(this.errors.databirth, function(error) {
-                    return _c(
-                      "small",
-                      { key: error, staticClass: "text-danger" },
-                      [_vm._v(_vm._s(error))]
-                    )
-                  })
-                ],
-                2
-              )
+              ])
             ]),
             _vm._v(" "),
             _c(
@@ -55352,12 +55427,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 /* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: [{
     path: '/',
+    name: 'home',
     component: _components_app_dashboard_Dashboard__WEBPACK_IMPORTED_MODULE_2__["default"]
   }, {
     path: '/students',
+    name: 'students',
     component: _components_app_students_Students__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {
     path: '/finances',
+    name: 'finances',
     component: _components_app_finances_Finances__WEBPACK_IMPORTED_MODULE_4__["default"]
   }]
 }));

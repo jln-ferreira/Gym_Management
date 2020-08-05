@@ -16,8 +16,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $allStudents = Student::all();
-        return $allStudents;
+        return Student::with('belt')->get();
     }
 
     /**
@@ -40,13 +39,14 @@ class StudentController extends Controller
     {
         try{
             $validation = $this->validate($request, [
-                'name'      => 'required|max:255|min:4',
-                'email'     => 'required|email|unique:students|max:127',
-                'address'   => 'required|max:127',
-                'belt_id'   => 'required',
-                'status'    => 'required',
-                'databirth' => 'required|date',
-                'comment'   => 'nullable',
+                'name'        => 'required|max:255|min:4',
+                'email'       => 'required|email|unique:students|max:127',
+                'phoneNumber' => 'required|numeric',
+                'address'     => 'required|max:127',
+                'belt_id'     => 'required',
+                'status'      => 'required',
+                'databirth'   => 'required|date',
+                'comment'     => 'nullable',
             ]);
         }catch (ValidationException $exception) {
             return response()->json([
@@ -58,13 +58,14 @@ class StudentController extends Controller
 
 
         $student = Student::create([
-            'name' => $request->input('nameStudent'),
-            'email' => $request->input('emailStudent'),
-            'address' => $request->input('addressStudent'),
-            'belt_id' => $request->input('beltStudent'),
-            'status' => $request->input('statusStudent'),
-            'databirth' => $request->input('birthDateStudent'),
-            'comment' => $request->input('commentStudent')
+            'name'        => $request->input('name'),
+            'email'       => $request->input('email'),
+            'phoneNumber' => $request->input('phoneNumber'),
+            'address'     => $request->input('address'),
+            'belt_id'     => $request->input('belt_id'),
+            'status'      => $request->input('status'),
+            'databirth'   => $request->input('databirth'),
+            'comment'     => $request->input('comment')
         ]);
 
         return response("Student added", 200);

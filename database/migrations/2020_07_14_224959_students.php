@@ -17,6 +17,7 @@ class Students extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->text('phoneNumber');
             $table->date('databirth');
             $table->text('address');
             $table->integer('belt_id')->unsigned();

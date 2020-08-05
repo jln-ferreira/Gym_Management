@@ -12,14 +12,17 @@ export default new VueRouter({
     routes:[
         {
             path: '/',
+            name: 'home',
             component: Dashboard,
         },
         {
             path: '/students',
+            name: 'students',
             component: Students,
         },
         {
             path: '/finances',
+            name: 'finances',
             component: Finances,
         },
     ],

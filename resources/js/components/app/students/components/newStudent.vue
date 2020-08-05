@@ -22,13 +22,25 @@
                         <small class="text-danger" v-for="error in this.errors.email" v-bind:key="error">{{ error }}</small>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="phoneNumber">Phone Number</label>
+                        <input type="text" class="form-control" id="phoneNumber" v-model="FormStudent.phoneNumber" required>
+                        <small class="text-danger"  v-for="error in this.errors.phoneNumber" v-bind:key="error">{{ error }}</small>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="databirth">Birthdate</label>
+                        <input type="date" class="form-control" id="databirth" v-model="FormStudent.databirth" required>
+                        <small class="text-danger" v-for="error in this.errors.databirth" v-bind:key="error">{{ error }}</small>
+                    </div>
+                    <div class="form-group col-md-6">
                     <label for="inputAddress">Address</label>
                     <input type="text" class="form-control" id="inputAddress" v-model="FormStudent.address" placeholder="1234 Main St" required>
                     <small class="text-danger" v-for="error in this.errors.address" v-bind:key="error">{{ error }}</small>
                 </div>
+                </div>
                 <div class="form-row">
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-6">
                         <label for="belt">Belt</label>
                         <select id="belt" class="form-control" v-model="FormStudent.belt_id" required>
                              <option v-for='belt in beltList' v-text='belt.name' v-bind:key="belt.id" :value="belt.id"></option>
@@ -41,11 +53,6 @@
                             <option v-for='status in statusList' v-text='status' v-bind:key="status.id" :value="status"></option>
                             <small class="text-danger" v-for="error in this.errors.status" v-bind:key="error">{{ error }}</small>
                         </select>
-                    </div>
-                    <div class="form-group offset-md-2 col-md-3">
-                        <label for="databirth">Birthdate</label>
-                        <input type="date" class="form-control" id="databirth" v-model="FormStudent.databirth" required>
-                        <small class="text-danger" v-for="error in this.errors.databirth" v-bind:key="error">{{ error }}</small>
                     </div>
                 </div>
                 <div class="form-group">
@@ -73,6 +80,7 @@ export default {
             FormStudent: {
                 name: "",
                 email: "",
+                phoneNumber: "",
                 address: "",
                 belt_id: "",
                 status: "",
@@ -88,18 +96,32 @@ export default {
         faChanging(){
             return (this.visibleNewStudent == true) ? "fa fa-minus" : "fa fa-plus"
         },
+        resetForm(){
+            this.FormStudent.name = ""
+            this.FormStudent.email = ""
+            this.FormStudent.phoneNumber = ""
+            this.FormStudent.address = ""
+            this.FormStudent.belt_id = ""
+            this.FormStudent.status = ""
+            this.FormStudent.databirth = ""
+            this.FormStudent.comment  = ""
+        },
         addNewPost(){ //-----[POST]------
 
                 axios.post('/api/student', {
-                    name: this.FormStudent.name,
-                    email: this.FormStudent.email,
-                    address: this.FormStudent.address,
-                    belt_id: this.FormStudent.belt_id,
-                    status: this.FormStudent.status,
-                    databirth: this.FormStudent.databirth,
-                    comment: this.FormStudent.comment
+                    name:        this.FormStudent.name,
+                    email:       this.FormStudent.email,
+                    phoneNumber: this.FormStudent.phoneNumber,
+                    address:     this.FormStudent.address,
+                    belt_id:     this.FormStudent.belt_id,
+                    status:      this.FormStudent.status,
+                    databirth:   this.FormStudent.databirth,
+                    comment:     this.FormStudent.comment
                 })
-                .then(response => alert(response.response))
+                .then(response => {
+                    alert(response.data)
+                    this.resetForm()
+                })
                 .catch(error => this.errors = error.response.data.errors)
             }
     },
