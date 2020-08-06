@@ -1,7 +1,7 @@
 <template>
   <section class="container">
-      <div class="bg-white shadow-sm">
-         <table id="table_student" class="table table-striped">
+      <div class="bg-white shadow-sm rounded p-2">
+         <table id="table_student" class="table table-striped compact">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -39,12 +39,17 @@ export default {
     created(){
         // Fetch all [Belts] from DB
         axios.get('/api/student')
-        .then(response => this.studentList = response.data)
+        .then(response => {
+            this.studentList = response.data
+            setTimeout(() => $('#table_student').DataTable(), 1000);
+        })
         .catch(error => console.log(error))
     }
 }
 </script>
 
 <style>
+/* import datatable  */
+@import url('//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css');
 
 </style>

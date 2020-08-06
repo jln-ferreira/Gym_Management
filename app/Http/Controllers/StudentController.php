@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 // model
 use App\Student;
+use App\Belt;
 
 use Illuminate\Http\Request;
 
@@ -20,16 +21,6 @@ class StudentController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -37,6 +28,9 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
+        //attendance_graduation for next belt
+        $belt = Belt::find($request->input('belt_id') + 1);
+
         try{
             $validation = $this->validate($request, [
                 'name'        => 'required|max:255|min:4',
@@ -56,22 +50,19 @@ class StudentController extends Controller
             ], 422);
         }
 
-
         $student = Student::create([
-            'name'        => $request->input('name'),
-            'email'       => $request->input('email'),
-            'phoneNumber' => $request->input('phoneNumber'),
-            'address'     => $request->input('address'),
-            'belt_id'     => $request->input('belt_id'),
-            'status'      => $request->input('status'),
-            'databirth'   => $request->input('databirth'),
-            'comment'     => $request->input('comment')
+            'name'                  => $request->input('name'),
+            'email'                 => $request->input('email'),
+            'phoneNumber'           => $request->input('phoneNumber'),
+            'address'               => $request->input('address'),
+            'belt_id'               => $request->input('belt_id'),
+            'status'                => $request->input('status'),
+            'databirth'             => $request->input('databirth'),
+            'comment'               => $request->input('comment'),
+            'attendance_graduation' => $belt->days_graduation
         ]);
 
         return response("Student added", 200);
-
-
-
     }
 
     /**
