@@ -20,7 +20,7 @@
                     <td>{{ student.belt.name }}</td>
                     <td>{{ student.attendance_graduation }}</td>
                     <td>
-                        <a href=""><i class="fas fa-wrench fa-lg text-success" title="Edit"></i></a>
+                        <a @click="gotoProfile(student.id)"><i class="fas fa-wrench fa-lg text-success" title="Edit"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -34,6 +34,11 @@ export default {
     data(){
         return{
            studentList: Array,
+        }
+    },
+    methods:{
+        gotoProfile(id){
+            this.$router.push('/students/' + id);
         }
     },
     created(){
