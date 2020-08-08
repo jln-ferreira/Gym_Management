@@ -1,6 +1,13 @@
 <template>
     <section class="container">
 
+        <!-- [HEADER] -->
+        <div class="pt-4 pb-2">
+            <h1 class="header-pages font-weight-bold">Profile</h1>
+        </div>
+        <!-- end HEADER -->
+        <hr/>
+
         <personal :student='student' :beltList='beltList'/>
         <evolutionBelt/>
 

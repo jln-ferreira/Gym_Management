@@ -2163,6 +2163,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 // imports
 
 
@@ -39056,7 +39063,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "btn btn-secondary mt-5",
+        staticClass: "btn btn-secondary",
         on: {
           click: function($event) {
             return _vm.togglePersonal()
@@ -39481,6 +39488,10 @@ var render = function() {
     "section",
     { staticClass: "container" },
     [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
       _c("personal", {
         attrs: { student: _vm.student, beltList: _vm.beltList }
       }),
@@ -39490,7 +39501,18 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "pt-4 pb-2" }, [
+      _c("h1", { staticClass: "header-pages font-weight-bold" }, [
+        _vm._v("Profile")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

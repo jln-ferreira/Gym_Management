@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- [button toggle] -->
-        <div class="btn btn-secondary mt-5" @click="togglePersonal()">
+        <div class="btn btn-secondary" @click="togglePersonal()">
             <i class="fa fa-user" aria-hidden="true"></i> Personal Information <i :class="faChanging()" aria-hidden="true"></i>
         </div>
         <!-- [end button] -->
