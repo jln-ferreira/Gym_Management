@@ -101,7 +101,7 @@ class StudentController extends Controller
         $newStudent->comment               = $request->modifyStudent['comment'];
         $newStudent->save();
 
-        return response($request->modifyStudent, 200);
+        return response('Student Edited!', 200);
     }
 
     /**

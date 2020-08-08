@@ -108,16 +108,7 @@ export default {
         },
         addNewPost(){ //-----[POST]------
 
-                axios.post('/api/student', {
-                    name:        this.FormStudent.name,
-                    email:       this.FormStudent.email,
-                    phoneNumber: this.FormStudent.phoneNumber,
-                    address:     this.FormStudent.address,
-                    belt_id:     this.FormStudent.belt_id,
-                    status:      this.FormStudent.status,
-                    databirth:   this.FormStudent.databirth,
-                    comment:     this.FormStudent.comment
-                })
+                axios.post('/api/student', this.FormStudent)
                 .then(response => {
                     alert(response.data)
                     this.resetForm()
