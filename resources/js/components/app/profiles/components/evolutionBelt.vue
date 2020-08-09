@@ -23,7 +23,17 @@
 
 <script>
 export default {
+    data(){
+        return{
 
+        }
+    },
+    created(){
+        // Fetch all graduation of especial student
+        axios.get('/api/student/' + this.$route.params.id + '/graduation')
+        .then(response => console.log(response.data))
+        .catch(error => console.log(error))
+    }
 }
 </script>
 

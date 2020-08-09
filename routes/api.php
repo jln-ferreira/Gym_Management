@@ -19,3 +19,7 @@ Route::resource('student', 'StudentController');
 
 // -----[BELTS]-----
 Route::resource('belt', 'BeltController');
+
+// -----[GRADUATION]-----
+Route::resource('graduation', 'GraduationController');
+Route::get('student/{student_id}/graduation', 'GraduationController@StudentGraduation');

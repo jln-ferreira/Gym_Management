@@ -2025,7 +2025,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+  created: function created() {
+    // Fetch all graduation of especial student
+    axios.get('/api/student/' + this.$route.params.id + '/graduation').then(function (response) {
+      return console.log(response.data);
+    })["catch"](function (error) {
+      return console.log(error);
+    });
+  }
+});
 
 /***/ }),
 
