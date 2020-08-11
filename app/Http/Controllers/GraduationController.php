@@ -20,6 +20,7 @@ class GraduationController extends Controller
 
     //Fetch all graduation for specific student
     public function StudentGraduation($student_id){
+
         return Student::find($student_id)->graduation;
     }
 

@@ -9,7 +9,7 @@
         <hr/>
 
         <personal :student='student' :beltList='beltList'/>
-        <evolutionBelt/>
+        <evolutionBelt :beltList='beltList'/>
 
 
     </section>

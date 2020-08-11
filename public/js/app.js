@@ -2025,16 +2025,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {};
+  props: {
+    beltList: "" //all belts
+
   },
+  data: function data() {
+    return {
+      graduations: "",
+      //all graduation of expecific student (AXIOS)
+      foreach: "0",
+      formend: Array,
+      visiblePersonal: true
+    };
+  },
+  methods: {
+    toggleGraduation: function toggleGraduation() {
+      return this.visiblePersonal = !this.visiblePersonal;
+    },
+    faChanging: function faChanging() {
+      return this.visiblePersonal == true ? "fa fa-minus" : "fa fa-plus";
+    }
+  },
+  computed: {},
   created: function created() {
+    var _this = this;
+
     // Fetch all graduation of especial student
     axios.get('/api/student/' + this.$route.params.id + '/graduation').then(function (response) {
-      return console.log(response.data);
+      return _this.graduations = response.data;
     })["catch"](function (error) {
-      return console.log(error);
+      return alert(error);
     });
   }
 });
@@ -39016,37 +39048,94 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "btn btn-primary",
+        on: {
+          click: function($event) {
+            return _vm.toggleGraduation()
+          }
+        }
+      },
+      [
+        _c("i", {
+          staticClass: "fa fa-graduation-cap",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" Student Graduation "),
+        _c("i", { class: _vm.faChanging(), attrs: { "aria-hidden": "true" } })
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: this.visiblePersonal,
+            expression: "this.visiblePersonal"
+          }
+        ],
+        staticClass: "bg-white shadow-sm rounded p-2 row"
+      },
+      [
+        _c(
+          "table",
+          { staticClass: "table compact table-hover text-center col-md-6" },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.graduations, function(graduation) {
+                return _c("tr", { key: graduation.id }, [
+                  _c("td", [
+                    _vm._v(_vm._s(_vm.beltList[graduation.belt_id].name))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("'Photo'")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(graduation.created_at.slice(0, 10)))])
+                ])
+              }),
+              0
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _vm._m(1)
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "bg-white shadow-sm rounded p-2" }, [
-        _c("table", { staticClass: "table compact table-hover" }, [
-          _c("thead", [
-            _c("tr", [
-              _c("th", [_vm._v("Belt")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("'Photo'")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("Date")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tbody", [
-            _c("tr", [
-              _c("td", [_vm._v("Belt")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("'Photo'")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Date")])
-            ])
-          ])
-        ])
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Belt")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("'Photo'")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Date")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6" }, [
+      _c("div", {
+        staticStyle: { width: "100%", height: "300px" },
+        attrs: { id: "graduation_pie" }
+      })
     ])
   }
 ]
@@ -39508,7 +39597,7 @@ var render = function() {
         attrs: { student: _vm.student, beltList: _vm.beltList }
       }),
       _vm._v(" "),
-      _c("evolutionBelt")
+      _c("evolutionBelt", { attrs: { beltList: _vm.beltList } })
     ],
     1
   )
