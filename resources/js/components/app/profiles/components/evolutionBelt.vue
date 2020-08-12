@@ -1,13 +1,13 @@
 <template>
-    <div>
+    <div class="col-md-6 pl-0">
         <!-- [button toggle] -->
         <div class="btn btn-primary" @click="toggleGraduation()">
             <i class="fa fa-graduation-cap" aria-hidden="true"></i> Student Graduation <i :class="faChanging()" aria-hidden="true"></i>
         </div>
         <!-- [end button] -->
 
-        <div class="bg-white shadow-sm rounded p-2 row" v-show="this.visiblePersonal">
-         <table class="table compact table-hover text-center col-md-6">
+        <div class="bg-white shadow-sm rounded p-2 mb-4" v-show="this.visiblePersonal">
+         <table class="table compact table-hover text-center">
             <thead >
                 <tr >
                     <th>Belt</th>
@@ -23,11 +23,6 @@
                 </tr>
             </tbody>
         </table>
-
-        <div class="col-md-6">
-            <div id="graduation_pie" style="width: 100%; height: 300px;"></div>
-        </div>
-
       </div>
     </div>
 </template>
@@ -40,8 +35,6 @@ export default {
     data(){
         return{
             graduations: "", //all graduation of expecific student (AXIOS)
-            foreach:"0",
-            formend: Array,
 
             visiblePersonal: true,
         }
@@ -53,9 +46,6 @@ export default {
         faChanging(){
             return (this.visiblePersonal == true) ? "fa fa-minus" : "fa fa-plus"
         },
-    },
-    computed:{
-
     },
     created(){
         // Fetch all graduation of especial student

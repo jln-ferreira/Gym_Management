@@ -9,7 +9,11 @@
         <hr/>
 
         <personal :student='student' :beltList='beltList'/>
-        <evolutionBelt :beltList='beltList'/>
+
+        <responsable />
+
+
+        <evolutionBelt  :beltList='beltList'/>
 
 
     </section>
@@ -18,11 +22,13 @@
 <script>
 // imports
 import personal from './components/personal.vue'
+import responsable from './components/responsable.vue'
 import evolutionBelt from './components/evolutionBelt.vue'
 
 export default {
     components: {
         personal,
+        responsable,
         evolutionBelt,
     },
     data(){
