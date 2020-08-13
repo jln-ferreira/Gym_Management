@@ -25,11 +25,30 @@
                             <input type="text" class="form-control" id="phoneNumber" required>
                         </div>
                         <div class="form-group">
+                            <label for="status">Status</label>
+                            <select id="kinship" class="form-control" required>
+                                <option><i class="fa fa-male" aria-hidden="true"></i> Father</option>
+                                <option><i class="fa fa-female" aria-hidden="true"></i> Mother</option>
+                                <option>Relatives</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <button type="save" class="btn btn-success">Save</button>
                             <button type="edit" class="btn btn-primary">Edit</button>
                             <button type="delete" class="btn btn-danger">Delete</button>
                         </div>
                     </form>
+                </div>
+            </div>
+
+            <!-- all responsable -->
+             <!-- Add Responsable -->
+            <div class="col-md-7">
+                <div class="rounded-lg shadow-sm p-4">
+                    <h3 class="font-weight-bolder text-center">Responsables:</h3>
+                    <div>
+
+                    </div>
                 </div>
             </div>
       </div>

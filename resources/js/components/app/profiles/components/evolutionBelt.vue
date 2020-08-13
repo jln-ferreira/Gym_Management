@@ -8,8 +8,8 @@
 
         <div class="bg-white shadow-sm rounded p-2 mb-4" v-show="this.visiblePersonal">
          <table class="table compact table-hover text-center">
-            <thead >
-                <tr >
+            <thead class="thead-belt shadow-sm">
+                <tr>
                     <th>Belt</th>
                     <th>'Photo'</th>
                     <th>Date</th>
@@ -57,5 +57,9 @@ export default {
 </script>
 
 <style>
+/* thead of table */
+.thead-belt{
+    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+}
 
 </style>
