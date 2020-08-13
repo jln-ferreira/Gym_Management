@@ -2244,6 +2244,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {},
   data: function data() {
@@ -39747,7 +39756,72 @@ var render = function() {
         ],
         staticClass: "bg-white shadow-sm rounded p-2 mb-4 row"
       },
-      [_vm._m(0), _vm._v(" "), _vm._m(1)]
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-7" }, [
+          _c("div", { staticClass: "rounded-lg shadow-sm p-4" }, [
+            _c("h3", { staticClass: "font-weight-bolder text-center" }, [
+              _vm._v("Responsables:")
+            ]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "row" },
+              _vm._l(this.responsables, function(responsable) {
+                return _c(
+                  "div",
+                  { key: responsable.id, staticClass: "card col-sm-3" },
+                  [
+                    responsable.kinship == "Father"
+                      ? _c("img", {
+                          staticClass: "card-img-top",
+                          attrs: {
+                            src: "image/responsable_ded.png",
+                            alt: "Card image"
+                          }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    responsable.kinship == "Mother"
+                      ? _c("img", {
+                          staticClass: "card-img-top",
+                          attrs: {
+                            src: "image/responsable_mother.png",
+                            alt: "Card image"
+                          }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    responsable.kinship == "Relatives"
+                      ? _c("img", {
+                          staticClass: "card-img-top",
+                          attrs: {
+                            src: "image/responsable_ded.png",
+                            alt: "Card image"
+                          }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c("p", { staticClass: "text-center mb-0" }, [
+                        _c("b", [_vm._v(_vm._s(responsable.name))])
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "text-center mb-0" }, [
+                        _vm._v(_vm._s(responsable.phoneNumber))
+                      ])
+                    ])
+                  ]
+                )
+              }),
+              0
+            )
+          ])
+        ])
+      ]
     )
   ])
 }
@@ -39798,21 +39872,9 @@ var staticRenderFns = [
                 attrs: { id: "kinship", required: "" }
               },
               [
-                _c("option", [
-                  _c("i", {
-                    staticClass: "fa fa-male",
-                    attrs: { "aria-hidden": "true" }
-                  }),
-                  _vm._v(" Father")
-                ]),
+                _c("option", [_vm._v("Father")]),
                 _vm._v(" "),
-                _c("option", [
-                  _c("i", {
-                    staticClass: "fa fa-female",
-                    attrs: { "aria-hidden": "true" }
-                  }),
-                  _vm._v(" Mother")
-                ]),
+                _c("option", [_vm._v("Mother")]),
                 _vm._v(" "),
                 _c("option", [_vm._v("Relatives")])
               ]
@@ -39834,25 +39896,11 @@ var staticRenderFns = [
             _vm._v(" "),
             _c(
               "button",
-              { staticClass: "btn btn-danger", attrs: { type: "delete" } },
-              [_vm._v("Delete")]
+              { staticClass: "btn btn-danger", attrs: { type: "cancel" } },
+              [_vm._v("Cancel")]
             )
           ])
         ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-7" }, [
-      _c("div", { staticClass: "rounded-lg shadow-sm p-4" }, [
-        _c("h3", { staticClass: "font-weight-bolder text-center" }, [
-          _vm._v("Responsables:")
-        ]),
-        _vm._v(" "),
-        _c("div")
       ])
     ])
   }
