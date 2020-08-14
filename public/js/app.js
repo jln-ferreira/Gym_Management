@@ -2254,6 +2254,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {},
   data: function data() {
@@ -2261,6 +2262,8 @@ __webpack_require__.r(__webpack_exports__);
       responsables: "",
       //all resposable for especific student
       visiblePersonal: true,
+      responsableSave: true,
+      //change buttons save to cancel/edit/ delete
       errors: {},
       // ---[POST]---
       FormResponsable: {
@@ -2294,6 +2297,14 @@ __webpack_require__.r(__webpack_exports__);
       this.FormResponsable.name = "";
       this.FormResponsable.email = "";
       this.FormResponsable.phoneNumber = "";
+    },
+    modifyPost: function modifyPost(index) {
+      //modify Save to edit
+      this.responsableSave = false;
+      this.FormResponsable.name = this.responsables[index].name;
+      this.FormResponsable.email = this.responsables[index].email;
+      this.FormResponsable.phoneNumber = this.responsables[index].phoneNumber;
+      this.FormResponsable.kinship = this.responsables[index].kinship;
     },
     //[ADD NEW RESPONSABLE]
     addNewPost: function addNewPost() {
@@ -7209,7 +7220,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* [card for each  responsable] */\n.card-responsable{\n    cursor: pointer;\n}\n.card-responsable :hover{\n  opacity: 0.5;\n  transition:all 0.5s ease;\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* [card for each  responsable] */\n.card-responsable{\n    cursor: pointer;\n}\n.card-responsable :hover{\n  opacity: 0.5;\n  transition:all 0.5s ease;\n}\n\n", ""]);
 
 // exports
 
@@ -40012,7 +40023,51 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _vm._m(0)
+                _c("div", { staticClass: "form-group" }, [
+                  this.responsableSave == true
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success",
+                          attrs: { type: "save" }
+                        },
+                        [_vm._v("Save")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  this.responsableSave == false
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "edit" }
+                        },
+                        [_vm._v("Edit")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  this.responsableSave == false
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          attrs: { type: "delete" }
+                        },
+                        [_vm._v("Delete")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  this.responsableSave == false
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-warning",
+                          attrs: { type: "cancel" }
+                        },
+                        [_vm._v("Cancel")]
+                      )
+                    : _vm._e()
+                ])
               ]
             )
           ])
@@ -40029,12 +40084,17 @@ var render = function() {
             _c(
               "div",
               { staticClass: "row" },
-              _vm._l(this.responsables, function(responsable) {
+              _vm._l(this.responsables, function(responsable, index) {
                 return _c(
                   "div",
                   {
                     key: responsable.id,
-                    staticClass: "card-responsable card col-lg-3 col-4"
+                    staticClass: "card-responsable card col-lg-3 col-4",
+                    on: {
+                      click: function($event) {
+                        return _vm.modifyPost(index)
+                      }
+                    }
                   },
                   [
                     responsable.kinship == "Father"
@@ -40087,32 +40147,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-success", attrs: { type: "save" } },
-        [_vm._v("Save")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "edit" } },
-        [_vm._v("Edit")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-danger", attrs: { type: "cancel" } },
-        [_vm._v("Cancel")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

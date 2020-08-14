@@ -34,9 +34,10 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <button type="save" class="btn btn-success">Save</button>
-                            <button type="edit" class="btn btn-primary">Edit</button>
-                            <button type="cancel" class="btn btn-danger">Cancel</button>
+                            <button v-if="this.responsableSave == true" type="save" class="btn btn-success">Save</button>
+                            <button v-if="this.responsableSave == false" type="edit" class="btn btn-primary">Edit</button>
+                            <button v-if="this.responsableSave == false" type="delete" class="btn btn-danger">Delete</button>
+                            <button v-if="this.responsableSave == false" type="cancel" class="btn btn-warning">Cancel</button>
                         </div>
                     </form>
                 </div>
@@ -49,7 +50,7 @@
                     <h3 class="font-weight-bolder text-center">Responsables:</h3>
                     <hr/>
                     <div class="row">
-                        <div class="card-responsable card col-lg-3 col-4" v-for="responsable in this.responsables" v-bind:key="responsable.id">
+                        <div class="card-responsable card col-lg-3 col-4" v-for="(responsable, index) in this.responsables" v-bind:key="responsable.id" @click="modifyPost(index)">
                             <img class="card-img-top" src="image/responsable_ded.png" alt="Card image" v-if="responsable.kinship == 'Father'">
                             <img class="card-img-top" src="image/responsable_mother.png" alt="Card image" v-if="responsable.kinship == 'Mother'">
                             <img class="card-img-top" src="image/responsable_ded.png" alt="Card image" v-if="responsable.kinship == 'Relatives'">
@@ -74,6 +75,8 @@ export default {
         return{
             responsables: "", //all resposable for especific student
             visiblePersonal: true,
+            responsableSave: true, //change buttons save to cancel/edit/ delete
+
             errors: {},
 
             // ---[POST]---
@@ -106,6 +109,13 @@ export default {
             this.FormResponsable.name = ""
             this.FormResponsable.email = ""
             this.FormResponsable.phoneNumber = ""
+        },
+        modifyPost(index){ //modify Save to edit
+            this.responsableSave = false
+            this.FormResponsable.name = this.responsables[index].name
+            this.FormResponsable.email = this.responsables[index].email
+            this.FormResponsable.phoneNumber = this.responsables[index].phoneNumber
+            this.FormResponsable.kinship = this.responsables[index].kinship
         },
         //[ADD NEW RESPONSABLE]
         addNewPost(){ //-----[POST]------
