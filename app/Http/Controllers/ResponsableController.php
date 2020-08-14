@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\student;
+use App\Responsable;
+use App\Student;
 
 class ResponsableController extends Controller
 {
@@ -25,16 +26,6 @@ class ResponsableController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -42,7 +33,30 @@ class ResponsableController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $validation = $this->validate($request, [
+                'name'        => 'required|max:255|min:4',
+                'email'       => 'required|email|max:127',
+                'phoneNumber' => 'required|numeric',
+                'kinship'     => "required",
+            ]);
+        }catch (ValidationException $exception) {
+            return response()->json([
+                'status'    => 'error',
+                'message'   => 'Error',
+                'errors'    => $exception->errors(),
+            ], 422);
+        }
+
+        $student = Responsable::create([
+            'student_id'  => $request->input('student_id'),
+            'name'        => $request->input('name'),
+            'email'       => $request->input('email'),
+            'phoneNumber' => $request->input('phoneNumber'),
+            'kinship'     => $request->input('kinship'),
+        ]);
+
+        return response("Responsable added", 200);
     }
 
     /**

@@ -107,14 +107,13 @@ export default {
             this.FormStudent.comment  = ""
         },
         addNewPost(){ //-----[POST]------
-
-                axios.post('/api/student', this.FormStudent)
-                .then(response => {
-                    alert(response.data)
-                    this.resetForm()
-                })
-                .catch(error => this.errors = error.response.data.errors)
-            }
+            axios.post('/api/student', this.FormStudent)
+            .then(response => {
+                alert(response.data)
+                this.resetForm()
+            })
+            .catch(error => this.errors = error.response.data.errors)
+        }
     },
     created(){
         // Fetch all [Belts] from DB
