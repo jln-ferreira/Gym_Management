@@ -2255,6 +2255,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {},
   data: function data() {
@@ -2267,6 +2268,7 @@ __webpack_require__.r(__webpack_exports__);
       errors: {},
       // ---[POST]---
       FormResponsable: {
+        id: "",
         student_id: this.$route.params.id,
         name: "",
         email: "",
@@ -2301,6 +2303,7 @@ __webpack_require__.r(__webpack_exports__);
     modifyPost: function modifyPost(index) {
       //modify Save to edit
       this.responsableSave = false;
+      this.FormResponsable.id = this.responsables[index].id;
       this.FormResponsable.name = this.responsables[index].name;
       this.FormResponsable.email = this.responsables[index].email;
       this.FormResponsable.phoneNumber = this.responsables[index].phoneNumber;
@@ -2319,6 +2322,16 @@ __webpack_require__.r(__webpack_exports__);
         _this.resetForm();
       })["catch"](function (error) {
         return _this.errors = error.response.data.errors;
+      });
+    },
+    deleteResponsable: function deleteResponsable(responsable) {
+      //-----[DELETE]------
+      axios.post('/api/responsable/' + responsable, {
+        _method: 'DELETE'
+      }).then(function (response) {
+        alert(response.data);
+      })["catch"](function (error) {
+        return console.log(error.response.data);
       });
     }
   },
@@ -7220,7 +7233,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* [card for each  responsable] */\n.card-responsable{\n    cursor: pointer;\n}\n.card-responsable :hover{\n  opacity: 0.5;\n  transition:all 0.5s ease;\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* [card for each  responsable] */\n.card-responsable{\n    cursor: pointer;\n}\n.card-responsable :hover{\n  opacity: 0.5;\n  transition:all 0.5s ease;\n}\n\n", ""]);
 
 // exports
 
@@ -39872,6 +39885,27 @@ var render = function() {
                 }
               },
               [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.FormResponsable.id,
+                      expression: "FormResponsable.id"
+                    }
+                  ],
+                  attrs: { type: "hidden" },
+                  domProps: { value: _vm.FormResponsable.id },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.FormResponsable, "id", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
                   _vm._v(" "),
@@ -40048,10 +40082,17 @@ var render = function() {
                   _vm._v(" "),
                   this.responsableSave == false
                     ? _c(
-                        "button",
+                        "a",
                         {
-                          staticClass: "btn btn-danger",
-                          attrs: { type: "delete" }
+                          staticClass: "btn btn-danger text-white",
+                          attrs: { type: "delete" },
+                          on: {
+                            click: function($event) {
+                              return _vm.deleteResponsable(
+                                _vm.FormResponsable.id
+                              )
+                            }
+                          }
                         },
                         [_vm._v("Delete")]
                       )
@@ -40059,9 +40100,9 @@ var render = function() {
                   _vm._v(" "),
                   this.responsableSave == false
                     ? _c(
-                        "button",
+                        "a",
                         {
-                          staticClass: "btn btn-warning",
+                          staticClass: "btn btn-warning text-white",
                           attrs: { type: "cancel" }
                         },
                         [_vm._v("Cancel")]

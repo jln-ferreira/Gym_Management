@@ -12,6 +12,7 @@
             <div class="col-md-5">
                 <div class="rounded-lg shadow-sm p-4">
                     <form method="post" @submit.prevent="addNewPost">
+                        <input type="hidden" v-model="FormResponsable.id">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" v-model="FormResponsable.name" required>
@@ -36,8 +37,8 @@
                         <div class="form-group">
                             <button v-if="this.responsableSave == true" type="save" class="btn btn-success">Save</button>
                             <button v-if="this.responsableSave == false" type="edit" class="btn btn-primary">Edit</button>
-                            <button v-if="this.responsableSave == false" type="delete" class="btn btn-danger">Delete</button>
-                            <button v-if="this.responsableSave == false" type="cancel" class="btn btn-warning">Cancel</button>
+                            <a @click="deleteResponsable(FormResponsable.id)" v-if="this.responsableSave == false" type="delete" class="btn btn-danger text-white">Delete</a>
+                            <a v-if="this.responsableSave == false" type="cancel" class="btn btn-warning text-white">Cancel</a>
                         </div>
                     </form>
                 </div>
@@ -81,6 +82,7 @@ export default {
 
             // ---[POST]---
             FormResponsable: {
+                id: "",
                 student_id: this.$route.params.id,
                 name: "",
                 email: "",
@@ -112,6 +114,7 @@ export default {
         },
         modifyPost(index){ //modify Save to edit
             this.responsableSave = false
+            this.FormResponsable.id = this.responsables[index].id
             this.FormResponsable.name = this.responsables[index].name
             this.FormResponsable.email = this.responsables[index].email
             this.FormResponsable.phoneNumber = this.responsables[index].phoneNumber
@@ -126,6 +129,15 @@ export default {
                 this.resetForm()
             })
             .catch(error => this.errors = error.response.data.errors)
+        },
+        deleteResponsable(responsable){//-----[DELETE]------
+            axios.post('/api/responsable/' + responsable, {
+                _method: 'DELETE'
+            })
+            .then(response => {
+                alert(response.data)
+            })
+            .catch(error => console.log(error.response.data))
         }
     },
     created(){

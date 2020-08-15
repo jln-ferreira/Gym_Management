@@ -101,6 +101,6 @@ class ResponsableController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return response("foi", 200);
     }
 }
