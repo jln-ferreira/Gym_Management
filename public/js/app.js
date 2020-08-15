@@ -2325,22 +2325,28 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     deleteResponsable: function deleteResponsable(responsable) {
+      var _this2 = this;
+
       //-----[DELETE]------
       axios.post('/api/responsable/' + responsable, {
         _method: 'DELETE'
       }).then(function (response) {
-        alert(response.data);
+        alert(response.data.alert);
+
+        _this2.resetForm();
+
+        _this2.responsableSave = true;
       })["catch"](function (error) {
         return console.log(error.response.data);
       });
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
     // Fetch all purchise of especial student
     axios.get('/api/student/' + this.$route.params.id + '/responsable').then(function (response) {
-      return _this2.responsables = response.data;
+      return _this3.responsables = response.data;
     })["catch"](function (error) {
       return alert(error);
     });
@@ -7233,7 +7239,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* [card for each  responsable] */\n.card-responsable{\n    cursor: pointer;\n}\n.card-responsable :hover{\n  opacity: 0.5;\n  transition:all 0.5s ease;\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* [card for each  responsable] */\n.card-responsable{\n    cursor: pointer;\n}\n.card-responsable :hover{\n  opacity: 0.5;\n  transition:all 0.5s ease;\n}\n\n", ""]);
 
 // exports
 

@@ -107,6 +107,7 @@ export default {
             }
             this.responsables.push(MirrorResponsable)
         },
+
         resetForm(){ //reset all inputs
             this.FormResponsable.name = ""
             this.FormResponsable.email = ""
@@ -135,7 +136,9 @@ export default {
                 _method: 'DELETE'
             })
             .then(response => {
-                alert(response.data)
+                alert(response.data.alert)
+                this.resetForm()
+                this.responsableSave = true
             })
             .catch(error => console.log(error.response.data))
         }

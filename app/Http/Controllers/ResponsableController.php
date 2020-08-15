@@ -101,6 +101,7 @@ class ResponsableController extends Controller
      */
     public function destroy($id)
     {
-        return response("foi", 200);
+        Responsable::find($id)->delete();
+        return response('Responsable Deleted', 200);
     }
 }
