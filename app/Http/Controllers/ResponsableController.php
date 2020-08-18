@@ -101,7 +101,11 @@ class ResponsableController extends Controller
      */
     public function destroy($id)
     {
+        $responsables = Responsable::find($id);
         Responsable::find($id)->delete();
-        return response('Responsable Deleted', 200);
+        return response([
+            'message' => 'Responsable Deleted',
+            'allResponsables' => $responsables
+    ], 200);
     }
 }

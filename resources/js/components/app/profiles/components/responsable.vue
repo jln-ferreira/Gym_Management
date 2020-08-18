@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- [button toggle] -->
-        <div class="btn btn-primary" @click="toggleBuy()">
+        <div class="btn btn-primary" @click="toggleResponsable()">
             <i class="fa fa-child" aria-hidden="true"></i> Responsable <i :class="faChanging()" aria-hidden="true"></i>
         </div>
         <!-- [end button] -->
@@ -92,7 +92,7 @@ export default {
         }
     },
     methods:{
-        toggleBuy(){
+        toggleResponsable(){
             return this.visiblePersonal = !this.visiblePersonal
         },
         faChanging(){
@@ -107,7 +107,12 @@ export default {
             }
             this.responsables.push(MirrorResponsable)
         },
-
+        deleteResponsableVue(obj){ //delete clicked resposable
+            var count = 0
+            this.responsables.forEach(element => {
+                (element.id == obj.id) ? this.responsables.splice(count,1) : count =+1
+            });
+        },
         resetForm(){ //reset all inputs
             this.FormResponsable.name = ""
             this.FormResponsable.email = ""
@@ -136,7 +141,8 @@ export default {
                 _method: 'DELETE'
             })
             .then(response => {
-                alert(response.data.alert)
+                alert(response.data.message)
+                this.deleteResponsableVue(response.data.allResponsables)
                 this.resetForm()
                 this.responsableSave = true
             })
