@@ -14,7 +14,7 @@
 
         <evolutionBelt  :beltList='beltList'/>
 
-        <purchasing/>
+        <paymment/>
 
 
     </section>
@@ -25,14 +25,14 @@
 import personal from './components/personal.vue'
 import responsable from './components/responsable.vue'
 import evolutionBelt from './components/evolutionBelt.vue'
-import purchasing from './components/purchasing.vue'
+import paymment from './components/paymment.vue'
 
 export default {
     components: {
         personal,
         responsable,
         evolutionBelt,
-        purchasing,
+        paymment,
     },
     data(){
         return{

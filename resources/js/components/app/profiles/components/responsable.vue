@@ -74,7 +74,7 @@ export default {
     },
     data(){
         return{
-            responsables: "", //all resposable for especific student
+            responsables: Array, //all resposable for especific student
             visiblePersonal: true,
             responsableSave: true, //change buttons save to cancel/edit/ delete
 

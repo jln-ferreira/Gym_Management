@@ -19,7 +19,7 @@ class ResponsableController extends Controller
         //
     }
 
-    //Fetch all graduation for specific student
+    //Fetch all Responsable for specific student
     public function StudentResponsable($student_id){
 
         return Student::find($student_id)->responsable;

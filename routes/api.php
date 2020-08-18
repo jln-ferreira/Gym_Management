@@ -27,3 +27,7 @@ Route::get('student/{student_id}/graduation', 'GraduationController@StudentGradu
 // -----[RESPONSABLE]-----
 Route::resource('responsable', 'ResponsableController');
 Route::get('student/{student_id}/responsable', 'ResponsableController@StudentResponsable');
+
+// -----[FINANCE]-----
+Route::resource('paymment', 'PaymmentController');
+Route::get('student/{student_id}/paymment', 'PaymmentController@StudentPaymment');
