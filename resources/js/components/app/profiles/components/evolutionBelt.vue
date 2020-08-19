@@ -16,6 +16,7 @@
                 </tr>
             </thead>
             <tbody>
+                <td colspan="3" v-if="graduations == ''">There is no Graduation</td>
                 <tr v-for='graduation in graduations' v-bind:key="graduation.id">
                     <td>{{ beltList[graduation.belt_id].name }}</td>
                     <td>'Photo'</td>

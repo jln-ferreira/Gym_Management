@@ -31,3 +31,6 @@ Route::get('student/{student_id}/responsable', 'ResponsableController@StudentRes
 // -----[FINANCE]-----
 Route::resource('paymment', 'PaymmentController');
 Route::get('student/{student_id}/paymment', 'PaymmentController@StudentPaymment');
+
+// -----[ITEM]-----
+Route::resource('item', 'ItemController');

@@ -14,7 +14,7 @@
 
         <evolutionBelt  :beltList='beltList'/>
 
-        <paymment/>
+        <paymment :student='student' :itens='itens'/>
 
 
     </section>
@@ -38,10 +38,11 @@ export default {
         return{
             student: Object, //Student selected
             beltList: Array, //all belts
+            itens: Array, //all belts
         }
     },
     created(){
-        // Fetch student to show his profile from DB
+        // Fetch [student] to show his profile from DB
         axios.get('/api/student/' + this.$route.params.id)
         .then(response => this.student = response.data)
         .catch(error => console.log(error))
@@ -49,6 +50,11 @@ export default {
         // Fetch all [Belts] from DB
         axios.get('/api/belt')
         .then(response => this.beltList = response.data)
+        .catch(error => console.log(error))
+
+        // Fetch [paymment] for especific student
+        axios.get('/api/item')
+        .then(response => this.itens = response.data)
         .catch(error => console.log(error))
     }
 }

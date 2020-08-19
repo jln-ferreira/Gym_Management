@@ -2,18 +2,45 @@
     <div>
         <!-- [button toggle] -->
         <div class="btn btn-secondary" @click="togglePaymment()">
-            <i class="fa fa-user" aria-hidden="true"></i> Personal Information <i :class="faChanging()" aria-hidden="true"></i>
+            <i class="fa fa-credit-card" aria-hidden="true"></i> Paymment <i :class="faChanging()" aria-hidden="true"></i>
         </div>
         <!-- [end button] -->
+
+        <div class="bg-white shadow-sm rounded p-2 mb-4" v-show="this.visiblePaymment">
+         <table class="table compact table-hover text-center">
+            <thead class="thead-belt shadow-sm">
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Un Value</th>
+                    <th>Final Value</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for='paymment in paymments' v-bind:key="paymment.id">
+                    <td>{{ itens[paymment.item_id - 1].name }}</td>
+                    <td>{{ paymment.quantity }}</td>
+                    <td>{{ itens[paymment.item_id - 1].value }}</td>
+                    <td>{{ paymment.final_value }}</td>
+                    <td>{{ paymment.date_paymment }}</td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
 
     </div>
 </template>
 
 <script>
 export default {
+    props:{
+        student: "", //Student selected
+        itens  : "",
+    },
     data(){
         return{
-            paymment: Array,
+            paymments: Array,
 
             visiblePaymment: true,
         }
@@ -29,12 +56,16 @@ export default {
     created(){
         // Fetch all finance of especial student
         axios.get('/api/student/' + this.$route.params.id + '/paymment')
-        .then(response => this.finances = response.data)
+        .then(response => this.paymments = response.data)
         .catch(error => alert(error))
     },
 }
 </script>
 
 <style>
+/* thead of table */
+.thead-belt{
+    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+}
 
 </style>
