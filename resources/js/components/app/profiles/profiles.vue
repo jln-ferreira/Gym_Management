@@ -16,6 +16,11 @@
 
         <paymment :student='student' :itens='itens'/>
 
+        <!-- footer for profile (Back | Delete) -->
+        <div class="text-right">
+            <a @click="gobackStudent()" class="btn-lg btn-warning" style="cursor:pointer"><i class="fas fa-arrow-left"></i> <b>Back</b></a>
+            <a class="btn-lg btn-danger text-white" style="cursor:pointer"><i class="far fa-trash-alt"></i> Delete</a>
+        </div>
 
     </section>
 </template>
@@ -39,6 +44,11 @@ export default {
             student: Object, //Student selected
             beltList: Array, //all belts
             itens: Array, //all belts
+        }
+    },
+    methods:{
+        gobackStudent(){
+            this.$router.push('/students');
         }
     },
     created(){

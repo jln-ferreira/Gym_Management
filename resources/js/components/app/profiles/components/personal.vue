@@ -60,7 +60,7 @@
                     <label for="comments">Comments</label>
                     <textarea class="form-control" id="comments" v-model="student.comment" rows="3"></textarea>
                 </div>
-                <button type="submit" class="btn btn-info text-white">Update</button>
+                <button type="submit" class="btn btn-info text-white"><i class="far fa-edit"></i> Update</button>
             </form>
         </div>
     </div>

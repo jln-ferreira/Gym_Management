@@ -90,7 +90,20 @@ class ResponsableController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $editResponsable = Responsable::find($id);
+
+        //use inputs to update mySQL
+        $editResponsable->name        = $request->modifyResponsable['name'];
+        $editResponsable->email       = $request->modifyResponsable['email'];
+        $editResponsable->phoneNumber = $request->modifyResponsable['phoneNumber'];
+        $editResponsable->kinship     = $request->modifyResponsable['kinship'];
+        $editResponsable->student_id  = $request->modifyResponsable['student_id'];
+        $editResponsable->save();
+
+        return response([
+            'message' => 'Responsable Updated!',
+            'Responsable' => $editResponsable
+    ], 200);
     }
 
     /**

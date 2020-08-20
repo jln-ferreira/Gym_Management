@@ -86,20 +86,20 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $newStudent = Student::find($id);
+        $editStudent = Student::find($id);
 
         //use inputs to update mySQL
-        $newStudent->name                  = $request->modifyStudent['name'];
-        $newStudent->email                 = $request->modifyStudent['email'];
-        $newStudent->phoneNumber           = $request->modifyStudent['phoneNumber'];
-        $newStudent->address               = $request->modifyStudent['address'];
-        $newStudent->belt_id               = $request->modifyStudent['belt_id'];
-        $newStudent->status                = $request->modifyStudent['status'];
-        $newStudent->databirth             = $request->modifyStudent['databirth'];
-        $newStudent->total_attendance      = $request->modifyStudent['total_attendance'];
-        $newStudent->attendance_graduation = $request->modifyStudent['attendance_graduation'];
-        $newStudent->comment               = $request->modifyStudent['comment'];
-        $newStudent->save();
+        $editStudent->name                  = $request->modifyStudent['name'];
+        $editStudent->email                 = $request->modifyStudent['email'];
+        $editStudent->phoneNumber           = $request->modifyStudent['phoneNumber'];
+        $editStudent->address               = $request->modifyStudent['address'];
+        $editStudent->belt_id               = $request->modifyStudent['belt_id'];
+        $editStudent->status                = $request->modifyStudent['status'];
+        $editStudent->databirth             = $request->modifyStudent['databirth'];
+        $editStudent->total_attendance      = $request->modifyStudent['total_attendance'];
+        $editStudent->attendance_graduation = $request->modifyStudent['attendance_graduation'];
+        $editStudent->comment               = $request->modifyStudent['comment'];
+        $editStudent->save();
 
         return response('Student Edited!', 200);
     }

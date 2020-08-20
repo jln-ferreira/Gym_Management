@@ -8,11 +8,10 @@
 
         <div class="bg-white shadow-sm rounded p-2 mb-4 row" v-show="this.visiblePersonal">
 
-            <!-- Add Responsable -->
             <div class="col-md-5">
                 <div class="rounded-lg shadow-sm p-4">
-                    <form method="post" @submit.prevent="addNewPost">
-                        <input type="hidden" v-model="FormResponsable.id">
+                    <!-- ----------[ADD RESPNSABLE]------------ -->
+                    <form method="post" @submit.prevent="addNewPost" v-if="this.responsableSave == true">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" v-model="FormResponsable.name" required>
@@ -35,10 +34,37 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <button v-if="this.responsableSave == true" type="save" class="btn btn-success">Save</button>
-                            <button v-if="this.responsableSave == false" type="edit" class="btn btn-primary">Edit</button>
-                            <a @click="deleteResponsable(FormResponsable.id)" v-if="this.responsableSave == false" type="delete" class="btn btn-danger text-white">Delete</a>
-                            <a v-if="this.responsableSave == false" type="cancel" class="btn btn-warning text-white">Cancel</a>
+                            <button type="save" class="btn btn-success">Save</button>
+                        </div>
+                    </form>
+                    <!-- ---------[EDIT RSPONSABLE]---------- -->
+                    <form method="post" @submit.prevent="updateResponsable" v-if="this.responsableSave == false">
+                        <input type="hidden" id="student_id" v-model="this.$route.params.id">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" v-model="FormResponsable.name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" v-model="FormResponsable.email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number</label>
+                            <input type="text" class="form-control" id="phoneNumber" v-model="FormResponsable.phoneNumber" required>
+                            <small class="text-danger"  v-for="error in this.errors.phoneNumber" v-bind:key="error">{{ error }}</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select id="kinship" class="form-control" v-model="FormResponsable.kinship" required>
+                                <option>Father</option>
+                                <option>Mother</option>
+                                <option>Relatives</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="edit" class="btn btn-primary"><i class="far fa-edit"></i> Edit</button>
+                            <a @click="deleteResponsable(FormResponsable.id)" type="delete" class="btn btn-danger text-white"><i class="far fa-trash-alt"></i> Delete</a>
+                            <a @click="cancelResponsable()" type="cancel" class="btn btn-warning text-white"><i class="fas fa-times"></i> Cancel</a>
                         </div>
                     </form>
                 </div>
@@ -147,7 +173,29 @@ export default {
                 this.responsableSave = true
             })
             .catch(error => console.log(error.response.data))
-        }
+        },
+        cancelResponsable(){ //------[CANCEL]-------
+            this.responsableSave = true
+            this.FormResponsable.id = ""
+            this.FormResponsable.name = ""
+            this.FormResponsable.email = ""
+            this.FormResponsable.phoneNumber = ""
+            this.FormResponsable.kinship = ""
+        },
+        updateResponsable(){ //-----[PATCH - EDIT]------
+            axios.post('/api/responsable/' + this.FormResponsable.id, {
+                modifyResponsable: this.FormResponsable,
+                _method: 'patch'
+            })
+            .then(response => {
+                alert(response.data.message)
+                this.deleteResponsableVue(response.data.Responsable)
+                this.showNewResponsable()
+                this.resetForm()
+                this.responsableSave = true
+            })
+            .catch(error => alert(error.response.data))
+        },
     },
     created(){
         // Fetch all purchise of especial student

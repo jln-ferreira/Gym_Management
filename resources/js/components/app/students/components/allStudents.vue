@@ -20,7 +20,7 @@
                     <td>{{ student.belt.name }}</td>
                     <td>{{ student.attendance_graduation }}</td>
                     <td>
-                        <a @click="gotoProfile(student.id)"><i class="fas fa-wrench fa-lg text-success" title="Edit"></i></a>
+                        <a @click="gotoProfile(student.id)" style="cursor:pointer"><i class="fas fa-wrench fa-lg text-success" title="Edit"></i></a>
                     </td>
                 </tr>
             </tbody>
