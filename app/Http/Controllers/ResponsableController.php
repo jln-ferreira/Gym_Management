@@ -119,6 +119,6 @@ class ResponsableController extends Controller
         return response([
             'message' => 'Responsable Deleted',
             'allResponsables' => $responsables
-    ], 200);
+        ], 200);
     }
 }

@@ -5,7 +5,7 @@ import VueRouter from "vue-router";
 import Dashboard from "./components/app/dashboard/Dashboard"
 import Students from "./components/app/students/Students"
 import Profiles from "./components/app/profiles/profiles"
-import Finances from "./components/app/finances/Finances"
+import Paymments from "./components/app/paymments/Paymments"
 
 Vue.use(VueRouter);
 
@@ -27,9 +27,9 @@ export default new VueRouter({
             component: Profiles,
         },
         {
-            path: '/finances',
-            name: 'finances',
-            component: Finances,
+            path: '/paymments',
+            name: 'paymments',
+            component: Paymments,
         },
     ],
 });

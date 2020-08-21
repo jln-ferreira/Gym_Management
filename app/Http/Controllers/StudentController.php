@@ -62,7 +62,10 @@ class StudentController extends Controller
             'attendance_graduation' => $belt->days_graduation
         ]);
 
-        return response("Student added", 200);
+        return response([
+            "message"=>"Student added",
+            "id"     =>$student->id
+        ], 200);
     }
 
     /**
@@ -112,6 +115,7 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Student::find($id)->delete();
+        return response('Responsable Deleted', 200);
     }
 }

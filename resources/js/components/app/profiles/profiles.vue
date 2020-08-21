@@ -17,9 +17,10 @@
         <paymment :student='student' :itens='itens'/>
 
         <!-- footer for profile (Back | Delete) -->
+        <hr/>
         <div class="text-right">
             <a @click="gobackStudent()" class="btn-lg btn-warning" style="cursor:pointer"><i class="fas fa-arrow-left"></i> <b>Back</b></a>
-            <a class="btn-lg btn-danger text-white" style="cursor:pointer"><i class="far fa-trash-alt"></i> Delete</a>
+            <a @click="deleteStudent()" class="btn-lg btn-danger text-white" style="cursor:pointer"><i class="far fa-trash-alt"></i> Delete</a>
         </div>
 
     </section>
@@ -48,8 +49,18 @@ export default {
     },
     methods:{
         gobackStudent(){
-            this.$router.push('/students');
-        }
+            this.$router.push('/students')
+        },
+        deleteStudent(student){//-----[DELETE]------
+            axios.post('/api/student/' + this.$route.params.id, {
+                _method: 'DELETE'
+            })
+            .then(response => {
+                this.$router.push('/students')
+                alert(response.data)
+            })
+            .catch(error => console.log(error.response.data))
+        },
     },
     created(){
         // Fetch [student] to show his profile from DB

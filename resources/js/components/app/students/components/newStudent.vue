@@ -109,8 +109,9 @@ export default {
         addNewPost(){ //-----[POST]------
             axios.post('/api/student', this.FormStudent)
             .then(response => {
-                alert(response.data)
+                alert(response.data.message)
                 this.resetForm()
+                this.$router.push('/students/' + response.data.id);
             })
             .catch(error => this.errors = error.response.data.errors)
         }

@@ -1,5 +1,5 @@
 <template>
-  <h1>THIS IS FINANCE PAGE</h1>
+    <p>all paymments</p>
 </template>
 
 <script>
