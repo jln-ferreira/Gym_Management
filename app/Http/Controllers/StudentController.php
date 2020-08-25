@@ -17,7 +17,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return Student::with('belt')->get();
+        return Student::with('belt')->orderBy('name')->get();
     }
 
     /**

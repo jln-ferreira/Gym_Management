@@ -1985,7 +1985,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_newPaymment_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/newPaymment.vue */ "./resources/js/components/app/paymments/components/newPaymment.vue");
+/* harmony import */ var _components_newPaymment_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/newPaymment.vue */ "./resources/js/components/app/paymments/components/newPaymment.vue");
 /* harmony import */ var _components_allPaymments_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/allPaymments.vue */ "./resources/js/components/app/paymments/components/allPaymments.vue");
 //
 //
@@ -2006,8 +2006,40 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    newPaymment: _components_newPaymment_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    newPaymment: _components_newPaymment_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     allPaymments: _components_allPaymments_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      allStudents: Array,
+      //Student All
+      allPaymments: Array,
+      //Paymment all
+      allItems: Array //Paymment all
+
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    // Fetch [student] to show his profile from DB
+    axios.get('/api/student').then(function (response) {
+      return _this.allStudents = response.data;
+    })["catch"](function (error) {
+      return console.log(error);
+    }); // Fetch [paymment] to show his profile from DB
+
+    axios.get('/api/paymment').then(function (response) {
+      return _this.allPaymments = response.data;
+    })["catch"](function (error) {
+      return console.log(error);
+    }); // Fetch [Item] to show his profile from DB
+
+    axios.get('/api/item').then(function (response) {
+      return _this.allItems = response.data;
+    })["catch"](function (error) {
+      return console.log(error);
+    });
   }
 });
 
@@ -2089,11 +2121,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    allStudents: "",
+    //Student DB
+    allItems: "" //Item DB
+
+  },
   data: function data() {
     return {
       visibleNewPaymment: false,
-      errors: {}
+      errors: {},
+      // ---[POST]---
+      FormPaymment: {
+        student: "",
+        date_paymment: "",
+        item: "",
+        quantity: "",
+        fixed_value: "",
+        value: "",
+        comment: ""
+      }
     };
   },
   methods: {
@@ -39651,7 +39703,9 @@ var render = function() {
     [
       _vm._m(0),
       _vm._v(" "),
-      _c("newPaymment"),
+      _c("newPaymment", {
+        attrs: { allStudents: _vm.allStudents, allItems: _vm.allItems }
+      }),
       _vm._v(" "),
       _c("allPaymments")
     ],
@@ -39763,11 +39817,117 @@ var render = function() {
             }
           },
           [
-            _vm._m(0),
+            _c("div", { staticClass: "form-row" }, [
+              _c("div", { staticClass: "form-group col-md-6" }, [
+                _c("label", { attrs: { for: "name" } }, [_vm._v("Student")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.FormPaymment.student,
+                        expression: "FormPaymment.student"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "student", required: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.FormPaymment,
+                          "student",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.allStudents, function(student) {
+                    return _c("option", {
+                      key: student.id,
+                      domProps: {
+                        value: student.id,
+                        textContent: _vm._s(student.name)
+                      }
+                    })
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(0)
+            ]),
             _vm._v(" "),
-            _vm._m(1),
+            _c("div", { staticClass: "form-row" }, [
+              _c("div", { staticClass: "form-group col-md-6" }, [
+                _c("label", { attrs: { for: "name" } }, [_vm._v("Item")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.FormPaymment.item,
+                        expression: "FormPaymment.item"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "item", required: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.FormPaymment,
+                          "item",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.allItems, function(item) {
+                    return _c("option", {
+                      key: item.id,
+                      domProps: {
+                        value: item.id,
+                        textContent: _vm._s(item.name)
+                      }
+                    })
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _vm._m(3)
+            ]),
             _vm._v(" "),
-            _vm._m(2),
+            _vm._m(4),
             _vm._v(" "),
             _c(
               "button",
@@ -39785,66 +39945,52 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "form-group col-md-6" }, [
-        _c("label", { attrs: { for: "name" } }, [_vm._v("Student")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", id: "student", required: "" }
-        })
-      ]),
+    return _c("div", { staticClass: "form-group col-md-3" }, [
+      _c("label", { attrs: { for: "databirth" } }, [_vm._v("Date")]),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-3" }, [
-        _c("label", { attrs: { for: "databirth" } }, [_vm._v("Date")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "date", id: "date_paymment", required: "" }
-        })
-      ])
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "date", id: "date_paymment", required: "" }
+      })
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "form-group col-md-6" }, [
-        _c("label", { attrs: { for: "name" } }, [_vm._v("Item")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", id: "item", required: "" }
-        })
-      ]),
+    return _c("div", { staticClass: "form-group col-md-1" }, [
+      _c("label", { attrs: { for: "databirth" } }, [_vm._v("Quantity")]),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-1" }, [
-        _c("label", { attrs: { for: "databirth" } }, [_vm._v("Quantity")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "number", id: "quantity", required: "" }
-        })
-      ]),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "number", id: "quantity", min: "1", required: "" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-2" }, [
+      _c("label", { attrs: { for: "databirth" } }, [_vm._v("Fixed Value")]),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-2" }, [
-        _c("label", { attrs: { for: "databirth" } }, [_vm._v("Fixed Value")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "number", id: "fixed_value", required: "" }
-        })
-      ]),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "number", id: "fixed_value", readonly: "", required: "" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-2" }, [
+      _c("label", { attrs: { for: "databirth" } }, [_vm._v("Other Value")]),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-2" }, [
-        _c("label", { attrs: { for: "databirth" } }, [_vm._v("Other Value")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "number", id: "value", required: "" }
-        })
-      ])
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "number", id: "value", required: "" }
+      })
     ])
   },
   function() {

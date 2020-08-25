@@ -16,11 +16,12 @@ class PaymmentController extends Controller
      */
     public function index()
     {
-        //
+        return Paymment::with('item')->get();
     }
 
     //Fetch all Finance for specific student
-    public function StudentPaymment($student_id){
+    public function StudentPaymment($student_id)
+    {
         return Student::find($student_id)->paymment;
     }
 

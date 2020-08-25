@@ -5,7 +5,7 @@
             <h1 class="header-pages font-weight-bold">Paymments</h1>
         </div>
 
-        <newPaymment/>
+        <newPaymment :allStudents='allStudents' :allItems='allItems'/>
         <allPaymments/>
 
 
@@ -22,6 +22,30 @@ export default {
         newPaymment,
         allPaymments
     },
+    data(){
+        return{
+            allStudents: Array, //Student All
+            allPaymments: Array, //Paymment all
+            allItems: Array, //Paymment all
+        }
+    },
+    created(){
+        // Fetch [student] to show his profile from DB
+        axios.get('/api/student')
+        .then(response => this.allStudents = response.data)
+        .catch(error => console.log(error))
+
+        // Fetch [paymment] to show his profile from DB
+        axios.get('/api/paymment')
+        .then(response => this.allPaymments = response.data)
+        .catch(error => console.log(error))
+
+        // Fetch [Item] to show his profile from DB
+        axios.get('/api/item')
+        .then(response => this.allItems = response.data)
+        .catch(error => console.log(error))
+    }
+
 }
 </script>
 

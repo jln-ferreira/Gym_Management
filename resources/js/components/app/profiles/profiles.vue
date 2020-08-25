@@ -12,7 +12,7 @@
 
         <responsable />
 
-        <evolutionBelt  :beltList='beltList'/>
+        <evolutionBelt :beltList='beltList'/>
 
         <paymment :student='student' :itens='itens'/>
 

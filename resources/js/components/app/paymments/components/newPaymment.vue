@@ -13,25 +13,29 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Student</label>
-                        <input type="text" class="form-control" id="student" required>
+                        <select id="student" class="form-control" v-model="FormPaymment.student" required>
+                             <option v-for='student in allStudents' v-text='student.name' v-bind:key="student.id" :value="student.id"></option>
+                        </select>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="databirth">Date</label>
-                        <input type="date" class="form-control" id="date_paymment"  required>
+                        <input type="date" class="form-control" id="date_paymment" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">Item</label>
-                        <input type="text" class="form-control" id="item" required>
+                        <select id="item" class="form-control" v-model="FormPaymment.item" required>
+                             <option v-for='item in allItems' v-text='item.name' v-bind:key="item.id" :value="item.id"></option>
+                        </select>
                     </div>
                     <div class="form-group col-md-1">
                         <label for="databirth">Quantity</label>
-                        <input type="number" class="form-control" id="quantity"  required>
+                        <input type="number" class="form-control" id="quantity" min="1" required>
                     </div>
                     <div class="form-group col-md-2">
                         <label for="databirth">Fixed Value</label>
-                        <input type="number" class="form-control" id="fixed_value"  required>
+                        <input type="number" class="form-control" id="fixed_value" readonly required>
                     </div>
                     <div class="form-group col-md-2">
                         <label for="databirth">Other Value</label>
@@ -50,12 +54,25 @@
 
 <script>
 export default {
+    props:{
+        allStudents: "", //Student DB
+        allItems: "", //Item DB
+    },
     data(){
         return{
             visibleNewPaymment: false,
-
             errors: {},
 
+            // ---[POST]---
+            FormPaymment: {
+                student: "",
+                date_paymment: "",
+                item: "",
+                quantity: "",
+                fixed_value: "",
+                value: "",
+                comment: ""
+            },
         }
     },
     methods:{
@@ -65,7 +82,9 @@ export default {
         faChanging(){
             return (this.visibleNewPaymment == true) ? "fa fa-minus" : "fa fa-plus"
         },
-    }
+
+    },
+
 }
 </script>
 
