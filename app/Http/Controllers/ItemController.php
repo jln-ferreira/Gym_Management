@@ -15,7 +15,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $allItens = Item::all();
+        $allItens = Item::with('subcategory')->get();
         return $allItens;
     }
 

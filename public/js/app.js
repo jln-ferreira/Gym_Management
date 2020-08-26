@@ -2125,6 +2125,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     allStudents: "",
@@ -2135,6 +2138,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       visibleNewPaymment: false,
+      visibleValue: false,
       errors: {},
       // ---[POST]---
       FormPaymment: {
@@ -2154,6 +2158,35 @@ __webpack_require__.r(__webpack_exports__);
     },
     faChanging: function faChanging() {
       return this.visibleNewPaymment == true ? "fa fa-minus" : "fa fa-plus";
+    },
+    toggleValue: function toggleValue() {
+      this.FormPaymment.value = 0;
+      return this.visibleValue = !this.visibleValue;
+    },
+    faChangingValue: function faChangingValue() {
+      return this.visibleValue == true ? "fa fa-times text-danger" : "fa fa-edit text-info";
+    },
+    resetForm: function resetForm() {
+      this.FormPaymment.forEach(function (item, key) {
+        key = "";
+      });
+    },
+    addNewPost: function addNewPost() {
+      var _this = this;
+
+      //-----[POST]------
+      axios.post('/api/paymment', this.FormPaymment).then(function (response) {
+        console.log(response.data.message);
+
+        _this.resetForm();
+      })["catch"](function (error) {
+        return _this.errors = error.response.data.errors;
+      });
+    }
+  },
+  computed: {
+    fixedValue: function fixedValue() {
+      return this.FormPaymment.fixed_value = this.allItems[this.FormPaymment.item - 1].value * this.FormPaymment.quantity;
     }
   }
 });
@@ -7553,6 +7586,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 // module
 exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* [SECOND NAVBAR] */\n.second-nav{\n        place-content: center;\n}\n@media only screen and (max-width: 767px) {\n.collapse:not(.show) {\n            display: none;\n}\n}\n@media only screen and (min-width: 767px) {\n.collapse:not(.show) {\n            display: flex;\n}\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/paymments/components/newPaymment.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/app/paymments/components/newPaymment.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* button to toggle value fixed or new value */\n.toggleValue{\n    align-self: center;\n    text-align: center;\n    cursor: pointer;\n}\n.toggleValue:hover{\n    opacity: 0.7;\n    transition:all 0.5s ease;\n}\n\n", ""]);
 
 // exports
 
@@ -38805,6 +38857,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/paymments/components/newPaymment.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/app/paymments/components/newPaymment.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./newPaymment.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/paymments/components/newPaymment.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/profiles/components/evolutionBelt.vue?vue&type=style&index=0&lang=css&":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/app/profiles/components/evolutionBelt.vue?vue&type=style&index=0&lang=css& ***!
@@ -39813,13 +39895,14 @@ var render = function() {
             on: {
               submit: function($event) {
                 $event.preventDefault()
+                return _vm.addNewPost($event)
               }
             }
           },
           [
             _c("div", { staticClass: "form-row" }, [
               _c("div", { staticClass: "form-group col-md-6" }, [
-                _c("label", { attrs: { for: "name" } }, [_vm._v("Student")]),
+                _c("label", { attrs: { for: "student" } }, [_vm._v("Student")]),
                 _vm._v(" "),
                 _c(
                   "select",
@@ -39867,12 +39950,40 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(0)
+              _c("div", { staticClass: "form-group col-md-3" }, [
+                _c("label", { attrs: { for: "databirth" } }, [_vm._v("Date")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.FormPaymment.date_paymment,
+                      expression: "FormPaymment.date_paymment"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "date", id: "date_paymment", required: "" },
+                  domProps: { value: _vm.FormPaymment.date_paymment },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.FormPaymment,
+                        "date_paymment",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-row" }, [
               _c("div", { staticClass: "form-group col-md-6" }, [
-                _c("label", { attrs: { for: "name" } }, [_vm._v("Item")]),
+                _c("label", { attrs: { for: "item" } }, [_vm._v("Item")]),
                 _vm._v(" "),
                 _c(
                   "select",
@@ -39920,14 +40031,163 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(1),
+              _c("div", { staticClass: "form-group col-md-1" }, [
+                _c("label", { attrs: { for: "quantity" } }, [
+                  _vm._v("Quantity")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.FormPaymment.quantity,
+                      expression: "FormPaymment.quantity"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "number",
+                    id: "quantity",
+                    min: "1",
+                    required: ""
+                  },
+                  domProps: { value: _vm.FormPaymment.quantity },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.FormPaymment,
+                        "quantity",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ]),
               _vm._v(" "),
-              _vm._m(2),
+              _c("div", { staticClass: "form-group col-md-2" }, [
+                _c("label", { attrs: { for: "fixed_value" } }, [
+                  _vm._v("Fixed Value")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.FormPaymment.fixed_value,
+                      expression: "FormPaymment.fixed_value"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "number",
+                    id: "fixed_value",
+                    readonly: "",
+                    required: ""
+                  },
+                  domProps: { value: _vm.FormPaymment.fixed_value },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.FormPaymment,
+                        "fixed_value",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ]),
               _vm._v(" "),
-              _vm._m(3)
+              _c(
+                "div",
+                { staticClass: "toggleValue form-group col-md-1 pt-2 mb-1" },
+                [
+                  _c("i", {
+                    class: ["fa-2x", _vm.faChangingValue()],
+                    on: {
+                      click: function($event) {
+                        return _vm.toggleValue()
+                      }
+                    }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.visibleValue,
+                      expression: "visibleValue"
+                    }
+                  ],
+                  staticClass: "form-group col-md-2"
+                },
+                [
+                  _c("label", { attrs: { for: "value" } }, [
+                    _vm._v("Other Value")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.FormPaymment.value,
+                        expression: "FormPaymment.value"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "number", id: "value" },
+                    domProps: { value: _vm.FormPaymment.value },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.FormPaymment, "value", $event.target.value)
+                      }
+                    }
+                  })
+                ]
+              )
             ]),
             _vm._v(" "),
-            _vm._m(4),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "comments" } }, [_vm._v("Comments")]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.FormPaymment.comment,
+                    expression: "FormPaymment.comment"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "comments", rows: "3" },
+                domProps: { value: _vm.FormPaymment.comment },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.FormPaymment, "comment", $event.target.value)
+                  }
+                }
+              })
+            ]),
             _vm._v(" "),
             _c(
               "button",
@@ -39940,73 +40200,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-md-3" }, [
-      _c("label", { attrs: { for: "databirth" } }, [_vm._v("Date")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "date", id: "date_paymment", required: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-md-1" }, [
-      _c("label", { attrs: { for: "databirth" } }, [_vm._v("Quantity")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "number", id: "quantity", min: "1", required: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-md-2" }, [
-      _c("label", { attrs: { for: "databirth" } }, [_vm._v("Fixed Value")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "number", id: "fixed_value", readonly: "", required: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-md-2" }, [
-      _c("label", { attrs: { for: "databirth" } }, [_vm._v("Other Value")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "number", id: "value", required: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "comments" } }, [_vm._v("Comments")]),
-      _vm._v(" "),
-      _c("textarea", {
-        staticClass: "form-control",
-        attrs: { id: "comments", rows: "3" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -57672,7 +57866,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _newPaymment_vue_vue_type_template_id_022a2922___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./newPaymment.vue?vue&type=template&id=022a2922& */ "./resources/js/components/app/paymments/components/newPaymment.vue?vue&type=template&id=022a2922&");
 /* harmony import */ var _newPaymment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./newPaymment.vue?vue&type=script&lang=js& */ "./resources/js/components/app/paymments/components/newPaymment.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _newPaymment_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./newPaymment.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/app/paymments/components/newPaymment.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -57680,7 +57876,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _newPaymment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _newPaymment_vue_vue_type_template_id_022a2922___WEBPACK_IMPORTED_MODULE_0__["render"],
   _newPaymment_vue_vue_type_template_id_022a2922___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -57709,6 +57905,22 @@ component.options.__file = "resources/js/components/app/paymments/components/new
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_newPaymment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./newPaymment.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/paymments/components/newPaymment.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_newPaymment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/app/paymments/components/newPaymment.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/components/app/paymments/components/newPaymment.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_newPaymment_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader!../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./newPaymment.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/paymments/components/newPaymment.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_newPaymment_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_newPaymment_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_newPaymment_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_newPaymment_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_newPaymment_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

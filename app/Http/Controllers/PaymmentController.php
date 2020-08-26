@@ -43,7 +43,10 @@ class PaymmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return response([
+            "message"=>$request,
+            "id"     =>2
+        ], 200);
     }
 
     /**
