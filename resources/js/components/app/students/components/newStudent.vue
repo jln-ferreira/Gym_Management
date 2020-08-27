@@ -64,7 +64,6 @@
             </form>
         </div>
     </section>
-
 </template>
 
 <script>
@@ -96,21 +95,10 @@ export default {
         faChanging(){
             return (this.visibleNewStudent == true) ? "fa fa-minus" : "fa fa-plus"
         },
-        resetForm(){
-            this.FormStudent.name = ""
-            this.FormStudent.email = ""
-            this.FormStudent.phoneNumber = ""
-            this.FormStudent.address = ""
-            this.FormStudent.belt_id = ""
-            this.FormStudent.status = ""
-            this.FormStudent.databirth = ""
-            this.FormStudent.comment  = ""
-        },
         addNewPost(){ //-----[POST]------
             axios.post('/api/student', this.FormStudent)
             .then(response => {
                 alert(response.data.message)
-                this.resetForm()
                 this.$router.push('/students/' + response.data.id);
             })
             .catch(error => this.errors = error.response.data.errors)

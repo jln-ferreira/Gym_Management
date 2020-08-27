@@ -94,17 +94,20 @@ export default {
             return (this.visibleValue == true) ? "fa fa-times text-danger" : "fa fa-edit text-info"
         },
         resetForm(){
-            this.FormPaymment.forEach(function (item, key) {
-                key = ""
-            });
+            this.FormPaymment.student= ""
+            this.FormPaymment.date_paymment= ""
+            this.FormPaymment.item= ""
+            this.FormPaymment.quantity= ""
+            this.FormPaymment.fixed_value= ""
+            this.FormPaymment.value= 0
+            this.FormPaymment.comment= ""
         },
         addNewPost(){ //-----[POST]------
             axios.post('/api/paymment', this.FormPaymment)
             .then(response => {
-                console.log(response.data.message)
+                alert(response.data)
                 this.resetForm()
             })
-            .catch(error => this.errors = error.response.data.errors)
         }
     },
     computed:{

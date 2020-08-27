@@ -43,10 +43,18 @@ class PaymmentController extends Controller
      */
     public function store(Request $request)
     {
-        return response([
-            "message"=>$request,
-            "id"     =>2
-        ], 200);
+        ($request->input('value') == 0) ? $value = $request->input('fixed_value') : $value = $request->input('value');
+
+        $paymment = Paymment::create([
+            'student_id'    => $request->input('student'),
+            'date_paymment' => $request->input('date_paymment'),
+            'item_id'       => $request->input('item'),
+            'quantity'      => $request->input('quantity'),
+            'final_value'   => $value, //if the value is in DB or is a new value
+            'comment'       => $request->input('comment'),
+        ]);
+
+        return response('Paymment Added!', 200);
     }
 
     /**

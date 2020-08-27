@@ -2167,20 +2167,22 @@ __webpack_require__.r(__webpack_exports__);
       return this.visibleValue == true ? "fa fa-times text-danger" : "fa fa-edit text-info";
     },
     resetForm: function resetForm() {
-      this.FormPaymment.forEach(function (item, key) {
-        key = "";
-      });
+      this.FormPaymment.student = "";
+      this.FormPaymment.date_paymment = "";
+      this.FormPaymment.item = "";
+      this.FormPaymment.quantity = "";
+      this.FormPaymment.fixed_value = "";
+      this.FormPaymment.value = 0;
+      this.FormPaymment.comment = "";
     },
     addNewPost: function addNewPost() {
       var _this = this;
 
       //-----[POST]------
       axios.post('/api/paymment', this.FormPaymment).then(function (response) {
-        console.log(response.data.message);
+        alert(response.data);
 
         _this.resetForm();
-      })["catch"](function (error) {
-        return _this.errors = error.response.data.errors;
       });
     }
   },
@@ -2988,7 +2990,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3016,24 +3017,12 @@ __webpack_require__.r(__webpack_exports__);
     faChanging: function faChanging() {
       return this.visibleNewStudent == true ? "fa fa-minus" : "fa fa-plus";
     },
-    resetForm: function resetForm() {
-      this.FormStudent.name = "";
-      this.FormStudent.email = "";
-      this.FormStudent.phoneNumber = "";
-      this.FormStudent.address = "";
-      this.FormStudent.belt_id = "";
-      this.FormStudent.status = "";
-      this.FormStudent.databirth = "";
-      this.FormStudent.comment = "";
-    },
     addNewPost: function addNewPost() {
       var _this = this;
 
       //-----[POST]------
       axios.post('/api/student', this.FormStudent).then(function (response) {
         alert(response.data.message);
-
-        _this.resetForm();
 
         _this.$router.push('/students/' + response.data.id);
       })["catch"](function (error) {
@@ -7604,7 +7593,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* button to toggle value fixed or new value */\n.toggleValue{\n    align-self: center;\n    text-align: center;\n    cursor: pointer;\n}\n.toggleValue:hover{\n    opacity: 0.7;\n    transition:all 0.5s ease;\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* button to toggle value fixed or new value */\n.toggleValue{\n    align-self: center;\n    text-align: center;\n    cursor: pointer;\n}\n.toggleValue:hover{\n    opacity: 0.7;\n    transition:all 0.5s ease;\n}\n\n", ""]);
 
 // exports
 
