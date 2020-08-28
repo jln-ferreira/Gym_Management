@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label for="fixed_value">Fixed Value</label>
-                        <input type="number" class="form-control" id="fixed_value" v-model="FormPaymment.fixed_value" readonly required>
+                        <input type="number" class="form-control" id="fixed_value"  :value="FormPaymment.fixed_value" readonly required>
                     </div>
                     <div class="toggleValue form-group col-md-1 pt-2 mb-1">
                         <i :class="['fa-2x', faChangingValue()]" @click="toggleValue()"></i>

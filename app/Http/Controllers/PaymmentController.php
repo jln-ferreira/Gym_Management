@@ -16,7 +16,7 @@ class PaymmentController extends Controller
      */
     public function index()
     {
-        return Paymment::with('item')->get();
+        return Paymment::with(['student','item'])->get();
     }
 
     //Fetch all Finance for specific student

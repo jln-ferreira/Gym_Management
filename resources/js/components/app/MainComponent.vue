@@ -21,6 +21,9 @@ export default {
 </script>
 
 <style>
+/* import datatable  */
+@import url('//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css');
+
     /* Fix Container - css */
     .container-fluid {
         padding-right: 0px !important;

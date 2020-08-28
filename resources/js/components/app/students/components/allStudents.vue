@@ -53,8 +53,4 @@ export default {
 }
 </script>
 
-<style>
-/* import datatable  */
-@import url('//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css');
-
-</style>
+<style></style>
