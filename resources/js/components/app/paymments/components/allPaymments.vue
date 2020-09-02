@@ -75,7 +75,7 @@
                     <td>{{ paymment.final_value }}</td>
                     <td>{{ paymment.date_paymment }}</td>
                     <td>
-                        <a @click="gotoProfile(paymment.id)" style="cursor:pointer"><i class="fas fa-wrench fa-lg text-success" title="Edit"></i></a>
+                        <a @click="editPaymment(paymment.id)" style="cursor:pointer"><i class="fas fa-wrench fa-lg text-success" title="Edit"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -124,13 +124,13 @@ export default {
             return (this.visibleValue == true) ? "fa fa-times text-danger" : "fa fa-edit text-info"
         },
         resetForm(){
-            this.FormPaymment.student= ""
-            this.FormPaymment.date_paymment= ""
-            this.FormPaymment.item= ""
-            this.FormPaymment.quantity= ""
-            this.FormPaymment.fixed_value= ""
-            this.FormPaymment.value= 0
-            this.FormPaymment.comment= ""
+            this.FormPaymment.student       = ""
+            this.FormPaymment.date_paymment = ""
+            this.FormPaymment.item          = ""
+            this.FormPaymment.quantity      = ""
+            this.FormPaymment.fixed_value   = ""
+            this.FormPaymment.value         = 0
+            this.FormPaymment.comment       = ""
         },
         addNewPost(){ //--[POST]--
             axios.post('/api/paymment', this.FormPaymment)
@@ -142,8 +142,22 @@ export default {
         //---------------------------
 
         // ------[ALL PAYMMENT]------
-        gotoProfile(id){
-            // this.$router.push('/paymments/' + id);
+        editPaymment(id){
+            this.visibleNewPaymment = true //open paymment edit
+            this.visibleValue = true //open variable value
+            // Fetch [paymment] clicked
+            axios.get('/api/paymment/' + id)
+            .then(response => {
+                this.FormPaymment.student       = response.data.student.id
+                this.FormPaymment.date_paymment = response.data.date_paymment
+                this.FormPaymment.item          = response.data.item.id
+                this.FormPaymment.quantity      = response.data.quantity
+                this.FormPaymment.fixed_value   = response.data.final_value
+                this.FormPaymment.value         = response.data.final_value
+                this.FormPaymment.comment       = response.data.comment
+            })
+            .catch(error => console.log(error))
+
         }
         //--------------------------
     },
@@ -157,7 +171,6 @@ export default {
         axios.get('/api/paymment')
         .then(response => {
             this.paymmentList = response.data
-            console.log(this.paymmentList)
             setTimeout(() => $('#table_paymment').DataTable(), 1000);
         })
         .catch(error => console.log(error))

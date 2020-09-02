@@ -65,7 +65,7 @@ class PaymmentController extends Controller
      */
     public function show($id)
     {
-        //
+        return Paymment::with(['student','item'])->get()->find($id);
     }
 
     /**

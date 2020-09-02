@@ -2162,8 +2162,26 @@ __webpack_require__.r(__webpack_exports__);
     },
     //---------------------------
     // ------[ALL PAYMMENT]------
-    gotoProfile: function gotoProfile(id) {} // this.$router.push('/paymments/' + id);
-    //--------------------------
+    editPaymment: function editPaymment(id) {
+      var _this2 = this;
+
+      this.visibleNewPaymment = true; //open paymment edit
+
+      this.visibleValue = true; //open variable value
+      // Fetch [paymment] clicked
+
+      axios.get('/api/paymment/' + id).then(function (response) {
+        _this2.FormPaymment.student = response.data.student.id;
+        _this2.FormPaymment.date_paymment = response.data.date_paymment;
+        _this2.FormPaymment.item = response.data.item.id;
+        _this2.FormPaymment.quantity = response.data.quantity;
+        _this2.FormPaymment.fixed_value = response.data.final_value;
+        _this2.FormPaymment.value = response.data.final_value;
+        _this2.FormPaymment.comment = response.data.comment;
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    } //--------------------------
 
   },
   computed: {
@@ -2172,12 +2190,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
     // Fetch all [paymments] from DB
     axios.get('/api/paymment').then(function (response) {
-      _this2.paymmentList = response.data;
-      console.log(_this2.paymmentList);
+      _this3.paymmentList = response.data;
       setTimeout(function () {
         return $('#table_paymment').DataTable();
       }, 1000);
@@ -2186,13 +2203,13 @@ __webpack_require__.r(__webpack_exports__);
     }); // Fetch [student] to show his profile from DB
 
     axios.get('/api/student').then(function (response) {
-      return _this2.allStudents = response.data;
+      return _this3.allStudents = response.data;
     })["catch"](function (error) {
       return console.log(error);
     }); // Fetch [Item] to show his profile from DB
 
     axios.get('/api/item').then(function (response) {
-      return _this2.allItems = response.data;
+      return _this3.allItems = response.data;
     })["catch"](function (error) {
       return console.log(error);
     });
@@ -7599,7 +7616,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* button to toggle value fixed or new value */\n.toggleValue{\n        align-self: center;\n        text-align: center;\n        cursor: pointer;\n}\n.toggleValue:hover{\n        opacity: 0.7;\n        transition:all 0.5s ease;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* button to toggle value fixed or new value */\n.toggleValue{\n        align-self: center;\n        text-align: center;\n        cursor: pointer;\n}\n.toggleValue:hover{\n        opacity: 0.7;\n        transition:all 0.5s ease;\n}\n", ""]);
 
 // exports
 
@@ -40122,7 +40139,7 @@ var render = function() {
                       staticStyle: { cursor: "pointer" },
                       on: {
                         click: function($event) {
-                          return _vm.gotoProfile(paymment.id)
+                          return _vm.editPaymment(paymment.id)
                         }
                       }
                     },
