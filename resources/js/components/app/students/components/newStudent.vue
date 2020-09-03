@@ -60,7 +60,7 @@
                     <textarea class="form-control" id="comments" v-model="FormStudent.comment" rows="3"></textarea>
                     <small class="text-danger" v-for="error in this.errors.comment" v-bind:key="error">{{ error }}</small>
                 </div>
-                <button type="submit" class="btn btn-success">Add Student</button>
+                <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Add Student</button>
             </form>
         </div>
     </section>

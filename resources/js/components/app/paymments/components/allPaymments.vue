@@ -1,15 +1,15 @@
 <template>
     <section class="container">
-                <hr>
+    <hr>
         <!-- [button toggle] -->
         <div class="btn btn-primary" @click="toggleNewPaymment()">
-            <i class="fa fa-credit-card" aria-hidden="true"></i> New Paymment <i :class="faChanging()" aria-hidden="true"></i>
+            <i class="fa fa-credit-card" aria-hidden="true"></i> New Payment <i :class="faChanging()" aria-hidden="true"></i>
         </div>
         <!-- [end button] -->
 
         <!-- [card new student] -->
         <div class="mt-1 shadow-sm p-4 mb-4 bg-white" v-show="visibleNewPaymment">
-            <form method="post" @submit.prevent="addNewPost">
+            <form method="post" @submit.prevent="payment_saveEdit">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="student">Student</label>
@@ -49,39 +49,44 @@
                     <label for="comments">Comments</label>
                     <textarea class="form-control" id="comments" rows="3" v-model="FormPaymment.comment"></textarea>
                 </div>
-                <button type="submit" class="btn btn-success">Add Paymment</button>
+                <button type="submit" class="btn btn-success" v-show="this.postVsEditButton"><i class="fa fa-plus"></i> Add Payment</button>
+                <button type="submit" class="btn btn-info text-white" v-show="!this.postVsEditButton"><i class="fa fa-edit"></i> Edit Payment</button>
+                <a class="btn btn-warning" v-show="!this.postVsEditButton"><i class="fa fa-times"></i> Cancel</a>
             </form>
         </div>
+        <!-- end CAND NEW STUDENT -->
 
-      <div class="bg-white shadow-sm rounded p-2">
-         <table id="table_paymment" class="table table-striped compact">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Item</th>
-                    <th>Quantity</th>
-                    <th>Value</th>
-                    <th>Date</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="paymment in this.paymmentList" v-bind:key="paymment.id">
-                    <td>{{ paymment.id }}</td>
-                    <td>{{ paymment.student.name }}</td>
-                    <td>{{ paymment.item.name }}</td>
-                    <td>{{ paymment.quantity }}</td>
-                    <td>{{ paymment.final_value }}</td>
-                    <td>{{ paymment.date_paymment }}</td>
-                    <td>
-                        <a @click="editPaymment(paymment.id)" style="cursor:pointer"><i class="fas fa-wrench fa-lg text-success" title="Edit"></i></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-      </div>
-  </section>
+        <!-- [TABLE ALL STUDENTS] -->
+        <div class="bg-white shadow-sm rounded p-2">
+            <table id="table_paymment" class="table table-striped compact">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Value</th>
+                        <th>Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="paymment in this.paymmentList" v-bind:key="paymment.id">
+                        <td>{{ paymment.id }}</td>
+                        <td>{{ paymment.student.name }}</td>
+                        <td>{{ paymment.item.name }}</td>
+                        <td>{{ paymment.quantity }}</td>
+                        <td>{{ paymment.final_value }}</td>
+                        <td>{{ paymment.date_paymment }}</td>
+                        <td>
+                            <a @click="editPaymment(paymment.id)" style="cursor:pointer"><i class="fas fa-wrench fa-lg text-success" title="Edit"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- end table all students -->
+    </section>
 </template>
 
 <script>
@@ -92,9 +97,10 @@ export default {
             allStudents: Array, //Student DB
             allItems: Array, //Item DB
 
-
+            //toggle
             visibleNewPaymment: false, //toggle new paymment
-            visibleValue: false,
+            visibleValue: false, //fixed value or change value
+            postVsEditButton: true, //button change if is a new item or i want to edit an item
 
             // ---[POST]---
             FormPaymment: {
@@ -132,12 +138,16 @@ export default {
             this.FormPaymment.value         = 0
             this.FormPaymment.comment       = ""
         },
-        addNewPost(){ //--[POST]--
-            axios.post('/api/paymment', this.FormPaymment)
-            .then(response => {
-                alert(response.data)
-                this.resetForm()
-            })
+        payment_saveEdit(){ //--[POST/ EDIT]--
+            if(this.postVsEditButton){ //[POST]
+                axios.post('/api/paymment', this.FormPaymment)
+                .then(response => {
+                    alert(response.data)
+                    this.resetForm()
+                })
+            }else{ //[EDIT]
+
+            }
         },
         //---------------------------
 
@@ -145,6 +155,7 @@ export default {
         editPaymment(id){
             this.visibleNewPaymment = true //open paymment edit
             this.visibleValue = true //open variable value
+            this.postVsEditButton = false //change buttons
             // Fetch [paymment] clicked
             axios.get('/api/paymment/' + id)
             .then(response => {
