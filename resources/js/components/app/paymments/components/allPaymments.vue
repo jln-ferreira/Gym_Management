@@ -51,7 +51,8 @@
                 </div>
                 <button type="submit" class="btn btn-success" v-show="this.postVsEditButton"><i class="fa fa-plus"></i> Add Payment</button>
                 <button type="submit" class="btn btn-info text-white" v-show="!this.postVsEditButton"><i class="fa fa-edit"></i> Edit Payment</button>
-                <a class="btn btn-warning" v-show="!this.postVsEditButton"><i class="fa fa-times"></i> Cancel</a>
+                <a class="btn btn-warning" v-show="!this.postVsEditButton" @click="BacktoSave()"><i class="fa fa-times"></i> Cancel</a>
+                <a class="btn btn-danger text-white" v-show="!this.postVsEditButton" @click="deletePayment(FormPaymment.id)"><i class="fa fa-plus"></i> Delete</a>
             </form>
         </div>
         <!-- end CAND NEW STUDENT -->
@@ -71,7 +72,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="paymment in this.paymmentList" v-bind:key="paymment.id">
+                    <tr v-for="(paymment, index) in this.paymmentList" v-bind:key="paymment.id">
                         <td>{{ paymment.id }}</td>
                         <td>{{ paymment.student.name }}</td>
                         <td>{{ paymment.item.name }}</td>
@@ -79,7 +80,7 @@
                         <td>{{ paymment.final_value }}</td>
                         <td>{{ paymment.date_paymment }}</td>
                         <td>
-                            <a @click="editPaymment(paymment.id)" style="cursor:pointer"><i class="fas fa-wrench fa-lg text-success" title="Edit"></i></a>
+                            <a @click="editPaymment(index)" style="cursor:pointer"><i class="fas fa-wrench fa-lg text-success" title="Edit"></i></a>
                         </td>
                     </tr>
                 </tbody>
@@ -104,6 +105,7 @@ export default {
 
             // ---[POST]---
             FormPaymment: {
+                id: "",
                 student: "",
                 date_paymment: "",
                 item: "",
@@ -130,6 +132,7 @@ export default {
             return (this.visibleValue == true) ? "fa fa-times text-danger" : "fa fa-edit text-info"
         },
         resetForm(){
+            this.FormPaymment.id            = ""
             this.FormPaymment.student       = ""
             this.FormPaymment.date_paymment = ""
             this.FormPaymment.item          = ""
@@ -138,38 +141,65 @@ export default {
             this.FormPaymment.value         = 0
             this.FormPaymment.comment       = ""
         },
-        payment_saveEdit(){ //--[POST/ EDIT]--
+        BacktoSave(){ //calcel button (yellow one)
+            this.visibleNewPaymment = false //open paymment edit
+            this.visibleValue = false //open variable value
+            this.postVsEditButton = true //change buttons
+            this.resetForm()
+        },
+        payment_saveEdit(){ //----------[POST]---------
             if(this.postVsEditButton){ //[POST]
                 axios.post('/api/paymment', this.FormPaymment)
                 .then(response => {
                     alert(response.data)
                     this.resetForm()
+                    this.BacktoSave()
                 })
             }else{ //[EDIT]
-
+                //----------[PUT PATCH - EDIT]----------
+                axios.post('/api/paymment/' + this.FormPaymment.id, {
+                modifyPaymment: this.FormPaymment,
+                _method: 'patch'
+                })
+                .then(response => {
+                    alert(response.data)
+                    this.resetForm()
+                    this.BacktoSave()
+                })
+                .catch(error => alert(error.response.data))
             }
+        },
+        deletePayment(paymment_id){ //------[DELETE]-------
+            axios.post('/api/paymment/' + paymment_id, {
+                _method: 'DELETE'
+            })
+            .then(response => {
+                alert(response.data)
+                this.resetForm()
+                this.BacktoSave()
+            })
+            .catch(error => console.log(error.response.data))
         },
         //---------------------------
 
         // ------[ALL PAYMMENT]------
-        editPaymment(id){
+        editPaymment(index){
             this.visibleNewPaymment = true //open paymment edit
             this.visibleValue = true //open variable value
             this.postVsEditButton = false //change buttons
-            // Fetch [paymment] clicked
-            axios.get('/api/paymment/' + id)
-            .then(response => {
-                this.FormPaymment.student       = response.data.student.id
-                this.FormPaymment.date_paymment = response.data.date_paymment
-                this.FormPaymment.item          = response.data.item.id
-                this.FormPaymment.quantity      = response.data.quantity
-                this.FormPaymment.fixed_value   = response.data.final_value
-                this.FormPaymment.value         = response.data.final_value
-                this.FormPaymment.comment       = response.data.comment
-            })
-            .catch(error => console.log(error))
 
-        }
+            //use the index if paymment clicked and find where is inside the thia.paymmentList
+            this.FormPaymment.id            = this.paymmentList[index].id
+            this.FormPaymment.student       = this.paymmentList[index].student.id
+            this.FormPaymment.date_paymment = this.paymmentList[index].date_paymment
+            this.FormPaymment.item          = this.paymmentList[index].item.id
+            this.FormPaymment.quantity      = this.paymmentList[index].quantity
+            this.FormPaymment.fixed_value   = this.paymmentList[index].final_value
+            this.FormPaymment.value         = this.paymmentList[index].final_value
+            this.FormPaymment.comment       = this.paymmentList[index].comment
+
+
+        },
         //--------------------------
     },
     computed:{

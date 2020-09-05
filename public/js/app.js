@@ -2108,6 +2108,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2125,6 +2126,7 @@ __webpack_require__.r(__webpack_exports__);
       //button change if is a new item or i want to edit an item
       // ---[POST]---
       FormPaymment: {
+        id: "",
         student: "",
         date_paymment: "",
         item: "",
@@ -2151,6 +2153,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.visibleValue == true ? "fa fa-times text-danger" : "fa fa-edit text-info";
     },
     resetForm: function resetForm() {
+      this.FormPaymment.id = "";
       this.FormPaymment.student = "";
       this.FormPaymment.date_paymment = "";
       this.FormPaymment.item = "";
@@ -2159,43 +2162,80 @@ __webpack_require__.r(__webpack_exports__);
       this.FormPaymment.value = 0;
       this.FormPaymment.comment = "";
     },
+    BacktoSave: function BacktoSave() {
+      //calcel button (yellow one)
+      this.visibleNewPaymment = false; //open paymment edit
+
+      this.visibleValue = false; //open variable value
+
+      this.postVsEditButton = true; //change buttons
+
+      this.resetForm();
+    },
     payment_saveEdit: function payment_saveEdit() {
       var _this = this;
 
-      //--[POST/ EDIT]--
+      //----------[POST]---------
       if (this.postVsEditButton) {
         //[POST]
         axios.post('/api/paymment', this.FormPaymment).then(function (response) {
           alert(response.data);
 
           _this.resetForm();
+
+          _this.BacktoSave();
         });
-      } else {//[EDIT]
+      } else {
+        //[EDIT]
+        //----------[PUT PATCH - EDIT]----------
+        axios.post('/api/paymment/' + this.FormPaymment.id, {
+          modifyPaymment: this.FormPaymment,
+          _method: 'patch'
+        }).then(function (response) {
+          alert(response.data);
+
+          _this.resetForm();
+
+          _this.BacktoSave();
+        })["catch"](function (error) {
+          return alert(error.response.data);
+        });
       }
+    },
+    deletePayment: function deletePayment(paymment_id) {
+      var _this2 = this;
+
+      //------[DELETE]-------
+      axios.post('/api/paymment/' + paymment_id, {
+        _method: 'DELETE'
+      }).then(function (response) {
+        alert(response.data);
+
+        _this2.resetForm();
+
+        _this2.BacktoSave();
+      })["catch"](function (error) {
+        return console.log(error.response.data);
+      });
     },
     //---------------------------
     // ------[ALL PAYMMENT]------
-    editPaymment: function editPaymment(id) {
-      var _this2 = this;
-
+    editPaymment: function editPaymment(index) {
       this.visibleNewPaymment = true; //open paymment edit
 
       this.visibleValue = true; //open variable value
 
       this.postVsEditButton = false; //change buttons
-      // Fetch [paymment] clicked
+      //use the index if paymment clicked and find where is inside the thia.paymmentList
 
-      axios.get('/api/paymment/' + id).then(function (response) {
-        _this2.FormPaymment.student = response.data.student.id;
-        _this2.FormPaymment.date_paymment = response.data.date_paymment;
-        _this2.FormPaymment.item = response.data.item.id;
-        _this2.FormPaymment.quantity = response.data.quantity;
-        _this2.FormPaymment.fixed_value = response.data.final_value;
-        _this2.FormPaymment.value = response.data.final_value;
-        _this2.FormPaymment.comment = response.data.comment;
-      })["catch"](function (error) {
-        return console.log(error);
-      });
+      this.FormPaymment.id = this.paymmentList[index].id;
+      this.FormPaymment.student = this.paymmentList[index].student.id;
+      this.FormPaymment.date_paymment = this.paymmentList[index].date_paymment;
+      this.FormPaymment.item = this.paymmentList[index].item.id;
+      this.FormPaymment.quantity = this.paymmentList[index].quantity;
+      this.FormPaymment.fixed_value = this.paymmentList[index].final_value;
+      this.FormPaymment.value = this.paymmentList[index].final_value;
+      this.FormPaymment.comment = this.paymmentList[index].comment;
     } //--------------------------
 
   },
@@ -2505,6 +2545,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -7600,7 +7643,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* button to toggle value fixed or new value */\n.toggleValue{\n        align-self: center;\n        text-align: center;\n        cursor: pointer;\n}\n.toggleValue:hover{\n        opacity: 0.7;\n        transition:all 0.5s ease;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* button to toggle value fixed or new value */\n.toggleValue{\n        align-self: center;\n        text-align: center;\n        cursor: pointer;\n}\n.toggleValue:hover{\n        opacity: 0.7;\n        transition:all 0.5s ease;\n}\n", ""]);
 
 // exports
 
@@ -7657,7 +7700,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* [card for each  responsable] */\n.card-responsable{\n    cursor: pointer;\n}\n.card-responsable :hover{\n  opacity: 0.5;\n  transition:all 0.5s ease;\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* [card for each  responsable] */\n.card-responsable{\n    cursor: pointer;\n}\n.card-responsable :hover{\n  opacity: 0.5;\n  transition:all 0.5s ease;\n}\n\n", ""]);
 
 // exports
 
@@ -40125,9 +40168,35 @@ var render = function() {
                     expression: "!this.postVsEditButton"
                   }
                 ],
-                staticClass: "btn btn-warning"
+                staticClass: "btn btn-warning",
+                on: {
+                  click: function($event) {
+                    return _vm.BacktoSave()
+                  }
+                }
               },
               [_c("i", { staticClass: "fa fa-times" }), _vm._v(" Cancel")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !this.postVsEditButton,
+                    expression: "!this.postVsEditButton"
+                  }
+                ],
+                staticClass: "btn btn-danger text-white",
+                on: {
+                  click: function($event) {
+                    return _vm.deletePayment(_vm.FormPaymment.id)
+                  }
+                }
+              },
+              [_c("i", { staticClass: "fa fa-plus" }), _vm._v(" Delete")]
             )
           ]
         )
@@ -40146,7 +40215,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(this.paymmentList, function(paymment) {
+            _vm._l(this.paymmentList, function(paymment, index) {
               return _c("tr", { key: paymment.id }, [
                 _c("td", [_vm._v(_vm._s(paymment.id))]),
                 _vm._v(" "),
@@ -40167,7 +40236,7 @@ var render = function() {
                       staticStyle: { cursor: "pointer" },
                       on: {
                         click: function($event) {
-                          return _vm.editPaymment(paymment.id)
+                          return _vm.editPaymment(index)
                         }
                       }
                     },
@@ -40907,182 +40976,250 @@ var render = function() {
       [
         _c("div", { staticClass: "col-md-5" }, [
           _c("div", { staticClass: "rounded-lg shadow-sm p-4" }, [
-            this.responsableSave == true
-              ? _c(
-                  "form",
-                  {
-                    attrs: { method: "post" },
+            _c(
+              "form",
+              {
+                attrs: { method: "post" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.responsable_saveEdit($event)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.FormResponsable.name,
+                        expression: "FormResponsable.name"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "name", required: "" },
+                    domProps: { value: _vm.FormResponsable.name },
                     on: {
-                      submit: function($event) {
-                        $event.preventDefault()
-                        return _vm.payment_saveEdit($event)
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.FormResponsable,
+                          "name",
+                          $event.target.value
+                        )
                       }
                     }
-                  },
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.FormResponsable.email,
+                        expression: "FormResponsable.email"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "email", id: "email", required: "" },
+                    domProps: { value: _vm.FormResponsable.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.FormResponsable,
+                          "email",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
                   [
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.FormResponsable.name,
-                            expression: "FormResponsable.name"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", id: "name", required: "" },
-                        domProps: { value: _vm.FormResponsable.name },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.FormResponsable,
-                              "name",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
+                    _c("label", { attrs: { for: "phoneNumber" } }, [
+                      _vm._v("Phone Number")
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("label", { attrs: { for: "email" } }, [
-                        _vm._v("Email")
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.FormResponsable.email,
-                            expression: "FormResponsable.email"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "email", id: "email", required: "" },
-                        domProps: { value: _vm.FormResponsable.email },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.FormResponsable,
-                              "email",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c("label", { attrs: { for: "phoneNumber" } }, [
-                          _vm._v("Phone Number")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.FormResponsable.phoneNumber,
-                              expression: "FormResponsable.phoneNumber"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "phoneNumber",
-                            required: ""
-                          },
-                          domProps: { value: _vm.FormResponsable.phoneNumber },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.FormResponsable,
-                                "phoneNumber",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm._l(this.errors.phoneNumber, function(error) {
-                          return _c(
-                            "small",
-                            { key: error, staticClass: "text-danger" },
-                            [_vm._v(_vm._s(error))]
-                          )
-                        })
-                      ],
-                      2
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group" }, [
-                      _c("label", { attrs: { for: "status" } }, [
-                        _vm._v("Status")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "select",
+                    _c("input", {
+                      directives: [
                         {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.FormResponsable.kinship,
-                              expression: "FormResponsable.kinship"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { id: "kinship", required: "" },
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.FormResponsable,
-                                "kinship",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.FormResponsable.phoneNumber,
+                          expression: "FormResponsable.phoneNumber"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", id: "phoneNumber", required: "" },
+                      domProps: { value: _vm.FormResponsable.phoneNumber },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
                           }
-                        },
-                        [
-                          _c("option", [_vm._v("Father")]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("Mother")]),
-                          _vm._v(" "),
-                          _c("option", [_vm._v("Relatives")])
-                        ]
-                      )
-                    ]),
+                          _vm.$set(
+                            _vm.FormResponsable,
+                            "phoneNumber",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
                     _vm._v(" "),
-                    _vm._m(0)
-                  ]
-                )
-              : _vm._e()
+                    _vm._l(this.errors.phoneNumber, function(error) {
+                      return _c(
+                        "small",
+                        { key: error, staticClass: "text-danger" },
+                        [_vm._v(_vm._s(error))]
+                      )
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "status" } }, [_vm._v("Status")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.FormResponsable.kinship,
+                          expression: "FormResponsable.kinship"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "kinship", required: "" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.FormResponsable,
+                            "kinship",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", [_vm._v("Father")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v("Mother")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v("Relatives")])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "button",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: this.responsableSave == true,
+                          expression: "this.responsableSave == true"
+                        }
+                      ],
+                      staticClass: "btn btn-success",
+                      attrs: { type: "save" }
+                    },
+                    [_c("i", { staticClass: "fa fa-plus" }), _vm._v(" Save")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: this.responsableSave == false,
+                          expression: "this.responsableSave == false"
+                        }
+                      ],
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "edit" }
+                    },
+                    [_vm._v("Edit")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: this.responsableSave == false,
+                          expression: "this.responsableSave == false"
+                        }
+                      ],
+                      staticClass: "btn btn-danger text-white",
+                      attrs: { type: "delete" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteResponsable(_vm.FormResponsable.id)
+                        }
+                      }
+                    },
+                    [_vm._v("Delete")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: this.responsableSave == false,
+                          expression: "this.responsableSave == false"
+                        }
+                      ],
+                      staticClass: "btn btn-warning text-white",
+                      attrs: { type: "cancel" },
+                      on: {
+                        click: function($event) {
+                          return _vm.cancelResponsable()
+                        }
+                      }
+                    },
+                    [_vm._v("Cancel")]
+                  )
+                ])
+              ]
+            )
           ])
         ]),
         _vm._v(" "),
@@ -41160,20 +41297,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-success", attrs: { type: "save" } },
-        [_c("i", { staticClass: "fa fa-plus" }), _vm._v(" Save")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

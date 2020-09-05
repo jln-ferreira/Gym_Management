@@ -19,12 +19,6 @@ class PaymmentController extends Controller
         return Paymment::with(['student','item'])->get();
     }
 
-    //Fetch all Finance for specific student
-    public function StudentPaymment($student_id)
-    {
-        return Student::find($student_id)->paymment;
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -88,7 +82,23 @@ class PaymmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // chose value goes to DB
+        ($request->modifyPaymment['value'] == 0) ?
+            $value = $request->modifyPaymment['fixed_value'] :
+            $value = $request->modifyPaymment['value'];
+
+        //Find paymment with id
+        $editPaymment = Paymment::find($id);
+
+        //use inputs to update mySQL
+        $editPaymment->student_id    = $request->modifyPaymment['student'];
+        $editPaymment->date_paymment = $request->modifyPaymment['date_paymment'];
+        $editPaymment->item_id       = $request->modifyPaymment['item'];
+        $editPaymment->quantity      = $request->modifyPaymment['quantity'];
+        $editPaymment->final_value   = $value;
+        $editPaymment->save();
+
+        return response('Payment Updated!', 200);
     }
 
     /**
@@ -99,6 +109,7 @@ class PaymmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Paymment::find($id)->delete();
+        return response('Payment Deleted', 200);
     }
 }

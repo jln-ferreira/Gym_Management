@@ -103,7 +103,7 @@ class ResponsableController extends Controller
         return response([
             'message' => 'Responsable Updated!',
             'Responsable' => $editResponsable
-    ], 200);
+        ], 200);
     }
 
     /**

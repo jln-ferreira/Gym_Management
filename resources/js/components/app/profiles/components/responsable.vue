@@ -11,7 +11,7 @@
             <div class="col-md-5">
                 <div class="rounded-lg shadow-sm p-4">
                     <!-- ----------[ADD RESPNSABLE]------------ -->
-                    <form method="post" @submit.prevent="payment_saveEdit" v-if="this.responsableSave == true">
+                    <form method="post" @submit.prevent="responsable_saveEdit">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" v-model="FormResponsable.name" required>
@@ -34,7 +34,10 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <button type="save" class="btn btn-success"><i class="fa fa-plus"></i> Save</button>
+                            <button type="save" v-show="this.responsableSave == true" class="btn btn-success"><i class="fa fa-plus"></i> Save</button>
+                            <button v-show="this.responsableSave == false" type="edit" class="btn btn-primary">Edit</button>
+                            <a  v-show="this.responsableSave == false" @click="deleteResponsable(FormResponsable.id)" type="delete" class="btn btn-danger text-white">Delete</a>
+                            <a v-show="this.responsableSave == false" @click="cancelResponsable()" type="cancel" class="btn btn-warning text-white">Cancel</a>
                         </div>
                     </form>
                 </div>
@@ -138,18 +141,16 @@ export default {
                 axios.post('/api/responsable/' + this.FormResponsable.id, {
                 modifyResponsable: this.FormResponsable,
                 _method: 'patch'
-            })
-            .then(response => {
-                alert(response.data.message)
-                this.deleteResponsableVue(response.data.Responsable)
-                this.showNewResponsable()
-                this.resetForm()
-                this.responsableSave = true
-            })
-            .catch(error => alert(error.response.data))
+                })
+                .then(response => {
+                    alert(response.data.message)
+                    this.deleteResponsableVue(response.data.Responsable)
+                    this.showNewResponsable()
+                    this.resetForm()
+                    this.responsableSave = true
+                })
+                .catch(error => alert(error.response.data))
             }
-
-
         },
         deleteResponsable(responsable){//-----[DELETE]------
             axios.post('/api/responsable/' + responsable, {
