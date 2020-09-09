@@ -110,6 +110,9 @@ class PaymmentController extends Controller
     public function destroy($id)
     {
         Paymment::find($id)->delete();
-        return response('Payment Deleted', 200);
+        return response([
+            "message"     =>"Payment Deleted",
+            "paymment_id" =>$id
+        ], 200);
     }
 }

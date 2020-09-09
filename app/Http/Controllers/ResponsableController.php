@@ -19,12 +19,6 @@ class ResponsableController extends Controller
         //
     }
 
-    //Fetch all Responsable for specific student
-    public function StudentResponsable($student_id){
-
-        return Student::find($student_id)->responsable;
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -118,7 +112,7 @@ class ResponsableController extends Controller
         Responsable::find($id)->delete();
         return response([
             'message' => 'Responsable Deleted',
-            'allResponsables' => $responsables
+            'responsable_id' => $id
         ], 200);
     }
 }

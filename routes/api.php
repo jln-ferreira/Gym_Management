@@ -16,17 +16,18 @@ use Illuminate\Support\Facades\Route;
 
 // -----[STUDENTS]-----
 Route::resource('student', 'StudentController');
+Route::get('student/{student_id}/graduation', 'StudentController@GraduationProfile');
+Route::get('student/{student_id}/responsable', 'StudentController@StudentProfile');
+Route::get('student/{student_id}/paymment', 'StudentController@PaymmentProfile');
 
 // -----[BELTS]-----
 Route::resource('belt', 'BeltController');
 
 // -----[GRADUATION]-----
 Route::resource('graduation', 'GraduationController');
-Route::get('student/{student_id}/graduation', 'GraduationController@StudentGraduation');
 
 // -----[RESPONSABLE]-----
 Route::resource('responsable', 'ResponsableController');
-Route::get('student/{student_id}/responsable', 'ResponsableController@StudentResponsable');
 
 // -----[FINANCE]-----
 Route::resource('paymment', 'PaymmentController');

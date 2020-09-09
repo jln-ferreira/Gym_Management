@@ -20,6 +20,24 @@ class StudentController extends Controller
         return Student::with('belt')->orderBy('name')->get();
     }
 
+    // ----------[profile]----------
+    //Fetch all graduation for specific student
+    public function GraduationProfile($student_id){
+
+        return Student::find($student_id)->graduation;
+    }
+    //Fetch all Responsable for specific student
+    public function StudentProfile($student_id){
+
+        return Student::find($student_id)->responsable;
+    }
+    //Fetch all Finance for specific student
+    public function PaymmentProfile($student_id)
+    {
+        return Student::find($student_id)->paymment;
+    }
+    // [end profile]
+
     /**
      * Store a newly created resource in storage.
      *

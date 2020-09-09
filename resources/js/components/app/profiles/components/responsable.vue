@@ -109,7 +109,7 @@ export default {
         deleteResponsableVue(obj){ //delete clicked resposable
             var count = 0
             this.responsables.forEach(element => {
-                (element.id == obj.id) ? this.responsables.splice(count,1) : count =+1
+                (element.id == obj) ? this.responsables.splice(count,1) : count =+1
             });
         },
         resetForm(){ //reset all inputs
@@ -158,7 +158,7 @@ export default {
             })
             .then(response => {
                 alert(response.data.message)
-                this.deleteResponsableVue(response.data.allResponsables)
+                this.deleteResponsableVue(response.data.responsable_id)
                 this.resetForm()
                 this.responsableSave = true
             })

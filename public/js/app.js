@@ -2172,8 +2172,17 @@ __webpack_require__.r(__webpack_exports__);
 
       this.resetForm();
     },
-    payment_saveEdit: function payment_saveEdit() {
+    deletePaymmentVue: function deletePaymmentVue(obj) {
       var _this = this;
+
+      //delete clicked paymment
+      var count = 0;
+      this.paymmentList.forEach(function (element) {
+        element.id == obj ? _this.paymmentList.splice(count, 1) : count = +1;
+      });
+    },
+    payment_saveEdit: function payment_saveEdit() {
+      var _this2 = this;
 
       //----------[POST]---------
       if (this.postVsEditButton) {
@@ -2181,9 +2190,9 @@ __webpack_require__.r(__webpack_exports__);
         axios.post('/api/paymment', this.FormPaymment).then(function (response) {
           alert(response.data);
 
-          _this.resetForm();
+          _this2.resetForm();
 
-          _this.BacktoSave();
+          _this2.BacktoSave();
         });
       } else {
         //[EDIT]
@@ -2194,26 +2203,28 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (response) {
           alert(response.data);
 
-          _this.resetForm();
+          _this2.resetForm();
 
-          _this.BacktoSave();
+          _this2.BacktoSave();
         })["catch"](function (error) {
           return alert(error.response.data);
         });
       }
     },
     deletePayment: function deletePayment(paymment_id) {
-      var _this2 = this;
+      var _this3 = this;
 
       //------[DELETE]-------
       axios.post('/api/paymment/' + paymment_id, {
         _method: 'DELETE'
       }).then(function (response) {
-        alert(response.data);
+        alert(response.data.message);
 
-        _this2.resetForm();
+        _this3.resetForm();
 
-        _this2.BacktoSave();
+        _this3.BacktoSave();
+
+        _this3.deletePaymmentVue(response.data.paymment_id);
       })["catch"](function (error) {
         return console.log(error.response.data);
       });
@@ -2245,11 +2256,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this4 = this;
 
     // Fetch all [paymments] from DB
     axios.get('/api/paymment').then(function (response) {
-      _this3.paymmentList = response.data;
+      _this4.paymmentList = response.data;
       setTimeout(function () {
         return $('#table_paymment').DataTable();
       }, 1000);
@@ -2258,13 +2269,13 @@ __webpack_require__.r(__webpack_exports__);
     }); // Fetch [student] to show his profile from DB
 
     axios.get('/api/student').then(function (response) {
-      return _this3.allStudents = response.data;
+      return _this4.allStudents = response.data;
     })["catch"](function (error) {
       return console.log(error);
     }); // Fetch [Item] to show his profile from DB
 
     axios.get('/api/item').then(function (response) {
-      return _this3.allItems = response.data;
+      return _this4.allItems = response.data;
     })["catch"](function (error) {
       return console.log(error);
     });
@@ -2355,6 +2366,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -2657,7 +2669,7 @@ __webpack_require__.r(__webpack_exports__);
       //delete clicked resposable
       var count = 0;
       this.responsables.forEach(function (element) {
-        element.id == obj.id ? _this.responsables.splice(count, 1) : count = +1;
+        element.id == obj ? _this.responsables.splice(count, 1) : count = +1;
       });
     },
     resetForm: function resetForm() {
@@ -2719,7 +2731,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         alert(response.data.message);
 
-        _this3.deleteResponsableVue(response.data.allResponsables);
+        _this3.deleteResponsableVue(response.data.responsable_id);
 
         _this3.resetForm();
 
@@ -7643,7 +7655,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* button to toggle value fixed or new value */\n.toggleValue{\n        align-self: center;\n        text-align: center;\n        cursor: pointer;\n}\n.toggleValue:hover{\n        opacity: 0.7;\n        transition:all 0.5s ease;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* button to toggle value fixed or new value */\n.toggleValue{\n        align-self: center;\n        text-align: center;\n        cursor: pointer;\n}\n.toggleValue:hover{\n        opacity: 0.7;\n        transition:all 0.5s ease;\n}\n", ""]);
 
 // exports
 
@@ -7681,7 +7693,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* thead of table */\n.thead-belt{\n    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* thead of table */\n.thead-belt{\n    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);\n}\n\n", ""]);
 
 // exports
 
@@ -40445,24 +40457,32 @@ var render = function() {
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.paymments, function(paymment) {
-              return _c("tr", { key: paymment.id }, [
-                _c("td", [
-                  _vm._v(_vm._s(_vm.itens[paymment.item_id - 1].name))
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(paymment.quantity))]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(_vm._s(_vm.itens[paymment.item_id - 1].value))
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(paymment.final_value))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(paymment.date_paymment))])
-              ])
-            }),
-            0
+            [
+              this.paymments == ""
+                ? _c("td", { attrs: { colspan: "5" } }, [
+                    _vm._v("There is no Paymments")
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.paymments, function(paymment) {
+                return _c("tr", { key: paymment.id }, [
+                  _c("td", [
+                    _vm._v(_vm._s(_vm.itens[paymment.item_id - 1].name))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(paymment.quantity))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(_vm._s(_vm.itens[paymment.item_id - 1].value))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(paymment.final_value))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(paymment.date_paymment))])
+                ])
+              })
+            ],
+            2
           )
         ])
       ]

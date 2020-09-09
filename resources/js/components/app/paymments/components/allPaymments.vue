@@ -147,6 +147,12 @@ export default {
             this.postVsEditButton = true //change buttons
             this.resetForm()
         },
+        deletePaymmentVue(obj){ //delete clicked paymment
+            var count = 0
+            this.paymmentList.forEach(element => {
+                (element.id == obj) ? this.paymmentList.splice(count,1) : count =+1
+            });
+        },
         payment_saveEdit(){ //----------[POST]---------
             if(this.postVsEditButton){ //[POST]
                 axios.post('/api/paymment', this.FormPaymment)
@@ -174,9 +180,10 @@ export default {
                 _method: 'DELETE'
             })
             .then(response => {
-                alert(response.data)
+                alert(response.data.message)
                 this.resetForm()
                 this.BacktoSave()
+                this.deletePaymmentVue(response.data.paymment_id)
             })
             .catch(error => console.log(error.response.data))
         },

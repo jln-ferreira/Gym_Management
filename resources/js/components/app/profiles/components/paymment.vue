@@ -18,6 +18,7 @@
                 </tr>
             </thead>
             <tbody>
+                <td colspan="5" v-if="this.paymments == ''">There is no Paymments</td>
                 <tr v-for='paymment in paymments' v-bind:key="paymment.id">
                     <td>{{ itens[paymment.item_id - 1].name }}</td>
                     <td>{{ paymment.quantity }}</td>
