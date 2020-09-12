@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Student;
+use App\Graduation;
 
 use Illuminate\Http\Request;
 
@@ -37,7 +37,13 @@ class GraduationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $graduation = Graduation::create([
+            'student_id' => $request->input('student_id'),
+            'belt_id'    => $request->input('belt_id'),
+            'created_at' => $request->input('graduation_date')
+        ]);
+
+        return response("Graduation added", 200);
     }
 
     /**

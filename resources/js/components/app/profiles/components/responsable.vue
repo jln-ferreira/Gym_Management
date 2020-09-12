@@ -51,9 +51,9 @@
                     <hr/>
                     <div class="row">
                         <div class="card-responsable card col-lg-3 col-4" v-for="(responsable, index) in this.responsables" v-bind:key="responsable.id" @click="modifyPost(index)">
-                            <img class="card-img-top" src="image/responsable_ded.png" alt="Card image" v-if="responsable.kinship == 'Father'">
-                            <img class="card-img-top" src="image/responsable_mother.png" alt="Card image" v-if="responsable.kinship == 'Mother'">
-                            <img class="card-img-top" src="image/responsable_ded.png" alt="Card image" v-if="responsable.kinship == 'Relatives'">
+                            <img class="card-img-top" src="image/responsables/responsable_ded.png" alt="Card image" v-if="responsable.kinship == 'Father'">
+                            <img class="card-img-top" src="image/responsables/responsable_mother.png" alt="Card image" v-if="responsable.kinship == 'Mother'">
+                            <img class="card-img-top" src="image/responsables/responsable_ded.png" alt="Card image" v-if="responsable.kinship == 'Relatives'">
                             <div>
                                 <p class="text-center mb-0"><b>{{ responsable.name }}</b></p>
                                 <p class="text-center mb-0">{{ responsable.phoneNumber }}</p>
@@ -113,17 +113,19 @@ export default {
             });
         },
         resetForm(){ //reset all inputs
+            this.FormResponsable.id = ""
             this.FormResponsable.name = ""
             this.FormResponsable.email = ""
             this.FormResponsable.phoneNumber = ""
+            this.FormResponsable.kinship = ""
         },
         modifyPost(index){ //modify Save to edit
             this.responsableSave = false
-            this.FormResponsable.id = this.responsables[index].id
-            this.FormResponsable.name = this.responsables[index].name
-            this.FormResponsable.email = this.responsables[index].email
+            this.FormResponsable.id          = this.responsables[index].id
+            this.FormResponsable.name        = this.responsables[index].name
+            this.FormResponsable.email       = this.responsables[index].email
             this.FormResponsable.phoneNumber = this.responsables[index].phoneNumber
-            this.FormResponsable.kinship = this.responsables[index].kinship
+            this.FormResponsable.kinship     = this.responsables[index].kinship
         },
         //[ADD NEW RESPONSABLE]
         responsable_saveEdit(){
@@ -136,8 +138,7 @@ export default {
                     this.resetForm()
                 })
                 .catch(error => this.errors = error.response.data.errors)
-            }else{
-                //----------[PUT PATCH - EDIT]----------
+            }else{//----------[PUT PATCH - EDIT]----------
                 axios.post('/api/responsable/' + this.FormResponsable.id, {
                 modifyResponsable: this.FormResponsable,
                 _method: 'patch'
@@ -166,11 +167,7 @@ export default {
         },
         cancelResponsable(){ //------[CANCEL]-------
             this.responsableSave = true
-            this.FormResponsable.id = ""
-            this.FormResponsable.name = ""
-            this.FormResponsable.email = ""
-            this.FormResponsable.phoneNumber = ""
-            this.FormResponsable.kinship = ""
+            this.resetForm()
         },
 
     },

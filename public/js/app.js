@@ -2346,6 +2346,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     beltList: "" //all belts
@@ -2356,8 +2359,11 @@ __webpack_require__.r(__webpack_exports__);
       graduations: "",
       //all graduation of expecific student (AXIOS)
       visibleGraduation: true,
+      graduationSave: true,
+      //change buttons save to cancel/edit/ delete
       // [POST] - New Graduation
       FormGraduation: {
+        id: "",
         student_id: this.$route.params.id,
         belt_id: 0,
         graduation_date: ""
@@ -2370,14 +2376,58 @@ __webpack_require__.r(__webpack_exports__);
     },
     faChanging: function faChanging() {
       return this.visiblePersonal == true ? "fa fa-minus" : "fa fa-plus";
+    },
+    showNewGraduation: function showNewGraduation() {
+      //create a new profile to show new graduation (vue)
+      var MirrorGraduation = {
+        'student_id': this.$route.params.id,
+        'belt_id': this.FormGraduation.belt_id,
+        'created_at': this.FormGraduation.graduation_date
+      };
+      this.graduations.push(MirrorGraduation);
+    },
+    resetForm: function resetForm() {
+      //reset all inputs
+      this.FormGraduation.id = "";
+      this.FormGraduation.belt_id = "";
+      this.FormGraduation.graduation_date = "";
+    },
+    modifyPost: function modifyPost(index) {
+      //modify Save to edit
+      this.graduationSave = false;
+      this.FormGraduation.id = this.graduations[index].id;
+      this.FormGraduation.belt_id = this.graduations[index].belt_id;
+      this.FormGraduation.graduation_date = this.graduations[index].created_at.slice(0, 10);
+    },
+    //[ADD NEW GRADUATION]
+    graduation_saveEdit: function graduation_saveEdit() {
+      var _this = this;
+
+      //--------------------[POST]--------------
+      if (this.graduationSave) {
+        axios.post('/api/graduation', this.FormGraduation).then(function (response) {
+          alert(response.data);
+
+          _this.showNewGraduation();
+
+          _this.resetForm();
+        })["catch"](function (error) {
+          return _this.errors = error.response.data.errors;
+        });
+      }
+    },
+    cancelGraduation: function cancelGraduation() {
+      //------[CANCEL]-------
+      this.graduationSave = true;
+      this.resetForm();
     }
   },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     // Fetch all graduation of especial student
     axios.get('/api/student/' + this.$route.params.id + '/graduation').then(function (response) {
-      return _this.graduations = response.data;
+      return _this2.graduations = response.data;
     })["catch"](function (error) {
       return alert(error);
     });
@@ -2703,9 +2753,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     resetForm: function resetForm() {
       //reset all inputs
+      this.FormResponsable.id = "";
       this.FormResponsable.name = "";
       this.FormResponsable.email = "";
       this.FormResponsable.phoneNumber = "";
+      this.FormResponsable.kinship = "";
     },
     modifyPost: function modifyPost(index) {
       //modify Save to edit
@@ -2772,11 +2824,7 @@ __webpack_require__.r(__webpack_exports__);
     cancelResponsable: function cancelResponsable() {
       //------[CANCEL]-------
       this.responsableSave = true;
-      this.FormResponsable.id = "";
-      this.FormResponsable.name = "";
-      this.FormResponsable.email = "";
-      this.FormResponsable.phoneNumber = "";
-      this.FormResponsable.kinship = "";
+      this.resetForm();
     }
   },
   created: function created() {
@@ -7703,7 +7751,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* thead of table */\n.thead-belt{\n    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);\n}\n\n/* [card for each  graduation] */\n.card-graduation{\n    cursor: pointer;\n}\n.card-graduation :hover{\n  opacity: 0.5;\n  transition:all 0.5s ease;\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* thead of table */\n.thead-belt{\n    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);\n}\n\n/* [card for each  graduation] */\n.card-graduation{\n    cursor: pointer;\n}\n.card-graduation :hover{\n  opacity: 0.5;\n  transition:all 0.5s ease;\n}\n\n", ""]);
 
 // exports
 
@@ -7741,7 +7789,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* [card for each  responsable] */\n.card-responsable{\n    cursor: pointer;\n}\n.card-responsable :hover{\n  opacity: 0.5;\n  transition:all 0.5s ease;\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* [card for each  responsable] */\n.card-responsable{\n    cursor: pointer;\n}\n.card-responsable :hover{\n  opacity: 0.5;\n  transition:all 0.5s ease;\n}\n\n", ""]);
 
 // exports
 
@@ -40380,92 +40428,181 @@ var render = function() {
       [
         _c("div", { staticClass: "col-md-5" }, [
           _c("div", { staticClass: "rounded-lg shadow-sm p-4" }, [
-            _c("form", { attrs: { method: "post" } }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "belt_graduation" } }, [
-                  _vm._v("Belt")
+            _c(
+              "form",
+              {
+                attrs: { method: "post" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.graduation_saveEdit($event)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "belt_graduation" } }, [
+                    _vm._v("Belt")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.FormGraduation.belt_id,
+                          expression: "FormGraduation.belt_id"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "belt_graduation", required: "" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.FormGraduation,
+                            "belt_id",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    _vm._l(_vm.beltList, function(belt) {
+                      return _c("option", {
+                        key: belt.id,
+                        domProps: {
+                          value: belt.id,
+                          textContent: _vm._s(belt.name)
+                        }
+                      })
+                    }),
+                    0
+                  )
                 ]),
                 _vm._v(" "),
-                _c(
-                  "select",
-                  {
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "graduation_date" } }, [
+                    _vm._v("Graduation Date")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
                     directives: [
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.FormGraduation.belt_id,
-                        expression: "FormGraduation.belt_id"
+                        value: _vm.FormGraduation.graduation_date,
+                        expression: "FormGraduation.graduation_date"
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { id: "belt_graduation", required: "" },
+                    attrs: {
+                      type: "date",
+                      id: "graduation_date",
+                      required: ""
+                    },
+                    domProps: { value: _vm.FormGraduation.graduation_date },
                     on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
                         _vm.$set(
                           _vm.FormGraduation,
-                          "belt_id",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
+                          "graduation_date",
+                          $event.target.value
                         )
                       }
                     }
-                  },
-                  _vm._l(_vm.beltList, function(belt) {
-                    return _c("option", {
-                      key: belt.id,
-                      domProps: {
-                        value: belt.id,
-                        textContent: _vm._s(belt.name)
-                      }
-                    })
-                  }),
-                  0
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "graduation_date" } }, [
-                  _vm._v("Graduation Date")
+                  })
                 ]),
                 _vm._v(" "),
-                _c("input", {
-                  directives: [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "button",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.FormGraduation.graduation_date,
-                      expression: "FormGraduation.graduation_date"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "date", id: "graduation_date", required: "" },
-                  domProps: { value: _vm.FormGraduation.graduation_date },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: this.graduationSave == true,
+                          expression: "this.graduationSave == true"
+                        }
+                      ],
+                      staticClass: "btn btn-success",
+                      attrs: { type: "save" }
+                    },
+                    [_c("i", { staticClass: "fa fa-plus" }), _vm._v(" Save")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: this.graduationSave == false,
+                          expression: "this.graduationSave == false"
+                        }
+                      ],
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "edit" }
+                    },
+                    [_vm._v("Edit")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: this.graduationSave == false,
+                          expression: "this.graduationSave == false"
+                        }
+                      ],
+                      staticClass: "btn btn-danger text-white",
+                      attrs: { type: "delete" }
+                    },
+                    [_vm._v("Delete")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: this.graduationSave == false,
+                          expression: "this.graduationSave == false"
+                        }
+                      ],
+                      staticClass: "btn btn-warning text-white",
+                      attrs: { type: "cancel" },
+                      on: {
+                        click: function($event) {
+                          return _vm.cancelGraduation()
+                        }
                       }
-                      _vm.$set(
-                        _vm.FormGraduation,
-                        "graduation_date",
-                        $event.target.value
-                      )
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _vm._m(0)
-            ])
+                    },
+                    [_vm._v("Cancel")]
+                  )
+                ])
+              ]
+            )
           ])
         ]),
         _vm._v(" "),
@@ -40480,12 +40617,17 @@ var render = function() {
             _c(
               "div",
               { staticClass: "row" },
-              _vm._l(this.graduations, function(graduation) {
+              _vm._l(this.graduations, function(graduation, index) {
                 return _c(
                   "div",
                   {
                     key: graduation.id,
-                    staticClass: "card-graduation card col-lg-3 col-4"
+                    staticClass: "card-graduation card col-lg-3 col-4",
+                    on: {
+                      click: function($event) {
+                        return _vm.modifyPost(index)
+                      }
+                    }
                   },
                   [
                     graduation.belt_id == "Father"
@@ -40521,7 +40663,9 @@ var render = function() {
                     _c("div", [
                       _c("p", { staticClass: "text-center mb-0" }, [
                         _c("b", [
-                          _vm._v(_vm._s(_vm.beltList[graduation.belt_id].name))
+                          _vm._v(
+                            _vm._s(_vm.beltList[graduation.belt_id - 1].name)
+                          )
                         ])
                       ]),
                       _vm._v(" "),
@@ -40540,20 +40684,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-success", attrs: { type: "save" } },
-        [_c("i", { staticClass: "fa fa-plus" }), _vm._v(" Save")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -41429,7 +41560,7 @@ var render = function() {
                       ? _c("img", {
                           staticClass: "card-img-top",
                           attrs: {
-                            src: "image/responsable_ded.png",
+                            src: "image/responsables/responsable_ded.png",
                             alt: "Card image"
                           }
                         })
@@ -41439,7 +41570,7 @@ var render = function() {
                       ? _c("img", {
                           staticClass: "card-img-top",
                           attrs: {
-                            src: "image/responsable_mother.png",
+                            src: "image/responsables/responsable_mother.png",
                             alt: "Card image"
                           }
                         })
@@ -41449,7 +41580,7 @@ var render = function() {
                       ? _c("img", {
                           staticClass: "card-img-top",
                           attrs: {
-                            src: "image/responsable_ded.png",
+                            src: "image/responsables/responsable_ded.png",
                             alt: "Card image"
                           }
                         })

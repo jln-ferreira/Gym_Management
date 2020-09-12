@@ -9,7 +9,7 @@
             <div class="col-md-5">
                 <!-- ----------[ADD GRADUATION]------------ -->
                 <div class="rounded-lg shadow-sm p-4">
-                    <form method="post">
+                    <form method="post" @submit.prevent="graduation_saveEdit">
                         <div class="form-group">
                             <label for="belt_graduation">Belt</label>
                             <select id="belt_graduation" class="form-control" v-model="FormGraduation.belt_id" required>
@@ -21,7 +21,10 @@
                             <input type="date" class="form-control" id="graduation_date" v-model="FormGraduation.graduation_date" required>
                         </div>
                         <div class="form-group">
-                            <button type="save" class="btn btn-success"><i class="fa fa-plus"></i> Save</button>
+                            <button type="save" v-show="this.graduationSave == true" class="btn btn-success"><i class="fa fa-plus"></i> Save</button>
+                            <button v-show="this.graduationSave == false" type="edit" class="btn btn-primary">Edit</button>
+                            <a v-show="this.graduationSave == false" type="delete" class="btn btn-danger text-white">Delete</a>
+                            <a v-show="this.graduationSave == false" @click="cancelGraduation()" type="cancel" class="btn btn-warning text-white">Cancel</a>
                         </div>
                     </form>
                 </div>
@@ -34,12 +37,12 @@
                     <h3 class="font-weight-bolder text-center">Graduations:</h3>
                     <hr/>
                     <div class="row">
-                        <div class="card-graduation card col-lg-3 col-4" v-for="graduation in this.graduations" v-bind:key="graduation.id">
+                        <div class="card-graduation card col-lg-3 col-4" v-for="(graduation, index) in this.graduations" v-bind:key="graduation.id" @click="modifyPost(index)">
                             <img class="card-img-top" src="image/responsable_ded.png" alt="Card image" v-if="graduation.belt_id == 'Father'">
                             <img class="card-img-top" src="image/responsable_mother.png" alt="Card image" v-if="graduation.belt_id == 'Mother'">
                             <img class="card-img-top" src="image/responsable_ded.png" alt="Card image" v-if="graduation.belt_id == 'Relatives'">
                             <div>
-                                <p class="text-center mb-0"><b>{{ beltList[graduation.belt_id].name }}</b></p>
+                                <p class="text-center mb-0"><b>{{ beltList[graduation.belt_id -1].name }}</b></p>
                                 <p class="text-center mb-0">{{ graduation.created_at.slice(0,10) }}</p>
                             </div>
                         </div>
@@ -60,9 +63,11 @@ export default {
         return{
             graduations: "", //all graduation of expecific student (AXIOS)
             visibleGraduation: true,
+            graduationSave: true, //change buttons save to cancel/edit/ delete
 
             // [POST] - New Graduation
             FormGraduation:{
+                id: "",
                 student_id: this.$route.params.id,
                 belt_id: 0,
                 graduation_date: ""
@@ -75,6 +80,42 @@ export default {
         },
         faChanging(){
             return (this.visiblePersonal == true) ? "fa fa-minus" : "fa fa-plus"
+        },
+        showNewGraduation(){ //create a new profile to show new graduation (vue)
+            var MirrorGraduation = {
+                'student_id': this.$route.params.id,
+                'belt_id': this.FormGraduation.belt_id,
+                'created_at': this.FormGraduation.graduation_date
+            }
+            this.graduations.push(MirrorGraduation)
+        },
+        resetForm(){ //reset all inputs
+            this.FormGraduation.id = ""
+            this.FormGraduation.belt_id = ""
+            this.FormGraduation.graduation_date = ""
+        },
+        modifyPost(index){ //modify Save to edit
+            this.graduationSave = false
+            this.FormGraduation.id              = this.graduations[index].id
+            this.FormGraduation.belt_id         = this.graduations[index].belt_id
+            this.FormGraduation.graduation_date = this.graduations[index].created_at.slice(0,10)
+        },
+        //[ADD NEW GRADUATION]
+        graduation_saveEdit(){
+             //--------------------[POST]--------------
+            if(this.graduationSave){
+                axios.post('/api/graduation', this.FormGraduation)
+                .then(response => {
+                    alert(response.data)
+                    this.showNewGraduation()
+                    this.resetForm()
+                })
+                .catch(error => this.errors = error.response.data.errors)
+            }
+        },
+        cancelGraduation(){ //------[CANCEL]-------
+            this.graduationSave = true
+            this.resetForm()
         },
     },
     created(){
