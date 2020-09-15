@@ -37,14 +37,12 @@ class PaymmentController extends Controller
      */
     public function store(Request $request)
     {
-        ($request->input('value') == 0) ? $value = $request->input('fixed_value') : $value = $request->input('value');
-
         Paymment::create([
             'student_id'    => $request->input('student'),
             'date_paymment' => $request->input('date_paymment'),
             'item_id'       => $request->input('item'),
             'quantity'      => $request->input('quantity'),
-            'final_value'   => $value, //if the value is in DB or is a new value
+            'final_value'   => $request->input('value'),
             'comment'       => $request->input('comment'),
         ]);
 
@@ -82,11 +80,6 @@ class PaymmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // chose value goes to DB
-        ($request->modifyPaymment['value'] == 0) ?
-            $value = $request->modifyPaymment['fixed_value'] :
-            $value = $request->modifyPaymment['value'];
-
         //Find paymment with id
         $editPaymment = Paymment::find($id);
 
@@ -95,7 +88,7 @@ class PaymmentController extends Controller
         $editPaymment->date_paymment = $request->modifyPaymment['date_paymment'];
         $editPaymment->item_id       = $request->modifyPaymment['item'];
         $editPaymment->quantity      = $request->modifyPaymment['quantity'];
-        $editPaymment->final_value   = $value;
+        $editPaymment->final_value   = $request->modifyPaymment['value'];
         $editPaymment->save();
 
         return response('Payment Updated!', 200);

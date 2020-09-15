@@ -2075,6 +2075,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2082,14 +2085,18 @@ __webpack_require__.r(__webpack_exports__);
       //all costs
       allItems: Array,
       //Item DB
+      Item_value: "",
+      //value of the item selected
       //toggle
       visibleNewCost: false,
       //toggle new cost
       postVsEditButton: true,
       //button change if is a new item or i want to edit an item
+      value_exp_show: false,
+      //toggle value_expected (small red)
       // ---[POST]---
       FormCost: {
-        id: "",
+        id: 1,
         date_paymment: "",
         item: "",
         quantity: "",
@@ -2106,7 +2113,18 @@ __webpack_require__.r(__webpack_exports__);
     faChanging: function faChanging() {
       return this.visibleNewCost == true ? "fa fa-minus" : "fa fa-plus";
     },
+    onChangeItem: function onChangeItem(event) {
+      //if item change, it save the value at ITEM_VALUE (change computed)
+      this.Item_value = this.allItems[event.target.value - 1].value;
+      this.value_exp_show = true;
+    },
+    use_value_exp: function use_value_exp(value) {
+      //use value expected as a VALUE
+      this.FormCost.value = value;
+      this.value_exp_show = false;
+    },
     resetForm: function resetForm() {
+      //reset all inputs
       this.FormCost.id = "";
       this.FormCost.date_paymment = "";
       this.FormCost.item = "";
@@ -2195,6 +2213,13 @@ __webpack_require__.r(__webpack_exports__);
       this.FormCost.comment = this.costList[index].comment;
     } //--------------------------
 
+  },
+  computed: {
+    // value expected - (Value item X quantity)
+    value_exp: function value_exp() {
+      this.value_exp_show = true;
+      return this.Item_value * this.FormCost.quantity;
+    }
   },
   created: function created() {
     var _this4 = this;
@@ -2365,10 +2390,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2378,13 +2399,15 @@ __webpack_require__.r(__webpack_exports__);
       //Student DB
       allItems: Array,
       //Item DB
+      Item_value: "",
+      //value of the item selected
       //toggle
       visibleNewPaymment: false,
       //toggle new paymment
-      visibleValue: false,
-      //fixed value or change value
       postVsEditButton: true,
       //button change if is a new item or i want to edit an item
+      value_exp_show: false,
+      //toggle value_expected (small red)
       // ---[POST]---
       FormPaymment: {
         id: "",
@@ -2392,7 +2415,6 @@ __webpack_require__.r(__webpack_exports__);
         date_paymment: "",
         item: "",
         quantity: "",
-        fixed_value: "",
         value: "",
         comment: ""
       }
@@ -2406,12 +2428,15 @@ __webpack_require__.r(__webpack_exports__);
     faChanging: function faChanging() {
       return this.visibleNewPaymment == true ? "fa fa-minus" : "fa fa-plus";
     },
-    toggleValue: function toggleValue() {
-      this.FormPaymment.value = 0;
-      return this.visibleValue = !this.visibleValue;
+    onChangeItem: function onChangeItem(event) {
+      //if item change, it save the value at ITEM_VALUE (change computed)
+      this.Item_value = this.allItems[event.target.value - 1].value;
+      this.value_exp_show = true;
     },
-    faChangingValue: function faChangingValue() {
-      return this.visibleValue == true ? "fa fa-times text-danger" : "fa fa-edit text-info";
+    use_value_exp: function use_value_exp(value) {
+      //use value expected as a VALUE
+      this.FormPaymment.value = value;
+      this.value_exp_show = false;
     },
     resetForm: function resetForm() {
       this.FormPaymment.id = "";
@@ -2419,15 +2444,12 @@ __webpack_require__.r(__webpack_exports__);
       this.FormPaymment.date_paymment = "";
       this.FormPaymment.item = "";
       this.FormPaymment.quantity = "";
-      this.FormPaymment.fixed_value = "";
       this.FormPaymment.value = 0;
       this.FormPaymment.comment = "";
     },
     BacktoSave: function BacktoSave() {
       //calcel button (yellow one)
       this.visibleNewPaymment = false; //open paymment edit
-
-      this.visibleValue = false; //open variable value
 
       this.postVsEditButton = true; //change buttons
 
@@ -2495,8 +2517,6 @@ __webpack_require__.r(__webpack_exports__);
     editPaymment: function editPaymment(index) {
       this.visibleNewPaymment = true; //open paymment edit
 
-      this.visibleValue = true; //open variable value
-
       this.postVsEditButton = false; //change buttons
       //use the index if paymment clicked and find where is inside the thia.paymmentList
 
@@ -2505,15 +2525,16 @@ __webpack_require__.r(__webpack_exports__);
       this.FormPaymment.date_paymment = this.paymmentList[index].date_paymment;
       this.FormPaymment.item = this.paymmentList[index].item.id;
       this.FormPaymment.quantity = this.paymmentList[index].quantity;
-      this.FormPaymment.fixed_value = this.paymmentList[index].final_value;
       this.FormPaymment.value = this.paymmentList[index].final_value;
       this.FormPaymment.comment = this.paymmentList[index].comment;
     } //--------------------------
 
   },
   computed: {
-    fixedValue: function fixedValue() {
-      return this.FormPaymment.fixed_value = this.allItems[this.FormPaymment.item - 1].value * this.FormPaymment.quantity;
+    // value expected - (Value item X quantity)
+    value_exp: function value_exp() {
+      this.value_exp_show = true;
+      return this.Item_value * this.FormPaymment.quantity;
     }
   },
   created: function created() {
@@ -8022,25 +8043,6 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 // module
 exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* [SECOND NAVBAR] */\n.second-nav{\n        place-content: center;\n}\n@media only screen and (max-width: 767px) {\n.collapse:not(.show) {\n            display: none;\n}\n}\n@media only screen and (min-width: 767px) {\n.collapse:not(.show) {\n            display: flex;\n}\n}\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/paymments/components/allPaymments.vue?vue&type=style&index=0&lang=css&":
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/app/paymments/components/allPaymments.vue?vue&type=style&index=0&lang=css& ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* button to toggle value fixed or new value */\n.toggleValue{\n        align-self: center;\n        text-align: center;\n        cursor: pointer;\n}\n.toggleValue:hover{\n        opacity: 0.7;\n        transition:all 0.5s ease;\n}\n", ""]);
 
 // exports
 
@@ -39274,36 +39276,6 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/paymments/components/allPaymments.vue?vue&type=style&index=0&lang=css&":
-/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/app/paymments/components/allPaymments.vue?vue&type=style&index=0&lang=css& ***!
-  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./allPaymments.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/paymments/components/allPaymments.vue?vue&type=style&index=0&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/profiles/components/evolutionBelt.vue?vue&type=style&index=0&lang=css&":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/app/profiles/components/evolutionBelt.vue?vue&type=style&index=0&lang=css& ***!
@@ -40243,23 +40215,28 @@ var render = function() {
                     staticClass: "form-control",
                     attrs: { id: "item", required: "" },
                     on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.FormCost,
-                          "item",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
+                      change: [
+                        function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.FormCost,
+                            "item",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        },
+                        function($event) {
+                          return _vm.onChangeItem($event)
+                        }
+                      ]
                     }
                   },
                   _vm._l(_vm.allItems, function(item) {
@@ -40336,7 +40313,37 @@ var render = function() {
                       _vm.$set(_vm.FormCost, "value", $event.target.value)
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: this.value_exp_show,
+                        expression: "this.value_exp_show"
+                      }
+                    ],
+                    staticClass: "text-center"
+                  },
+                  [
+                    _vm._m(0),
+                    _c(
+                      "small",
+                      {
+                        staticClass: "badge badge-primary",
+                        on: {
+                          click: function($event) {
+                            return _vm.use_value_exp(_vm.value_exp)
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(_vm.value_exp))]
+                    )
+                  ]
+                )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group col-md-3" }, [
@@ -40484,7 +40491,7 @@ var render = function() {
           attrs: { id: "table_cost" }
         },
         [
-          _vm._m(0),
+          _vm._m(1),
           _vm._v(" "),
           _c(
             "tbody",
@@ -40529,6 +40536,12 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("small", [_c("b", [_vm._v("Expected value: ")])])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -40778,23 +40791,28 @@ var render = function() {
                     staticClass: "form-control",
                     attrs: { id: "item", required: "" },
                     on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.FormPaymment,
-                          "item",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
+                      change: [
+                        function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.FormPaymment,
+                            "item",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        },
+                        function($event) {
+                          return _vm.onChangeItem($event)
+                        }
+                      ]
                     }
                   },
                   _vm._l(_vm.allItems, function(item) {
@@ -40848,78 +40866,44 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group col-md-2" }, [
-                _c("label", { attrs: { for: "fixed_value" } }, [
-                  _vm._v("Fixed Value")
-                ]),
+                _c("label", { attrs: { for: "value" } }, [_vm._v("Value")]),
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "form-control",
-                  attrs: {
-                    type: "number",
-                    id: "fixed_value",
-                    readonly: "",
-                    required: ""
-                  },
-                  domProps: { value: _vm.FormPaymment.fixed_value }
-                })
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "toggleValue form-group col-md-1 pt-2 mb-1" },
-                [
-                  _c("i", {
-                    class: ["fa-2x", _vm.faChangingValue()],
-                    on: {
-                      click: function($event) {
-                        return _vm.toggleValue()
-                      }
-                    }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.visibleValue,
-                      expression: "visibleValue"
-                    }
-                  ],
-                  staticClass: "form-group col-md-2"
-                },
-                [
-                  _c("label", { attrs: { for: "value" } }, [
-                    _vm._v("Other Value")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
+                  attrs: { type: "number", id: "value", required: "" },
+                  domProps: { value: _vm.FormPaymment.value }
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
                     directives: [
                       {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.FormPaymment.value,
-                        expression: "FormPaymment.value"
+                        name: "show",
+                        rawName: "v-show",
+                        value: this.value_exp_show,
+                        expression: "this.value_exp_show"
                       }
                     ],
-                    staticClass: "form-control",
-                    attrs: { type: "number", id: "value" },
-                    domProps: { value: _vm.FormPaymment.value },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                    staticClass: "text-center"
+                  },
+                  [
+                    _vm._m(0),
+                    _c(
+                      "small",
+                      {
+                        staticClass: "badge badge-primary",
+                        on: {
+                          click: function($event) {
+                            return _vm.use_value_exp(_vm.value_exp)
+                          }
                         }
-                        _vm.$set(_vm.FormPaymment, "value", $event.target.value)
-                      }
-                    }
-                  })
-                ]
-              )
+                      },
+                      [_vm._v(_vm._s(_vm.value_exp))]
+                    )
+                  ]
+                )
+              ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
@@ -41036,7 +41020,7 @@ var render = function() {
           attrs: { id: "table_paymment" }
         },
         [
-          _vm._m(0),
+          _vm._m(1),
           _vm._v(" "),
           _c(
             "tbody",
@@ -41083,6 +41067,12 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("small", [_c("b", [_vm._v("Expected value: ")])])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -58884,9 +58874,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _allPaymments_vue_vue_type_template_id_da52d440___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./allPaymments.vue?vue&type=template&id=da52d440& */ "./resources/js/components/app/paymments/components/allPaymments.vue?vue&type=template&id=da52d440&");
 /* harmony import */ var _allPaymments_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./allPaymments.vue?vue&type=script&lang=js& */ "./resources/js/components/app/paymments/components/allPaymments.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _allPaymments_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./allPaymments.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/app/paymments/components/allPaymments.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -58894,7 +58882,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _allPaymments_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _allPaymments_vue_vue_type_template_id_da52d440___WEBPACK_IMPORTED_MODULE_0__["render"],
   _allPaymments_vue_vue_type_template_id_da52d440___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -58923,22 +58911,6 @@ component.options.__file = "resources/js/components/app/paymments/components/all
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_allPaymments_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./allPaymments.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/paymments/components/allPaymments.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_allPaymments_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/app/paymments/components/allPaymments.vue?vue&type=style&index=0&lang=css&":
-/*!************************************************************************************************************!*\
-  !*** ./resources/js/components/app/paymments/components/allPaymments.vue?vue&type=style&index=0&lang=css& ***!
-  \************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_allPaymments_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader!../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./allPaymments.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/paymments/components/allPaymments.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_allPaymments_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_allPaymments_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_allPaymments_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_allPaymments_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_allPaymments_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

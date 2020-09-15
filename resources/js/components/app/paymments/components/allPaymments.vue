@@ -25,7 +25,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="item">Item</label>
-                        <select id="item" class="form-control" v-model="FormPaymment.item" required>
+                        <select id="item" class="form-control" v-model="FormPaymment.item" @change="onChangeItem($event)" required>
                              <option v-for='item in allItems' v-text='item.name' v-bind:key="item.id" :value="item.id"></option>
                         </select>
                     </div>
@@ -34,15 +34,11 @@
                         <input type="number" class="form-control" id="quantity" v-model="FormPaymment.quantity" min="1" required>
                     </div>
                     <div class="form-group col-md-2">
-                        <label for="fixed_value">Fixed Value</label>
-                        <input type="number" class="form-control" id="fixed_value"  :value="FormPaymment.fixed_value" readonly required>
-                    </div>
-                    <div class="toggleValue form-group col-md-1 pt-2 mb-1">
-                        <i :class="['fa-2x', faChangingValue()]" @click="toggleValue()"></i>
-                    </div>
-                    <div class="form-group col-md-2" v-show="visibleValue">
-                        <label for="value">Other Value</label>
-                        <input type="number" class="form-control" id="value" v-model="FormPaymment.value">
+                        <label for="value">Value</label>
+                        <input type="number" class="form-control" id="value"  :value="FormPaymment.value" required>
+                        <div class="text-center" v-show="this.value_exp_show">
+                            <small><b>Expected value: </b></small><small class="badge badge-primary" @click="use_value_exp(value_exp)">{{ value_exp }}</small>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -98,10 +94,12 @@ export default {
             allStudents: Array, //Student DB
             allItems: Array, //Item DB
 
+            Item_value: "", //value of the item selected
+
             //toggle
             visibleNewPaymment: false, //toggle new paymment
-            visibleValue: false, //fixed value or change value
             postVsEditButton: true, //button change if is a new item or i want to edit an item
+            value_exp_show: false, //toggle value_expected (small red)
 
             // ---[POST]---
             FormPaymment: {
@@ -110,7 +108,6 @@ export default {
                 date_paymment: "",
                 item: "",
                 quantity: "",
-                fixed_value: "",
                 value: "",
                 comment: ""
             },
@@ -124,12 +121,13 @@ export default {
         faChanging(){
             return (this.visibleNewPaymment == true) ? "fa fa-minus" : "fa fa-plus"
         },
-        toggleValue(){
-            this.FormPaymment.value = 0
-            return this.visibleValue = !this.visibleValue
+        onChangeItem(event){  //if item change, it save the value at ITEM_VALUE (change computed)
+            this.Item_value = this.allItems[event.target.value - 1].value
+            this.value_exp_show = true
         },
-        faChangingValue(){
-            return (this.visibleValue == true) ? "fa fa-times text-danger" : "fa fa-edit text-info"
+        use_value_exp(value){ //use value expected as a VALUE
+            this.FormPaymment.value = value
+            this.value_exp_show = false
         },
         resetForm(){
             this.FormPaymment.id            = ""
@@ -137,13 +135,11 @@ export default {
             this.FormPaymment.date_paymment = ""
             this.FormPaymment.item          = ""
             this.FormPaymment.quantity      = ""
-            this.FormPaymment.fixed_value   = ""
             this.FormPaymment.value         = 0
             this.FormPaymment.comment       = ""
         },
         BacktoSave(){ //calcel button (yellow one)
             this.visibleNewPaymment = false //open paymment edit
-            this.visibleValue = false //open variable value
             this.postVsEditButton = true //change buttons
             this.resetForm()
         },
@@ -192,7 +188,6 @@ export default {
         // ------[ALL PAYMMENT]------
         editPaymment(index){
             this.visibleNewPaymment = true //open paymment edit
-            this.visibleValue = true //open variable value
             this.postVsEditButton = false //change buttons
 
             //use the index if paymment clicked and find where is inside the thia.paymmentList
@@ -201,7 +196,6 @@ export default {
             this.FormPaymment.date_paymment = this.paymmentList[index].date_paymment
             this.FormPaymment.item          = this.paymmentList[index].item.id
             this.FormPaymment.quantity      = this.paymmentList[index].quantity
-            this.FormPaymment.fixed_value   = this.paymmentList[index].final_value
             this.FormPaymment.value         = this.paymmentList[index].final_value
             this.FormPaymment.comment       = this.paymmentList[index].comment
 
@@ -210,8 +204,10 @@ export default {
         //--------------------------
     },
     computed:{
-        fixedValue(){
-            return this.FormPaymment.fixed_value = this.allItems[this.FormPaymment.item-1].value * this.FormPaymment.quantity
+        // value expected - (Value item X quantity)
+        value_exp(){
+            this.value_exp_show = true
+            return this.Item_value * this.FormPaymment.quantity
         }
     },
     created(){
@@ -237,14 +233,5 @@ export default {
 </script>
 
 <style>
-/* button to toggle value fixed or new value */
-    .toggleValue{
-        align-self: center;
-        text-align: center;
-        cursor: pointer;
-    }
-    .toggleValue:hover{
-        opacity: 0.7;
-        transition:all 0.5s ease;
-    }
+
 </style>

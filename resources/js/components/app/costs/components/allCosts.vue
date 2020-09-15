@@ -13,7 +13,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="item">Item</label>
-                        <select id="item" class="form-control" v-model="FormCost.item" required>
+                        <select id="item" class="form-control" v-model="FormCost.item" @change="onChangeItem($event)" required>
                              <option v-for='item in allItems' v-text='item.name' v-bind:key="item.id" :value="item.id"></option>
                         </select>
                     </div>
@@ -24,6 +24,9 @@
                     <div class="form-group col-md-2">
                         <label for="value">Value</label>
                         <input type="number" class="form-control" id="value" v-model="FormCost.value" min="1" required>
+                        <div class="text-center" v-show="this.value_exp_show">
+                            <small><b>Expected value: </b></small><small class="badge badge-primary" @click="use_value_exp(value_exp)">{{ value_exp }}</small>
+                        </div>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="databirth">Date</label>
@@ -80,13 +83,16 @@ export default {
             costList: Array, //all costs
             allItems: Array, //Item DB
 
+            Item_value: "", //value of the item selected
+
             //toggle
             visibleNewCost: false, //toggle new cost
             postVsEditButton: true, //button change if is a new item or i want to edit an item
+            value_exp_show: false, //toggle value_expected (small red)
 
             // ---[POST]---
             FormCost: {
-                id: "",
+                id: 1,
                 date_paymment: "",
                 item: "",
                 quantity: "",
@@ -103,12 +109,20 @@ export default {
         faChanging(){
             return (this.visibleNewCost == true) ? "fa fa-minus" : "fa fa-plus"
         },
-        resetForm(){
+        onChangeItem(event){  //if item change, it save the value at ITEM_VALUE (change computed)
+            this.Item_value = this.allItems[event.target.value - 1].value
+            this.value_exp_show = true
+        },
+        use_value_exp(value){ //use value expected as a VALUE
+            this.FormCost.value = value
+            this.value_exp_show = false
+        },
+        resetForm(){ //reset all inputs
             this.FormCost.id            = ""
             this.FormCost.date_paymment = ""
             this.FormCost.item          = ""
             this.FormCost.quantity      = ""
-            this.FormCost.value    = 0
+            this.FormCost.value         = 0
             this.FormCost.comment       = ""
         },
         BacktoSave(){ //cancel button (yellow one)
@@ -168,12 +182,18 @@ export default {
             this.FormCost.date_paymment = this.costList[index].date_paymment
             this.FormCost.item          = this.costList[index].item.id
             this.FormCost.quantity      = this.costList[index].quantity
-            this.FormCost.value    = this.costList[index].final_value
+            this.FormCost.value         = this.costList[index].final_value
             this.FormCost.comment       = this.costList[index].comment
-
-
         },
         //--------------------------
+
+    },
+    computed:{
+        // value expected - (Value item X quantity)
+        value_exp(){
+            this.value_exp_show = true
+            return this.Item_value * this.FormCost.quantity
+        }
     },
     created(){
         // Fetch all [Cost] from DB
