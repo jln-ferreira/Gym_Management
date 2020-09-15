@@ -6,6 +6,7 @@ import Dashboard from "./components/app/dashboard/Dashboard"
 import Students from "./components/app/students/Students"
 import Profiles from "./components/app/profiles/profiles"
 import Paymments from "./components/app/paymments/Paymments"
+import Costs from "./components/app/costs/Costs"
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,11 @@ export default new VueRouter({
             path: '/paymments',
             name: 'paymments',
             component: Paymments,
+        },
+        {
+            path: '/costs',
+            name: 'costs',
+            component: Costs,
         },
     ],
 });

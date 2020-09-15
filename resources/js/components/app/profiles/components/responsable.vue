@@ -35,9 +35,9 @@
                         </div>
                         <div class="form-group">
                             <button type="save" v-show="this.responsableSave == true" class="btn btn-success"><i class="fa fa-plus"></i> Save</button>
-                            <button v-show="this.responsableSave == false" type="edit" class="btn btn-primary">Edit</button>
-                            <a  v-show="this.responsableSave == false" @click="deleteResponsable(FormResponsable.id)" type="delete" class="btn btn-danger text-white">Delete</a>
-                            <a v-show="this.responsableSave == false" @click="cancelResponsable()" type="cancel" class="btn btn-warning text-white">Cancel</a>
+                            <button v-show="this.responsableSave == false" type="edit" class="btn btn-primary"><i class="far fa-edit"></i> Edit</button>
+                            <a  v-show="this.responsableSave == false" @click="deleteResponsable(FormResponsable.id)" type="delete" class="btn btn-danger text-white"><i class="far fa-trash-alt"></i> Delete</a>
+                            <a v-show="this.responsableSave == false" @click="cancelResponsable()" type="cancel" class="btn btn-warning text-white"><i class="fa fa-times"></i> Cancel</a>
                         </div>
                     </form>
                 </div>
@@ -50,6 +50,7 @@
                     <h3 class="font-weight-bolder text-center">Responsables:</h3>
                     <hr/>
                     <div class="row">
+                        <small class="mx-auto" v-if="this.responsables == ''">There is no Responsable</small>
                         <div class="card-responsable card col-lg-3 col-4" v-for="(responsable, index) in this.responsables" v-bind:key="responsable.id" @click="modifyPost(index)">
                             <img class="card-img-top" src="image/responsables/responsable_ded.png" alt="Card image" v-if="responsable.kinship == 'Father'">
                             <img class="card-img-top" src="image/responsables/responsable_mother.png" alt="Card image" v-if="responsable.kinship == 'Mother'">

@@ -4,6 +4,7 @@
          <table id="table_student" class="table table-striped compact">
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone Number</th>
@@ -14,6 +15,7 @@
             </thead>
             <tbody>
                 <tr v-for="student in this.studentList" v-bind:key="student.id">
+                    <td>{{ student.id }}</td>
                     <td>{{ student.name }}</td>
                     <td>{{ student.email }}</td>
                     <td>{{ student.phoneNumber }}</td>

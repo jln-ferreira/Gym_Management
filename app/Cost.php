@@ -8,7 +8,7 @@ class Cost extends Model
 {
     protected $guarded = [];
 
-    // ------- RELATIONSHIP -------
+    // cost < item
     public function item()
     {
         return $this->belongsTo(Item::class);

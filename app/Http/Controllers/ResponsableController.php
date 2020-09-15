@@ -96,7 +96,7 @@ class ResponsableController extends Controller
 
         return response([
             'message' => 'Responsable Updated!',
-            'Responsable' => $editResponsable
+            'Responsable' => $editResponsable->id
         ], 200);
     }
 
@@ -108,7 +108,6 @@ class ResponsableController extends Controller
      */
     public function destroy($id)
     {
-        $responsables = Responsable::find($id);
         Responsable::find($id)->delete();
         return response([
             'message' => 'Responsable Deleted',

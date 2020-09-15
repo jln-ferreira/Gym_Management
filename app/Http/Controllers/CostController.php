@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Paymment;
-use App\Student;
+use App\Cost;
 
-class PaymmentController extends Controller
+class CostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class PaymmentController extends Controller
      */
     public function index()
     {
-        return Paymment::with(['student','item'])->get();
+        return Cost::with('item')->get();
     }
 
     /**
@@ -37,18 +36,15 @@ class PaymmentController extends Controller
      */
     public function store(Request $request)
     {
-        ($request->input('value') == 0) ? $value = $request->input('fixed_value') : $value = $request->input('value');
-
-        Paymment::create([
-            'student_id'    => $request->input('student'),
+        Cost::create([
             'date_paymment' => $request->input('date_paymment'),
             'item_id'       => $request->input('item'),
             'quantity'      => $request->input('quantity'),
-            'final_value'   => $value, //if the value is in DB or is a new value
+            'final_value'   => $request->input('value'),
             'comment'       => $request->input('comment'),
         ]);
 
-        return response('Paymment Added!', 200);
+        return response('Cost Added!', 200);
     }
 
     /**
@@ -59,7 +55,7 @@ class PaymmentController extends Controller
      */
     public function show($id)
     {
-        return Paymment::with(['student','item'])->get()->find($id);
+        //
     }
 
     /**
@@ -82,23 +78,17 @@ class PaymmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // chose value goes to DB
-        ($request->modifyPaymment['value'] == 0) ?
-            $value = $request->modifyPaymment['fixed_value'] :
-            $value = $request->modifyPaymment['value'];
-
-        //Find paymment with id
-        $editPaymment = Paymment::find($id);
+        //Find cost with id
+        $editCost = Cost::find($id);
 
         //use inputs to update mySQL
-        $editPaymment->student_id    = $request->modifyPaymment['student'];
-        $editPaymment->date_paymment = $request->modifyPaymment['date_paymment'];
-        $editPaymment->item_id       = $request->modifyPaymment['item'];
-        $editPaymment->quantity      = $request->modifyPaymment['quantity'];
-        $editPaymment->final_value   = $value;
-        $editPaymment->save();
+        $editCost->date_paymment = $request->modifyCost['date_paymment'];
+        $editCost->item_id       = $request->modifyCost['item'];
+        $editCost->quantity      = $request->modifyCost['quantity'];
+        $editCost->final_value   = $request->modifyCost['value'];
+        $editCost->save();
 
-        return response('Payment Updated!', 200);
+        return response('Cost Updated!', 200);
     }
 
     /**
@@ -109,10 +99,10 @@ class PaymmentController extends Controller
      */
     public function destroy($id)
     {
-        Paymment::find($id)->delete();
+        Cost::find($id)->delete();
         return response([
-            "message"     =>"Payment Deleted",
-            "paymment_id" =>$id
+            "message" =>"Cost Deleted",
+            "cost_id" =>$id
         ], 200);
     }
 }

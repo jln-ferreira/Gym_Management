@@ -77,7 +77,18 @@ class GraduationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $editGraduation = Graduation::find($id);
+
+        //use inputs to update mySQL
+        $editGraduation->student_id = $request->modifyGraduation['student_id'];
+        $editGraduation->belt_id    = $request->modifyGraduation['belt_id'];
+        $editGraduation->created_at = $request->modifyGraduation['graduation_date'];
+        $editGraduation->save();
+
+        return response([
+            'message' => 'Graduation Updated!',
+            'Graduation' => $editGraduation->id
+        ], 200);
     }
 
     /**
@@ -88,6 +99,10 @@ class GraduationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Graduation::find($id)->delete();
+        return response([
+            'message' => 'Graduation Deleted',
+            'graduation_id' => $id
+        ], 200);
     }
 }

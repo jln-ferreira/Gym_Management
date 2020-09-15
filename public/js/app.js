@@ -1959,6 +1959,266 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/costs/Costs.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/app/costs/Costs.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_allCosts_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/allCosts.vue */ "./resources/js/components/app/costs/components/allCosts.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// import components
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    allCosts: _components_allCosts_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/costs/components/allCosts.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/app/costs/components/allCosts.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      costList: Array,
+      //all costs
+      allItems: Array,
+      //Item DB
+      //toggle
+      visibleNewCost: false,
+      //toggle new cost
+      postVsEditButton: true,
+      //button change if is a new item or i want to edit an item
+      // ---[POST]---
+      FormCost: {
+        id: "",
+        date_paymment: "",
+        item: "",
+        quantity: "",
+        value: 0,
+        comment: ""
+      }
+    };
+  },
+  methods: {
+    // ------[NEW COST]------
+    toggleNewCost: function toggleNewCost() {
+      return this.visibleNewCost = !this.visibleNewCost;
+    },
+    faChanging: function faChanging() {
+      return this.visibleNewCost == true ? "fa fa-minus" : "fa fa-plus";
+    },
+    resetForm: function resetForm() {
+      this.FormCost.id = "";
+      this.FormCost.date_paymment = "";
+      this.FormCost.item = "";
+      this.FormCost.quantity = "";
+      this.FormCost.value = 0;
+      this.FormCost.comment = "";
+    },
+    BacktoSave: function BacktoSave() {
+      //cancel button (yellow one)
+      this.visibleNewCost = false; //open cost edit
+
+      this.postVsEditButton = true; //change buttons
+
+      this.resetForm();
+    },
+    deleteCostVue: function deleteCostVue(obj) {
+      var _this = this;
+
+      //delete clicked cost
+      var count = 0;
+      this.costList.forEach(function (element) {
+        element.id == obj ? _this.costList.splice(count, 1) : count = +1;
+      });
+    },
+    cost_saveEdit: function cost_saveEdit() {
+      var _this2 = this;
+
+      //----------[POST]---------
+      if (this.postVsEditButton) {
+        //[POST]
+        axios.post('/api/cost', this.FormCost).then(function (response) {
+          alert(response.data);
+
+          _this2.resetForm();
+
+          _this2.BacktoSave();
+        });
+      } else {
+        //[EDIT]
+        //----------[PUT PATCH - EDIT]----------
+        axios.post('/api/cost/' + this.FormCost.id, {
+          modifyCost: this.FormCost,
+          _method: 'patch'
+        }).then(function (response) {
+          alert(response.data);
+
+          _this2.resetForm();
+
+          _this2.BacktoSave();
+        })["catch"](function (error) {
+          return alert(error.response.data);
+        });
+      }
+    },
+    deleteCost: function deleteCost(cost_id) {
+      var _this3 = this;
+
+      //------[DELETE]-------
+      axios.post('/api/cost/' + cost_id, {
+        _method: 'DELETE'
+      }).then(function (response) {
+        alert(response.data.message);
+
+        _this3.resetForm();
+
+        _this3.BacktoSave();
+
+        _this3.deleteCostVue(response.data.cost_id);
+      })["catch"](function (error) {
+        return console.log(error.response.data);
+      });
+    },
+    //---------------------------
+    // ------[ALL COST]------
+    editCost: function editCost(index) {
+      this.visibleNewCost = true; //open cost edit
+
+      this.postVsEditButton = false; //change buttons
+      //use the index if cost clicked and find where is inside the thia.costList
+
+      this.FormCost.id = this.costList[index].id;
+      this.FormCost.date_paymment = this.costList[index].date_paymment;
+      this.FormCost.item = this.costList[index].item.id;
+      this.FormCost.quantity = this.costList[index].quantity;
+      this.FormCost.value = this.costList[index].final_value;
+      this.FormCost.comment = this.costList[index].comment;
+    } //--------------------------
+
+  },
+  created: function created() {
+    var _this4 = this;
+
+    // Fetch all [Cost] from DB
+    axios.get('/api/cost').then(function (response) {
+      _this4.costList = response.data;
+      setTimeout(function () {
+        return $('#table_cost').DataTable();
+      }, 1000);
+    })["catch"](function (error) {
+      return console.log(error);
+    }); // Fetch [Item] to show his profile from DB
+
+    axios.get('/api/item').then(function (response) {
+      return _this4.allItems = response.data;
+    })["catch"](function (error) {
+      return console.log(error);
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/dashboard/Dashboard.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/app/dashboard/Dashboard.vue?vue&type=script&lang=js& ***!
@@ -2113,6 +2373,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       paymmentList: Array,
+      //all payments
       allStudents: Array,
       //Student DB
       allItems: Array,
@@ -2348,7 +2609,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     beltList: "" //all belts
@@ -2386,6 +2646,15 @@ __webpack_require__.r(__webpack_exports__);
       };
       this.graduations.push(MirrorGraduation);
     },
+    deleteGraduationVue: function deleteGraduationVue(obj) {
+      var _this = this;
+
+      //delete clicked Grduation
+      var count = 0;
+      this.graduations.forEach(function (element) {
+        element.id == obj ? _this.graduations.splice(count, 1) : count = +1;
+      });
+    },
     resetForm: function resetForm() {
       //reset all inputs
       this.FormGraduation.id = "";
@@ -2401,20 +2670,56 @@ __webpack_require__.r(__webpack_exports__);
     },
     //[ADD NEW GRADUATION]
     graduation_saveEdit: function graduation_saveEdit() {
-      var _this = this;
+      var _this2 = this;
 
       //--------------------[POST]--------------
       if (this.graduationSave) {
         axios.post('/api/graduation', this.FormGraduation).then(function (response) {
           alert(response.data);
 
-          _this.showNewGraduation();
+          _this2.showNewGraduation();
 
-          _this.resetForm();
+          _this2.resetForm();
         })["catch"](function (error) {
-          return _this.errors = error.response.data.errors;
+          return _this2.errors = error.response.data.errors;
+        });
+      } else {
+        //----------[PUT PATCH - EDIT]----------
+        axios.post('/api/graduation/' + this.FormGraduation.id, {
+          modifyGraduation: this.FormGraduation,
+          _method: 'patch'
+        }).then(function (response) {
+          alert(response.data.message);
+
+          _this2.deleteGraduationVue(response.data.Graduation);
+
+          _this2.showNewGraduation();
+
+          _this2.resetForm();
+
+          _this2.graduationSave = true;
+        })["catch"](function (error) {
+          return alert(error.response.data);
         });
       }
+    },
+    deleteGraduation: function deleteGraduation(graduation) {
+      var _this3 = this;
+
+      //-----[DELETE]------
+      axios.post('/api/graduation/' + graduation, {
+        _method: 'DELETE'
+      }).then(function (response) {
+        alert(response.data.message);
+
+        _this3.deleteGraduationVue(response.data.graduation_id);
+
+        _this3.resetForm();
+
+        _this3.graduationSave = true;
+      })["catch"](function (error) {
+        return console.log(error.response.data);
+      });
     },
     cancelGraduation: function cancelGraduation() {
       //------[CANCEL]-------
@@ -2423,11 +2728,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this4 = this;
 
     // Fetch all graduation of especial student
     axios.get('/api/student/' + this.$route.params.id + '/graduation').then(function (response) {
-      return _this2.graduations = response.data;
+      return _this4.graduations = response.data;
     })["catch"](function (error) {
       return alert(error);
     });
@@ -2636,6 +2941,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -2993,6 +3299,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -7751,7 +8059,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* thead of table */\n.thead-belt{\n    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);\n}\n\n/* [card for each  graduation] */\n.card-graduation{\n    cursor: pointer;\n}\n.card-graduation :hover{\n  opacity: 0.5;\n  transition:all 0.5s ease;\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* thead of table */\n.thead-belt{\n    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);\n}\n\n/* [card for each  graduation] */\n.card-graduation{\n    cursor: pointer;\n}\n.card-graduation :hover{\n  opacity: 0.5;\n  transition:all 0.5s ease;\n}\n\n", ""]);
 
 // exports
 
@@ -7789,7 +8097,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* [card for each  responsable] */\n.card-responsable{\n    cursor: pointer;\n}\n.card-responsable :hover{\n  opacity: 0.5;\n  transition:all 0.5s ease;\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* [card for each  responsable] */\n.card-responsable{\n    cursor: pointer;\n}\n.card-responsable :hover{\n  opacity: 0.5;\n  transition:all 0.5s ease;\n}\n\n", ""]);
 
 // exports
 
@@ -39787,30 +40095,458 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _vm._m(0)
+      _c(
+        "div",
+        { staticClass: "shadow-sm col-sm-2" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "list-group-item list-group-item-action",
+              attrs: { to: "/costs" }
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-coins",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v(" Costs")
+            ]
+          )
+        ],
+        1
+      )
     ]
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/costs/Costs.vue?vue&type=template&id=7b395f34&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/app/costs/Costs.vue?vue&type=template&id=7b395f34& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [_vm._m(0), _vm._v(" "), _c("allCosts")], 1)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "shadow-sm col-sm-2" }, [
+    return _c("div", { staticClass: "pt-4 pb-2" }, [
+      _c("h1", { staticClass: "header-pages font-weight-bold" }, [
+        _vm._v("Costs")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/costs/components/allCosts.vue?vue&type=template&id=0ac0468c&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/app/costs/components/allCosts.vue?vue&type=template&id=0ac0468c& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("section", { staticClass: "container" }, [
+    _c("hr"),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "btn btn-primary",
+        on: {
+          click: function($event) {
+            return _vm.toggleNewCost()
+          }
+        }
+      },
+      [
+        _c("i", {
+          staticClass: "fa fa-coins",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" New Cost "),
+        _c("i", { class: _vm.faChanging(), attrs: { "aria-hidden": "true" } })
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.visibleNewCost,
+            expression: "visibleNewCost"
+          }
+        ],
+        staticClass: "mt-1 shadow-sm p-4 mb-4 bg-white"
+      },
+      [
+        _c(
+          "form",
+          {
+            attrs: { method: "post" },
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.cost_saveEdit($event)
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "form-row" }, [
+              _c("div", { staticClass: "form-group col-md-6" }, [
+                _c("label", { attrs: { for: "item" } }, [_vm._v("Item")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.FormCost.item,
+                        expression: "FormCost.item"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "item", required: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.FormCost,
+                          "item",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.allItems, function(item) {
+                    return _c("option", {
+                      key: item.id,
+                      domProps: {
+                        value: item.id,
+                        textContent: _vm._s(item.name)
+                      }
+                    })
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-1" }, [
+                _c("label", { attrs: { for: "quantity" } }, [
+                  _vm._v("Quantity")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.FormCost.quantity,
+                      expression: "FormCost.quantity"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "number",
+                    id: "quantity",
+                    min: "1",
+                    required: ""
+                  },
+                  domProps: { value: _vm.FormCost.quantity },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.FormCost, "quantity", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-2" }, [
+                _c("label", { attrs: { for: "value" } }, [_vm._v("Value")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.FormCost.value,
+                      expression: "FormCost.value"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "number",
+                    id: "value",
+                    min: "1",
+                    required: ""
+                  },
+                  domProps: { value: _vm.FormCost.value },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.FormCost, "value", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-3" }, [
+                _c("label", { attrs: { for: "databirth" } }, [_vm._v("Date")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.FormCost.date_paymment,
+                      expression: "FormCost.date_paymment"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "date", id: "date_paymment", required: "" },
+                  domProps: { value: _vm.FormCost.date_paymment },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.FormCost,
+                        "date_paymment",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "comments" } }, [_vm._v("Comments")]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.FormCost.comment,
+                    expression: "FormCost.comment"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "comments", rows: "3" },
+                domProps: { value: _vm.FormCost.comment },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.FormCost, "comment", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: this.postVsEditButton,
+                    expression: "this.postVsEditButton"
+                  }
+                ],
+                staticClass: "btn btn-success",
+                attrs: { type: "submit" }
+              },
+              [_c("i", { staticClass: "fa fa-plus" }), _vm._v(" Add Payment")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !this.postVsEditButton,
+                    expression: "!this.postVsEditButton"
+                  }
+                ],
+                staticClass: "btn btn-info text-white",
+                attrs: { type: "submit" }
+              },
+              [_c("i", { staticClass: "fa fa-edit" }), _vm._v(" Edit Payment")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !this.postVsEditButton,
+                    expression: "!this.postVsEditButton"
+                  }
+                ],
+                staticClass: "btn btn-warning",
+                on: {
+                  click: function($event) {
+                    return _vm.BacktoSave()
+                  }
+                }
+              },
+              [_c("i", { staticClass: "fa fa-times" }), _vm._v(" Cancel")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !this.postVsEditButton,
+                    expression: "!this.postVsEditButton"
+                  }
+                ],
+                staticClass: "btn btn-danger text-white",
+                on: {
+                  click: function($event) {
+                    return _vm.deleteCost(_vm.FormCost.id)
+                  }
+                }
+              },
+              [_c("i", { staticClass: "far fa-trash-alt" }), _vm._v(" Delete")]
+            )
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "bg-white shadow-sm rounded p-2" }, [
       _c(
-        "a",
+        "table",
         {
-          staticClass: "list-group-item list-group-item-action",
-          attrs: { href: "#" }
+          staticClass: "table table-striped compact",
+          attrs: { id: "table_cost" }
         },
         [
-          _c("i", {
-            staticClass: "fa fa-coins",
-            attrs: { "aria-hidden": "true" }
-          }),
-          _vm._v(" Costs")
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(this.costList, function(cost, index) {
+              return _c("tr", { key: cost.id }, [
+                _c("td", [_vm._v(_vm._s(cost.id))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(cost.item.name))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(cost.quantity))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(cost.final_value))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(cost.date_paymment))]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "a",
+                    {
+                      staticStyle: { cursor: "pointer" },
+                      on: {
+                        click: function($event) {
+                          return _vm.editCost(index)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fas fa-wrench fa-lg text-success",
+                        attrs: { title: "Edit" }
+                      })
+                    ]
+                  )
+                ])
+              ])
+            }),
+            0
+          )
         ]
       )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Id")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Item")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Quantity")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Value")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Date")]),
+        _vm._v(" "),
+        _c("th")
+      ])
     ])
   }
 ]
@@ -40285,7 +41021,7 @@ var render = function() {
                   }
                 }
               },
-              [_c("i", { staticClass: "fa fa-plus" }), _vm._v(" Delete")]
+              [_c("i", { staticClass: "far fa-trash-alt" }), _vm._v(" Delete")]
             )
           ]
         )
@@ -40559,7 +41295,7 @@ var render = function() {
                       staticClass: "btn btn-primary",
                       attrs: { type: "edit" }
                     },
-                    [_vm._v("Edit")]
+                    [_c("i", { staticClass: "far fa-edit" }), _vm._v(" Edit")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -40574,9 +41310,17 @@ var render = function() {
                         }
                       ],
                       staticClass: "btn btn-danger text-white",
-                      attrs: { type: "delete" }
+                      attrs: { type: "delete" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteGraduation(_vm.FormGraduation.id)
+                        }
+                      }
                     },
-                    [_vm._v("Delete")]
+                    [
+                      _c("i", { staticClass: "far fa-trash-alt" }),
+                      _vm._v(" Delete")
+                    ]
                   ),
                   _vm._v(" "),
                   _c(
@@ -40598,7 +41342,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Cancel")]
+                    [_c("i", { staticClass: "fa fa-times" }), _vm._v(" Cancel")]
                   )
                 ])
               ]
@@ -40617,66 +41361,55 @@ var render = function() {
             _c(
               "div",
               { staticClass: "row" },
-              _vm._l(this.graduations, function(graduation, index) {
-                return _c(
-                  "div",
-                  {
-                    key: graduation.id,
-                    staticClass: "card-graduation card col-lg-3 col-4",
-                    on: {
-                      click: function($event) {
-                        return _vm.modifyPost(index)
-                      }
-                    }
-                  },
-                  [
-                    graduation.belt_id == "Father"
-                      ? _c("img", {
-                          staticClass: "card-img-top",
-                          attrs: {
-                            src: "image/responsable_ded.png",
-                            alt: "Card image"
-                          }
-                        })
-                      : _vm._e(),
-                    _vm._v(" "),
-                    graduation.belt_id == "Mother"
-                      ? _c("img", {
-                          staticClass: "card-img-top",
-                          attrs: {
-                            src: "image/responsable_mother.png",
-                            alt: "Card image"
-                          }
-                        })
-                      : _vm._e(),
-                    _vm._v(" "),
-                    graduation.belt_id == "Relatives"
-                      ? _c("img", {
-                          staticClass: "card-img-top",
-                          attrs: {
-                            src: "image/responsable_ded.png",
-                            alt: "Card image"
-                          }
-                        })
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c("p", { staticClass: "text-center mb-0" }, [
-                        _c("b", [
-                          _vm._v(
-                            _vm._s(_vm.beltList[graduation.belt_id - 1].name)
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "text-center mb-0" }, [
-                        _vm._v(_vm._s(graduation.created_at.slice(0, 10)))
-                      ])
+              [
+                this.graduations == ""
+                  ? _c("small", { staticClass: "mx-auto" }, [
+                      _vm._v("There is no Graduation")
                     ])
-                  ]
-                )
-              }),
-              0
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._l(this.graduations, function(graduation, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: graduation.id,
+                      staticClass: "card-graduation card col-lg-3 col-4",
+                      on: {
+                        click: function($event) {
+                          return _vm.modifyPost(index)
+                        }
+                      }
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "card-img-top",
+                        attrs: {
+                          src:
+                            "image/belts/" +
+                            _vm.beltList[graduation.belt_id - 1].name +
+                            ".png",
+                          alt: "Card image"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c("p", { staticClass: "text-center mb-0" }, [
+                          _c("b", [
+                            _vm._v(
+                              _vm._s(_vm.beltList[graduation.belt_id - 1].name)
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "text-center mb-0" }, [
+                          _vm._v(_vm._s(graduation.created_at.slice(0, 10)))
+                        ])
+                      ])
+                    ]
+                  )
+                })
+              ],
+              2
             )
           ])
         ])
@@ -40749,7 +41482,7 @@ var render = function() {
             [
               this.paymments == ""
                 ? _c("td", { attrs: { colspan: "5" } }, [
-                    _vm._v("There is no Paymments")
+                    _vm._v("There is no Paymment")
                   ])
                 : _vm._e(),
               _vm._v(" "),
@@ -41480,7 +42213,7 @@ var render = function() {
                       staticClass: "btn btn-primary",
                       attrs: { type: "edit" }
                     },
-                    [_vm._v("Edit")]
+                    [_c("i", { staticClass: "far fa-edit" }), _vm._v(" Edit")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -41502,7 +42235,10 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Delete")]
+                    [
+                      _c("i", { staticClass: "far fa-trash-alt" }),
+                      _vm._v(" Delete")
+                    ]
                   ),
                   _vm._v(" "),
                   _c(
@@ -41524,7 +42260,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Cancel")]
+                    [_c("i", { staticClass: "fa fa-times" }), _vm._v(" Cancel")]
                   )
                 ])
               ]
@@ -41543,62 +42279,70 @@ var render = function() {
             _c(
               "div",
               { staticClass: "row" },
-              _vm._l(this.responsables, function(responsable, index) {
-                return _c(
-                  "div",
-                  {
-                    key: responsable.id,
-                    staticClass: "card-responsable card col-lg-3 col-4",
-                    on: {
-                      click: function($event) {
-                        return _vm.modifyPost(index)
-                      }
-                    }
-                  },
-                  [
-                    responsable.kinship == "Father"
-                      ? _c("img", {
-                          staticClass: "card-img-top",
-                          attrs: {
-                            src: "image/responsables/responsable_ded.png",
-                            alt: "Card image"
-                          }
-                        })
-                      : _vm._e(),
-                    _vm._v(" "),
-                    responsable.kinship == "Mother"
-                      ? _c("img", {
-                          staticClass: "card-img-top",
-                          attrs: {
-                            src: "image/responsables/responsable_mother.png",
-                            alt: "Card image"
-                          }
-                        })
-                      : _vm._e(),
-                    _vm._v(" "),
-                    responsable.kinship == "Relatives"
-                      ? _c("img", {
-                          staticClass: "card-img-top",
-                          attrs: {
-                            src: "image/responsables/responsable_ded.png",
-                            alt: "Card image"
-                          }
-                        })
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c("div", [
-                      _c("p", { staticClass: "text-center mb-0" }, [
-                        _c("b", [_vm._v(_vm._s(responsable.name))])
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "text-center mb-0" }, [
-                        _vm._v(_vm._s(responsable.phoneNumber))
-                      ])
+              [
+                this.responsables == ""
+                  ? _c("small", { staticClass: "mx-auto" }, [
+                      _vm._v("There is no Responsable")
                     ])
-                  ]
-                )
-              }),
-              0
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._l(this.responsables, function(responsable, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: responsable.id,
+                      staticClass: "card-responsable card col-lg-3 col-4",
+                      on: {
+                        click: function($event) {
+                          return _vm.modifyPost(index)
+                        }
+                      }
+                    },
+                    [
+                      responsable.kinship == "Father"
+                        ? _c("img", {
+                            staticClass: "card-img-top",
+                            attrs: {
+                              src: "image/responsables/responsable_ded.png",
+                              alt: "Card image"
+                            }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      responsable.kinship == "Mother"
+                        ? _c("img", {
+                            staticClass: "card-img-top",
+                            attrs: {
+                              src: "image/responsables/responsable_mother.png",
+                              alt: "Card image"
+                            }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      responsable.kinship == "Relatives"
+                        ? _c("img", {
+                            staticClass: "card-img-top",
+                            attrs: {
+                              src: "image/responsables/responsable_ded.png",
+                              alt: "Card image"
+                            }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c("p", { staticClass: "text-center mb-0" }, [
+                          _c("b", [_vm._v(_vm._s(responsable.name))])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "text-center mb-0" }, [
+                          _vm._v(_vm._s(responsable.phoneNumber))
+                        ])
+                      ])
+                    ]
+                  )
+                })
+              ],
+              2
             )
           ])
         ])
@@ -41778,6 +42522,8 @@ var render = function() {
             "tbody",
             _vm._l(this.studentList, function(student) {
               return _c("tr", { key: student.id }, [
+                _c("td", [_vm._v(_vm._s(student.id))]),
+                _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(student.name))]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(student.email))]),
@@ -41823,6 +42569,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
+        _c("th", [_vm._v("Id")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Name")]),
         _vm._v(" "),
         _c("th", [_vm._v("Email")]),
@@ -57849,6 +58597,144 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/app/costs/Costs.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/app/costs/Costs.vue ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Costs_vue_vue_type_template_id_7b395f34___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Costs.vue?vue&type=template&id=7b395f34& */ "./resources/js/components/app/costs/Costs.vue?vue&type=template&id=7b395f34&");
+/* harmony import */ var _Costs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Costs.vue?vue&type=script&lang=js& */ "./resources/js/components/app/costs/Costs.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Costs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Costs_vue_vue_type_template_id_7b395f34___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Costs_vue_vue_type_template_id_7b395f34___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/app/costs/Costs.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/app/costs/Costs.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/app/costs/Costs.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Costs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Costs.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/costs/Costs.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Costs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/app/costs/Costs.vue?vue&type=template&id=7b395f34&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/app/costs/Costs.vue?vue&type=template&id=7b395f34& ***!
+  \************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Costs_vue_vue_type_template_id_7b395f34___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Costs.vue?vue&type=template&id=7b395f34& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/costs/Costs.vue?vue&type=template&id=7b395f34&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Costs_vue_vue_type_template_id_7b395f34___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Costs_vue_vue_type_template_id_7b395f34___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/app/costs/components/allCosts.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/js/components/app/costs/components/allCosts.vue ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _allCosts_vue_vue_type_template_id_0ac0468c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./allCosts.vue?vue&type=template&id=0ac0468c& */ "./resources/js/components/app/costs/components/allCosts.vue?vue&type=template&id=0ac0468c&");
+/* harmony import */ var _allCosts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./allCosts.vue?vue&type=script&lang=js& */ "./resources/js/components/app/costs/components/allCosts.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _allCosts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _allCosts_vue_vue_type_template_id_0ac0468c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _allCosts_vue_vue_type_template_id_0ac0468c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/app/costs/components/allCosts.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/app/costs/components/allCosts.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/app/costs/components/allCosts.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_allCosts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./allCosts.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/costs/components/allCosts.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_allCosts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/app/costs/components/allCosts.vue?vue&type=template&id=0ac0468c&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/app/costs/components/allCosts.vue?vue&type=template&id=0ac0468c& ***!
+  \**************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_allCosts_vue_vue_type_template_id_0ac0468c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./allCosts.vue?vue&type=template&id=0ac0468c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/costs/components/allCosts.vue?vue&type=template&id=0ac0468c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_allCosts_vue_vue_type_template_id_0ac0468c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_allCosts_vue_vue_type_template_id_0ac0468c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/app/dashboard/Dashboard.vue":
 /*!*************************************************************!*\
   !*** ./resources/js/components/app/dashboard/Dashboard.vue ***!
@@ -63297,8 +64183,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_app_students_Students__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/app/students/Students */ "./resources/js/components/app/students/Students.vue");
 /* harmony import */ var _components_app_profiles_profiles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/app/profiles/profiles */ "./resources/js/components/app/profiles/profiles.vue");
 /* harmony import */ var _components_app_paymments_Paymments__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/app/paymments/Paymments */ "./resources/js/components/app/paymments/Paymments.vue");
+/* harmony import */ var _components_app_costs_Costs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/app/costs/Costs */ "./resources/js/components/app/costs/Costs.vue");
 
  // components
+
 
 
 
@@ -63322,6 +64210,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
     path: '/paymments',
     name: 'paymments',
     component: _components_app_paymments_Paymments__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }, {
+    path: '/costs',
+    name: 'costs',
+    component: _components_app_costs_Costs__WEBPACK_IMPORTED_MODULE_6__["default"]
   }]
 }));
 

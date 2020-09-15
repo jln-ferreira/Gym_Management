@@ -3,6 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Cost;
+use App\Student;
 use App\Item;
 
 use Faker\Generator as Faker;

@@ -19,7 +19,7 @@ class Costs extends Migration
             $table->integer('item_id')->unsigned();
             $table->integer('quantity');
             $table->double('final_value');
-            $table->text('comment');
+            $table->text('comment')->nullable();
 
             $table->timestamps();
         });

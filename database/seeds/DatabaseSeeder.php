@@ -20,12 +20,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(Belt::class,10)->create();
+        factory(Belt::class,7)->create();
         factory(Subcategory::class,10)->create();
         factory(Item::class,10)->create();
-        factory(Cost::class,40)->create();
         factory(Student::class,50)->create();
-        factory(Responsable::class,20)->create();
+        factory(Cost::class,40)->create();
+        factory(Responsable::class,50)->create();
         factory(Paymment::class,50)->create();
         factory(Graduation::class,50)->create();
     }

@@ -52,7 +52,7 @@
                 <button type="submit" class="btn btn-success" v-show="this.postVsEditButton"><i class="fa fa-plus"></i> Add Payment</button>
                 <button type="submit" class="btn btn-info text-white" v-show="!this.postVsEditButton"><i class="fa fa-edit"></i> Edit Payment</button>
                 <a class="btn btn-warning" v-show="!this.postVsEditButton" @click="BacktoSave()"><i class="fa fa-times"></i> Cancel</a>
-                <a class="btn btn-danger text-white" v-show="!this.postVsEditButton" @click="deletePayment(FormPaymment.id)"><i class="fa fa-plus"></i> Delete</a>
+                <a class="btn btn-danger text-white" v-show="!this.postVsEditButton" @click="deletePayment(FormPaymment.id)"><i class="far fa-trash-alt"></i> Delete</a>
             </form>
         </div>
         <!-- end CAND NEW STUDENT -->
@@ -94,7 +94,7 @@
 export default {
     data(){
         return{
-            paymmentList: Array,
+            paymmentList: Array, //all payments
             allStudents: Array, //Student DB
             allItems: Array, //Item DB
 

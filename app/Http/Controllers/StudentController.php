@@ -24,7 +24,7 @@ class StudentController extends Controller
     //Fetch all graduation for specific student
     public function GraduationProfile($student_id){
 
-        return Student::find($student_id)->graduation;
+        return Student::find($student_id)->graduation->sortDesc();
     }
     //Fetch all Responsable for specific student
     public function StudentProfile($student_id){

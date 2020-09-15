@@ -22,9 +22,9 @@
                         </div>
                         <div class="form-group">
                             <button type="save" v-show="this.graduationSave == true" class="btn btn-success"><i class="fa fa-plus"></i> Save</button>
-                            <button v-show="this.graduationSave == false" type="edit" class="btn btn-primary">Edit</button>
-                            <a v-show="this.graduationSave == false" type="delete" class="btn btn-danger text-white">Delete</a>
-                            <a v-show="this.graduationSave == false" @click="cancelGraduation()" type="cancel" class="btn btn-warning text-white">Cancel</a>
+                            <button v-show="this.graduationSave == false" type="edit" class="btn btn-primary"><i class="far fa-edit"></i> Edit</button>
+                            <a v-show="this.graduationSave == false" @click="deleteGraduation(FormGraduation.id)" type="delete" class="btn btn-danger text-white"><i class="far fa-trash-alt"></i> Delete</a>
+                            <a v-show="this.graduationSave == false" @click="cancelGraduation()" type="cancel" class="btn btn-warning text-white"><i class="fa fa-times"></i> Cancel</a>
                         </div>
                     </form>
                 </div>
@@ -37,10 +37,9 @@
                     <h3 class="font-weight-bolder text-center">Graduations:</h3>
                     <hr/>
                     <div class="row">
+                        <small class="mx-auto" v-if="this.graduations == ''">There is no Graduation</small>
                         <div class="card-graduation card col-lg-3 col-4" v-for="(graduation, index) in this.graduations" v-bind:key="graduation.id" @click="modifyPost(index)">
-                            <img class="card-img-top" src="image/responsable_ded.png" alt="Card image" v-if="graduation.belt_id == 'Father'">
-                            <img class="card-img-top" src="image/responsable_mother.png" alt="Card image" v-if="graduation.belt_id == 'Mother'">
-                            <img class="card-img-top" src="image/responsable_ded.png" alt="Card image" v-if="graduation.belt_id == 'Relatives'">
+                            <img class="card-img-top" :src="'image/belts/' + beltList[graduation.belt_id -1].name + '.png'" alt="Card image">
                             <div>
                                 <p class="text-center mb-0"><b>{{ beltList[graduation.belt_id -1].name }}</b></p>
                                 <p class="text-center mb-0">{{ graduation.created_at.slice(0,10) }}</p>
@@ -89,6 +88,12 @@ export default {
             }
             this.graduations.push(MirrorGraduation)
         },
+        deleteGraduationVue(obj){ //delete clicked Grduation
+            var count = 0
+            this.graduations.forEach(element => {
+                (element.id == obj) ? this.graduations.splice(count,1) : count =+1
+            });
+        },
         resetForm(){ //reset all inputs
             this.FormGraduation.id = ""
             this.FormGraduation.belt_id = ""
@@ -111,7 +116,32 @@ export default {
                     this.resetForm()
                 })
                 .catch(error => this.errors = error.response.data.errors)
+            }else{//----------[PUT PATCH - EDIT]----------
+                axios.post('/api/graduation/' + this.FormGraduation.id, {
+                modifyGraduation: this.FormGraduation,
+                _method: 'patch'
+                })
+                .then(response => {
+                    alert(response.data.message)
+                    this.deleteGraduationVue(response.data.Graduation)
+                    this.showNewGraduation()
+                    this.resetForm()
+                    this.graduationSave = true
+                })
+                .catch(error => alert(error.response.data))
             }
+        },
+        deleteGraduation(graduation){//-----[DELETE]------
+            axios.post('/api/graduation/' + graduation, {
+                _method: 'DELETE'
+            })
+            .then(response => {
+                alert(response.data.message)
+                this.deleteGraduationVue(response.data.graduation_id)
+                this.resetForm()
+                this.graduationSave = true
+            })
+            .catch(error => console.log(error.response.data))
         },
         cancelGraduation(){ //------[CANCEL]-------
             this.graduationSave = true

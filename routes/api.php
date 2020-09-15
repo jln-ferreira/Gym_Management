@@ -32,5 +32,8 @@ Route::resource('responsable', 'ResponsableController');
 // -----[FINANCE]-----
 Route::resource('paymment', 'PaymmentController');
 
+// -----[COST]-----
+Route::resource('cost', 'costController');
+
 // -----[ITEM]-----
 Route::resource('item', 'ItemController');

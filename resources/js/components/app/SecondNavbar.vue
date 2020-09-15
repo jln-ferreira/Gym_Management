@@ -10,7 +10,7 @@
             <router-link to="/paymments" class="list-group-item list-group-item-action"><i class="fa fa-credit-card" aria-hidden="true"></i> Paymments</router-link>
         </div>
         <div class="shadow-sm col-sm-2">
-            <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-coins" aria-hidden="true"></i> Costs</a>
+            <router-link to="/costs" class="list-group-item list-group-item-action"><i class="fa fa-coins" aria-hidden="true"></i> Costs</router-link>
         </div>
     </nav>
 </template>
