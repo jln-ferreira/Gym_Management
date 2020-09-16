@@ -2083,7 +2083,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       costList: Array,
       //all costs
-      allItems: Array,
+      allItems: [],
       //Item DB
       Item_value: "",
       //value of the item selected
@@ -2235,7 +2235,10 @@ __webpack_require__.r(__webpack_exports__);
     }); // Fetch [Item] to show his profile from DB
 
     axios.get('/api/item').then(function (response) {
-      return _this4.allItems = response.data;
+      response.data.forEach(function (element) {
+        //push all itens are for selling (income)
+        if (element.identifier == 'c') _this4.allItems.push(element);
+      });
     })["catch"](function (error) {
       return console.log(error);
     });
@@ -2397,7 +2400,7 @@ __webpack_require__.r(__webpack_exports__);
       //all payments
       allStudents: Array,
       //Student DB
-      allItems: Array,
+      allItems: [],
       //Item DB
       Item_value: "",
       //value of the item selected
@@ -2430,7 +2433,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     onChangeItem: function onChangeItem(event) {
       //if item change, it save the value at ITEM_VALUE (change computed)
-      this.Item_value = this.allItems[event.target.value - 1].value;
+      this.Item_value = this.allItems[event.target.value - 1].sell;
       this.value_exp_show = true;
     },
     use_value_exp: function use_value_exp(value) {
@@ -2557,7 +2560,10 @@ __webpack_require__.r(__webpack_exports__);
     }); // Fetch [Item] to show his profile from DB
 
     axios.get('/api/item').then(function (response) {
-      return _this4.allItems = response.data;
+      response.data.forEach(function (element) {
+        //push all itens are for selling (income)
+        if (element.identifier == 'p' || element.identifier == 'cp') _this4.allItems.push(element);
+      });
     })["catch"](function (error) {
       return console.log(error);
     });

@@ -18,6 +18,8 @@ class Items extends Migration
             $table->integer('subcategory_id')->unsigned();
             $table->string('name');
             $table->integer('value');
+            $table->integer('sell');
+            $table->string('identifier'); //c = cost | p = payment | cp = both
 
             $table->timestamps();
         });

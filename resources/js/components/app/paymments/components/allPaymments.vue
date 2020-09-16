@@ -92,7 +92,7 @@ export default {
         return{
             paymmentList: Array, //all payments
             allStudents: Array, //Student DB
-            allItems: Array, //Item DB
+            allItems: [], //Item DB
 
             Item_value: "", //value of the item selected
 
@@ -122,7 +122,7 @@ export default {
             return (this.visibleNewPaymment == true) ? "fa fa-minus" : "fa fa-plus"
         },
         onChangeItem(event){  //if item change, it save the value at ITEM_VALUE (change computed)
-            this.Item_value = this.allItems[event.target.value - 1].value
+            this.Item_value = this.allItems[event.target.value - 1].sell
             this.value_exp_show = true
         },
         use_value_exp(value){ //use value expected as a VALUE
@@ -226,7 +226,11 @@ export default {
 
         // Fetch [Item] to show his profile from DB
         axios.get('/api/item')
-        .then(response => this.allItems = response.data)
+        .then(response => {
+            response.data.forEach(element => { //push all itens are for selling (income)
+                if (element.identifier == 'p' || element.identifier == 'cp') this.allItems.push(element)
+            })
+        })
         .catch(error => console.log(error))
     }
 }

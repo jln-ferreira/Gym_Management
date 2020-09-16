@@ -81,7 +81,7 @@ export default {
     data(){
         return{
             costList: Array, //all costs
-            allItems: Array, //Item DB
+            allItems: [], //Item DB
 
             Item_value: "", //value of the item selected
 
@@ -206,7 +206,11 @@ export default {
 
         // Fetch [Item] to show his profile from DB
         axios.get('/api/item')
-        .then(response => this.allItems = response.data)
+        .then(response => {
+            response.data.forEach(element => { //push all itens are for selling (income)
+                if (element.identifier == 'c') this.allItems.push(element)
+            })
+        })
         .catch(error => console.log(error))
     }
 }
