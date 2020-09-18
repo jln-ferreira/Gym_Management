@@ -2115,8 +2115,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     onChangeItem: function onChangeItem(event) {
       //if item change, it save the value at ITEM_VALUE (change computed)
-      this.Item_value = this.allItems[event.target.value - 1].value;
-      this.value_exp_show = true;
+      if (event.target.value != "") {
+        this.Item_value = this.allItems.find(function (x) {
+          return x.id == event.target.value;
+        }).sell;
+        this.value_exp_show = true;
+      }
     },
     use_value_exp: function use_value_exp(value) {
       //use value expected as a VALUE
@@ -2433,8 +2437,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     onChangeItem: function onChangeItem(event) {
       //if item change, it save the value at ITEM_VALUE (change computed)
-      this.Item_value = this.allItems[event.target.value - 1].sell;
-      this.value_exp_show = true;
+      if (event.target.value != "") {
+        this.Item_value = this.allItems.find(function (x) {
+          return x.id == event.target.value;
+        }).value;
+        this.value_exp_show = true;
+      }
     },
     use_value_exp: function use_value_exp(value) {
       //use value expected as a VALUE
@@ -40221,28 +40229,26 @@ var render = function() {
                     staticClass: "form-control",
                     attrs: { id: "item", required: "" },
                     on: {
-                      change: [
-                        function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.FormCost,
-                            "item",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        },
-                        function($event) {
-                          return _vm.onChangeItem($event)
-                        }
-                      ]
+                      click: function($event) {
+                        return _vm.onChangeItem($event)
+                      },
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.FormCost,
+                          "item",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
                     }
                   },
                   _vm._l(_vm.allItems, function(item) {

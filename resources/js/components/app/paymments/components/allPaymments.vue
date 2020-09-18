@@ -122,8 +122,10 @@ export default {
             return (this.visibleNewPaymment == true) ? "fa fa-minus" : "fa fa-plus"
         },
         onChangeItem(event){  //if item change, it save the value at ITEM_VALUE (change computed)
-            this.Item_value = this.allItems[event.target.value - 1].sell
-            this.value_exp_show = true
+            if(event.target.value != ""){
+                this.Item_value = this.allItems.find(x => x.id == event.target.value).value;
+                this.value_exp_show = true
+            }
         },
         use_value_exp(value){ //use value expected as a VALUE
             this.FormPaymment.value = value
