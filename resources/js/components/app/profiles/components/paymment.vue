@@ -1,8 +1,8 @@
 <template>
     <div>
         <!-- [button toggle] -->
-        <div class="btn btn-secondary" @click="togglePaymment()">
-            <i class="fa fa-credit-card" aria-hidden="true"></i> Paymment <i :class="faChanging()" aria-hidden="true"></i>
+        <div class="btn btn-secondary btn-block text-left" @click="togglePaymment()">
+            <i class="fa fa-credit-card" aria-hidden="true"></i> Paymment <i :class="[faChanging(), 'float-right']" aria-hidden="true"></i>
         </div>
         <!-- [end button] -->
 

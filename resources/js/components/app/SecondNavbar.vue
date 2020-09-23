@@ -12,6 +12,9 @@
         <div class="shadow-sm col-sm-2">
             <router-link to="/costs" class="list-group-item list-group-item-action"><i class="fa fa-coins" aria-hidden="true"></i> Costs</router-link>
         </div>
+        <div class="shadow-sm col-sm-2">
+            <router-link to="/settings" class="list-group-item list-group-item-action"><i class="fas fa-cog"></i> Settings</router-link>
+        </div>
     </nav>
 </template>
 

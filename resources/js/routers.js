@@ -7,6 +7,7 @@ import Students from "./components/app/students/Students"
 import Profiles from "./components/app/profiles/profiles"
 import Paymments from "./components/app/paymments/Paymments"
 import Costs from "./components/app/costs/Costs"
+import Settings from "./components/app/settings/Settings"
 
 Vue.use(VueRouter);
 
@@ -36,6 +37,11 @@ export default new VueRouter({
             path: '/costs',
             name: 'costs',
             component: Costs,
+        },
+        {
+            path: '/settings',
+            name: 'settings',
+            component: Settings,
         },
     ],
 });

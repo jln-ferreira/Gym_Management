@@ -1,8 +1,8 @@
 <template>
     <section>
         <!-- [button toggle] -->
-        <div class="btn btn-primary" @click="toggleGraduation()">
-            <i class="fa fa-graduation-cap" aria-hidden="true"></i> Student Graduation <i :class="faChanging()" aria-hidden="true"></i>
+        <div class="btn btn-primary btn-block text-left" @click="toggleGraduation()">
+            <i class="fa fa-graduation-cap" aria-hidden="true"></i> Student Graduation <i :class="[faChanging(), 'float-right']" aria-hidden="true"></i>
         </div>
 
         <div class="bg-white shadow-sm rounded p-2 mb-4 row" v-show="this.visibleGraduation">

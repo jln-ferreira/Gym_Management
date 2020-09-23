@@ -1,8 +1,8 @@
 <template>
     <div>
         <!-- [button toggle] -->
-        <div class="btn btn-primary" @click="toggleResponsable()">
-            <i class="fa fa-child" aria-hidden="true"></i> Responsable <i :class="faChanging()" aria-hidden="true"></i>
+        <div class="btn btn-primary btn-block text-left" @click="toggleResponsable()">
+            <i class="fa fa-child" aria-hidden="true"></i> Responsable <i :class="[faChanging(), 'float-right']" aria-hidden="true"></i>
         </div>
         <!-- [end button] -->
 
