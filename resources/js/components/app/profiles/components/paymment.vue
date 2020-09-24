@@ -1,8 +1,8 @@
 <template>
     <div>
         <!-- [button toggle] -->
-        <div class="btn btn-secondary btn-block text-left" @click="togglePaymment()">
-            <i class="fa fa-credit-card" aria-hidden="true"></i> Paymment <i :class="[faChanging(), 'float-right']" aria-hidden="true"></i>
+        <div class="card-header text-white text-left" @click="togglePaymment()">
+            <i class="fa fa-credit-card" aria-hidden="true"></i> Payment <i :class="[faChanging(), 'float-right']" aria-hidden="true"></i>
         </div>
         <!-- [end button] -->
 
@@ -63,7 +63,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+/* header of loggles */
+.card-header{
+    background: rgb(110,0,107);
+    background: linear-gradient(90deg, rgba(110,0,107,1) 0%, rgba(110,0,107,1) 67%, rgba(0,0,0,1) 69%, rgba(0,0,0,1) 88%, rgba(110,0,107,1) 91%);
+}
+
 /* thead of table */
 .thead-belt{
     background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);

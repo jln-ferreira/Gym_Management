@@ -1,7 +1,7 @@
 <template>
     <section>
         <!-- [button toggle] -->
-        <div class="btn btn-primary btn-block text-left" @click="toggleGraduation()">
+        <div class="card-header text-white text-left" @click="toggleGraduation()">
             <i class="fa fa-graduation-cap" aria-hidden="true"></i> Student Graduation <i :class="[faChanging(), 'float-right']" aria-hidden="true"></i>
         </div>
 
@@ -78,7 +78,7 @@ export default {
             return this.visibleGraduation = !this.visibleGraduation
         },
         faChanging(){
-            return (this.visiblePersonal == true) ? "fa fa-minus" : "fa fa-plus"
+            return (this.visibleGraduation == true) ? "fa fa-minus" : "fa fa-plus"
         },
         showNewGraduation(){ //create a new profile to show new graduation (vue)
             var MirrorGraduation = {
@@ -157,7 +157,14 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+/* header of loggles */
+.card-header{
+    background: rgb(107,55,0);
+    background: linear-gradient(90deg, rgba(107,55,0,1) 0%, rgba(107,55,0,1) 67%, rgba(0,0,0,1) 69%, rgba(0,0,0,1) 88%, rgba(107,55,0,1) 91%);
+}
+
+
 /* thead of table */
 .thead-belt{
     background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);

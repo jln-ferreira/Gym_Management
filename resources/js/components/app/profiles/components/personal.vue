@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- [button toggle] -->
-        <div class="btn btn-secondary btn-block text-left" @click="togglePersonal()">
+        <div class="card-header bg-danger text-white text-left" @click="togglePersonal()">
             <i class="fa fa-user" aria-hidden="true"></i> Personal Information <i :class="[faChanging(), 'float-right']" aria-hidden="true"></i>
         </div>
         <!-- [end button] -->
@@ -97,6 +97,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+/* header of loggles */
+.card-header{
+    background: rgb(236,5,5);
+    background: linear-gradient(90deg, rgba(236,5,5,1) 0%, rgba(236,5,5,1) 67%, rgba(255,255,255,1) 69%, rgba(255,255,255,1) 88%, rgba(236,5,5,1) 91%);
+}
 
 </style>
