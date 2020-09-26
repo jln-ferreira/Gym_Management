@@ -3,7 +3,7 @@
 
         <!-- [HEADER] -->
         <div class="pt-4 pb-2">
-            <h1 class="header-pages font-weight-bold">Profile</h1>
+            <h1 class="header-pages font-weight-bold"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Profile</h1>
         </div>
         <!-- end HEADER -->
         <hr/>

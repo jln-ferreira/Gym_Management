@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- [button toggle] -->
-        <div class="card-header bg-dark text-white text-left" @click="toggleResponsable()">
+        <div class="card-header text-white text-left" @click="toggleResponsable()">
             <i class="fa fa-child" aria-hidden="true"></i> Responsable <i :class="[faChanging(), 'float-right']" aria-hidden="true"></i>
         </div>
         <!-- [end button] -->
@@ -184,8 +184,8 @@ export default {
 <style scoped>
 /* header of loggles */
 .card-header{
-    background: rgb(0,0,0);
-    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 67%, rgba(255,0,0,1) 69%, rgba(255,0,0,1) 88%, rgba(0,0,0,1) 91%);
+    background: rgb(22,20,17);
+    background: linear-gradient(90deg, rgba(22,20,17,1) 0%, rgba(52,52,52,1) 48%, rgba(43,43,43,1) 67%, rgba(165,165,165,1) 69%, rgba(195,0,0,1) 71%, rgba(195,0,0,1) 86%, rgba(165,165,165,1) 89%, rgba(43,43,43,1) 91%);
 }
 
 /* [card for each  responsable] */

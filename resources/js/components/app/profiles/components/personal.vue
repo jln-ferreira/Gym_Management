@@ -1,11 +1,10 @@
 <template>
     <div>
         <!-- [button toggle] -->
-        <div class="card-header bg-danger text-white text-left" @click="togglePersonal()">
+        <div class="card-header text-white text-left" @click="togglePersonal()">
             <i class="fa fa-user" aria-hidden="true"></i> Personal Information <i :class="[faChanging(), 'float-right']" aria-hidden="true"></i>
         </div>
         <!-- [end button] -->
-
 
           <!-- [card new student] -->
         <div class="mt-1 shadow-sm p-4 mb-4 bg-white" v-show="this.visiblePersonal">
@@ -100,8 +99,9 @@ export default {
 <style scoped>
 /* header of loggles */
 .card-header{
-    background: rgb(236,5,5);
-    background: linear-gradient(90deg, rgba(236,5,5,1) 0%, rgba(236,5,5,1) 67%, rgba(255,255,255,1) 69%, rgba(255,255,255,1) 88%, rgba(236,5,5,1) 91%);
+    background: rgb(22,20,17);
+    background: linear-gradient(90deg, rgba(22,20,17,1) 0%, rgba(122,36,36,1) 48%, rgba(142,11,11,1) 67%, rgba(0,0,0,1) 71%, rgba(0,0,0,1) 86%, rgba(142,11,11,1) 91%);
 }
+
 
 </style>

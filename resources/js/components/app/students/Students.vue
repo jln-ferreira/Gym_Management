@@ -2,7 +2,7 @@
     <div>
         <!-- [HEADER] -->
         <div class="pt-4 pb-2">
-            <h1 class="header-pages font-weight-bold">Students</h1>
+            <h1 class="header-pages font-weight-bold"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Students</h1>
         </div>
         <!-- end HEADER -->
         <newStudent class="mb-2"></newStudent>

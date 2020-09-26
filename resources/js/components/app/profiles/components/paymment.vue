@@ -66,8 +66,8 @@ export default {
 <style scoped>
 /* header of loggles */
 .card-header{
-    background: rgb(110,0,107);
-    background: linear-gradient(90deg, rgba(110,0,107,1) 0%, rgba(110,0,107,1) 67%, rgba(0,0,0,1) 69%, rgba(0,0,0,1) 88%, rgba(110,0,107,1) 91%);
+    background: rgb(32,24,32);
+    background: linear-gradient(90deg, rgba(32,24,32,1) 0%, rgba(69,5,67,1) 48%, rgba(97,12,95,1) 67%, rgba(0,0,0,1) 71%, rgba(0,0,0,1) 86%, rgba(88,17,86,1) 91%);
 }
 
 /* thead of table */

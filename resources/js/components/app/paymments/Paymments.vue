@@ -2,7 +2,7 @@
   <div>
         <!-- [HEADER] -->
         <div class="pt-4 pb-2">
-            <h1 class="header-pages font-weight-bold">Paymments</h1>
+            <h1 class="header-pages font-weight-bold"><i class="fa fa-credit-card" aria-hidden="true"></i> Paymments</h1>
         </div>
 
         <allPaymments />

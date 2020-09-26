@@ -160,8 +160,8 @@ export default {
 <style scoped>
 /* header of loggles */
 .card-header{
-    background: rgb(107,55,0);
-    background: linear-gradient(90deg, rgba(107,55,0,1) 0%, rgba(107,55,0,1) 67%, rgba(0,0,0,1) 69%, rgba(0,0,0,1) 88%, rgba(107,55,0,1) 91%);
+    background: rgb(22,20,17);
+    background: linear-gradient(90deg, rgba(22,20,17,1) 0%, rgba(80,42,13,1) 48%, rgba(86,45,32,1) 67%, rgba(0,0,0,1) 71%, rgba(0,0,0,1) 86%, rgba(86,45,32,1) 91%);
 }
 
 

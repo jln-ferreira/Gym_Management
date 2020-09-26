@@ -2,7 +2,7 @@
   <div>
         <!-- [HEADER] -->
         <div class="pt-4 pb-2">
-            <h1 class="header-pages font-weight-bold">Costs</h1>
+            <h1 class="header-pages font-weight-bold"><i class="fa fa-coins" aria-hidden="true"></i> Costs</h1>
         </div>
 
         <allCosts />
