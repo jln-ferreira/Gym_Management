@@ -3301,6 +3301,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_gymProfile_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/gymProfile.vue */ "./resources/js/components/app/settings/components/gymProfile.vue");
 //
 //
 //
@@ -3338,12 +3339,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+// imports
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    gymProfile: _components_gymProfile_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {};
   },
   methods: {}
 });
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/settings/components/gymProfile.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/app/settings/components/gymProfile.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
 
@@ -8208,7 +8240,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* [sidebar] */\n.card-header[data-v-f275aaf4]{\n    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);\n}\n.card-header[data-v-f275aaf4]:hover{\n    background-color: #050506;\n    background-image: linear-gradient(62deg, #050506 0%, #5d5d60 100%);\n    color: white;\n}\n/* end sidebar */\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* [sidebar] */\n.card-header[data-v-f275aaf4]{\n    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);\n}\n.card-header[data-v-f275aaf4]:hover{\n    background-color: #050506;\n    background-image: linear-gradient(62deg, #050506 0%, #5d5d60 100%);\n    color: white;\n}\n/* end sidebar */\n\n\n\n\n", ""]);
 
 // exports
 
@@ -42659,79 +42691,113 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("section", { staticClass: "container" }, [
+      _c("hr"),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-9 col-sm-6" }, [_c("gymProfile")], 1)
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "pt-4 pb-2" }, [
-        _c("h1", { staticClass: "header-pages font-weight-bold" }, [
-          _c("i", { staticClass: "fas fa-cog" }),
-          _vm._v(" Settings")
-        ])
+    return _c("div", { staticClass: "pt-4 pb-2" }, [
+      _c("h1", { staticClass: "header-pages font-weight-bold" }, [
+        _c("i", { staticClass: "fas fa-cog" }),
+        _vm._v(" Settings")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-4" }, [
+      _c("div", { staticClass: "card-header text-left" }, [
+        _c("i", { staticClass: "far fa-id-badge" }),
+        _vm._v(" Gym Profile "),
+        _c("i", {
+          staticClass: "float-right",
+          attrs: { "aria-hidden": "true" }
+        })
       ]),
       _vm._v(" "),
-      _c("section", { staticClass: "container" }, [
-        _c("hr"),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-3 col-sm-4" }, [
-            _c("div", { staticClass: "card-header text-left" }, [
-              _c("i", { staticClass: "far fa-id-badge" }),
-              _vm._v(" Gym Profile "),
-              _c("i", {
-                staticClass: "float-right",
-                attrs: { "aria-hidden": "true" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-header text-left" }, [
-              _c("i", { staticClass: "fas fa-gift" }),
-              _vm._v(" Itens "),
-              _c("i", {
-                staticClass: "float-right",
-                attrs: { "aria-hidden": "true" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-header text-left" }, [
-              _c("i", { staticClass: "fas fa-medal" }),
-              _vm._v(" Belts "),
-              _c("i", {
-                staticClass: "float-right",
-                attrs: { "aria-hidden": "true" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-header text-left" }, [
-              _c("i", {
-                staticClass: "fa fa-user",
-                attrs: { "aria-hidden": "true" }
-              }),
-              _vm._v(" Students Status "),
-              _c("i", {
-                staticClass: "float-right",
-                attrs: { "aria-hidden": "true" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-header text-left" }, [
-              _c("i", { staticClass: "fas fa-user-shield" }),
-              _vm._v(" Resposables Status "),
-              _c("i", {
-                staticClass: "float-right",
-                attrs: { "aria-hidden": "true" }
-              })
-            ])
-          ])
-        ])
+      _c("div", { staticClass: "card-header text-left" }, [
+        _c("i", { staticClass: "fas fa-gift" }),
+        _vm._v(" Itens "),
+        _c("i", {
+          staticClass: "float-right",
+          attrs: { "aria-hidden": "true" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-header text-left" }, [
+        _c("i", { staticClass: "fas fa-medal" }),
+        _vm._v(" Belts "),
+        _c("i", {
+          staticClass: "float-right",
+          attrs: { "aria-hidden": "true" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-header text-left" }, [
+        _c("i", {
+          staticClass: "fa fa-user",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" Students Status "),
+        _c("i", {
+          staticClass: "float-right",
+          attrs: { "aria-hidden": "true" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-header text-left" }, [
+        _c("i", { staticClass: "fas fa-user-shield" }),
+        _vm._v(" Resposables Status "),
+        _c("i", {
+          staticClass: "float-right",
+          attrs: { "aria-hidden": "true" }
+        })
       ])
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/settings/components/gymProfile.vue?vue&type=template&id=44e90058&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/app/settings/components/gymProfile.vue?vue&type=template&id=44e90058& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("section", {
+    staticClass: "bg-white shadow-sm rounded p-2 mb-4 row"
+  })
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -59736,6 +59802,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Settings_vue_vue_type_template_id_f275aaf4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Settings_vue_vue_type_template_id_f275aaf4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/app/settings/components/gymProfile.vue":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/app/settings/components/gymProfile.vue ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _gymProfile_vue_vue_type_template_id_44e90058___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gymProfile.vue?vue&type=template&id=44e90058& */ "./resources/js/components/app/settings/components/gymProfile.vue?vue&type=template&id=44e90058&");
+/* harmony import */ var _gymProfile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gymProfile.vue?vue&type=script&lang=js& */ "./resources/js/components/app/settings/components/gymProfile.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _gymProfile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _gymProfile_vue_vue_type_template_id_44e90058___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _gymProfile_vue_vue_type_template_id_44e90058___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/app/settings/components/gymProfile.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/app/settings/components/gymProfile.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/app/settings/components/gymProfile.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_gymProfile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./gymProfile.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/settings/components/gymProfile.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_gymProfile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/app/settings/components/gymProfile.vue?vue&type=template&id=44e90058&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/app/settings/components/gymProfile.vue?vue&type=template&id=44e90058& ***!
+  \*******************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_gymProfile_vue_vue_type_template_id_44e90058___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./gymProfile.vue?vue&type=template&id=44e90058& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/app/settings/components/gymProfile.vue?vue&type=template&id=44e90058&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_gymProfile_vue_vue_type_template_id_44e90058___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_gymProfile_vue_vue_type_template_id_44e90058___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

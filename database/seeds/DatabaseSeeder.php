@@ -10,6 +10,8 @@ use App\Graduation;
 use App\Item;
 use App\Subcategory;
 use App\Cost;
+use App\User;
+use App\Gym;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,6 +22,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        factory(Gym::class,2)->create();
+        factory(User::class,20)->create();
         factory(Belt::class,7)->create();
         factory(Subcategory::class,10)->create();
         factory(Item::class,10)->create();

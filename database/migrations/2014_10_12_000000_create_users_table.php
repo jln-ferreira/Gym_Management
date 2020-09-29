@@ -17,12 +17,13 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('gym_name');
-
+            $table->integer('gym_id');
+            $table->integer('auth');
 
             //Login
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->smallInteger('active');
             $table->rememberToken();
             $table->timestamps();
         });

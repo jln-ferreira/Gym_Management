@@ -29,14 +29,27 @@
                     </div>
 
                 </div>
+                 <!-- COMPONENTs -->
+                <div class="col-md-9 col-sm-6">
+                    <gymProfile/>
+                </div>
+
             </div>
         </section>
+
+
 
     </div>
 </template>
 
 <script>
+// imports
+import gymProfile from './components/gymProfile.vue'
+
 export default {
+    components: {
+        gymProfile,
+    },
     data(){
         return{
 

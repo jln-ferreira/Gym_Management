@@ -35,7 +35,7 @@
                     {{-- end hamburger --}}
 
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ Auth::user()->gym_name }}
+                        {{ Auth::user()->gym->name }}
                     </a>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

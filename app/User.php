@@ -20,7 +20,7 @@ class User extends Authenticatable
     ];
 
     protected $attributes = [
-        'gym_name' => false,
+        'gym_id' => false, 'auth' => false, 'active' => false,
     ];
 
     /**
@@ -41,6 +41,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+        // Relationship
+        // student < gym
+        public function gym()
+        {
+            return $this->belongsTo(Gym::class);
+        }
 }
 
 
