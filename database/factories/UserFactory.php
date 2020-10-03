@@ -4,6 +4,7 @@
 
 use App\User;
 use App\Gym;
+
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 

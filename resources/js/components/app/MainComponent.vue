@@ -1,7 +1,6 @@
 <template>
     <div class="container-fluid">
         <SecondNavbar />
-
         <!-- ----- [routes of MAIN PAGE] ----- -->
         <router-view></router-view>
     </div>
@@ -13,7 +12,6 @@
 import SecondNavbar from './SecondNavbar.vue'
 
 export default {
-
     components: {
         SecondNavbar,
     }

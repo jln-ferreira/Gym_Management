@@ -34,6 +34,9 @@ import evolutionBelt from './components/evolutionBelt.vue'
 import paymment from './components/paymment.vue'
 
 export default {
+    // auth User
+    props: ['app'],
+
     components: {
         personal,
         responsable,
@@ -42,6 +45,8 @@ export default {
     },
     data(){
         return{
+            user_id: this.$userId,
+
             student: Object, //Student selected
             beltList: Array, //all belts
             itens: Array, //all belts

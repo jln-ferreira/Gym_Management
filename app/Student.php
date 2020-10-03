@@ -26,11 +26,15 @@ class Student extends Model
     {
         return $this->hasMany(Paymment::class);
     }
-
     // student > responsable
     public function responsable()
     {
         return $this->hasMany(Responsable::class);
+    }
+    // student < gym
+    public function gym()
+    {
+        return $this->belongsTo(Gym::class);
     }
 
 

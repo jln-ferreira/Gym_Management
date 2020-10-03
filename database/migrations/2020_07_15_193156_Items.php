@@ -20,6 +20,7 @@ class Items extends Migration
             $table->integer('value');
             $table->integer('sell');
             $table->string('identifier'); //c = cost | p = payment | cp = both
+            $table->integer('gym_id');
 
             $table->timestamps();
         });

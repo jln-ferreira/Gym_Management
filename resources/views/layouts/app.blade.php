@@ -7,6 +7,12 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
+        {{-- Authentication Laravel to VUE JS --}}
+        @if (Auth::check())
+            <meta name="user_id" content="{{ Auth::user()->id }}" />
+        @endif
+        {{-- -------------------------------- --}}
+
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Scripts -->
@@ -25,6 +31,7 @@
     </head>
     <body>
         <div id="app">
+
             <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
                 <div class="container-fluid">
 

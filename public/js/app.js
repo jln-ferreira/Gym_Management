@@ -1918,7 +1918,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 // import components
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3231,6 +3230,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  // auth User
+  props: ['app'],
   components: {
     personal: _components_personal_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     responsable: _components_responsable_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -3239,6 +3240,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      user_id: this.$userId,
       student: Object,
       //Student selected
       beltList: Array,
@@ -8126,7 +8128,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 exports.push([module.i, "@import url(//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css);", ""]);
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* import datatable  */\n\n    /* Fix Container - css */\n.container-fluid {\n        padding-right: 0px !important;\n        padding-left: 0px !important;\n}\n.col-sm-2{\n        padding-right: 0px !important;\n        padding-left: 0px !important;\n}\n.row{\n        margin-right: 0px !important;\n        margin-left: 0px !important;\n}\n\n    /* header of all pages - DASHBOARD STUDENTS FINANCES COSTS */\n.header-pages{\n        text-align: center;\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* import datatable  */\n\n    /* Fix Container - css */\n.container-fluid {\n        padding-right: 0px !important;\n        padding-left: 0px !important;\n}\n.col-sm-2{\n        padding-right: 0px !important;\n        padding-left: 0px !important;\n}\n.row{\n        margin-right: 0px !important;\n        margin-left: 0px !important;\n}\n\n    /* header of all pages - DASHBOARD STUDENTS FINANCES COSTS */\n.header-pages{\n        text-align: center;\n}\n\n", ""]);
 
 // exports
 
@@ -58727,7 +58729,10 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  // ------GOES TO BLADE.PHP------
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('welcome', __webpack_require__(/*! ./components/welcome_Page/welcome.vue */ "./resources/js/components/welcome_Page/welcome.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('main-component', __webpack_require__(/*! ./components/app/MainComponent.vue */ "./resources/js/components/app/MainComponent.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('main-component', __webpack_require__(/*! ./components/app/MainComponent.vue */ "./resources/js/components/app/MainComponent.vue")["default"]); //get Authentication from Laravel to VUE JS
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$userId = document.querySelector("meta[name='user_id']").getAttribute('content'); // ----------
+
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
   components: {},

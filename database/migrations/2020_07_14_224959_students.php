@@ -23,6 +23,7 @@ class Students extends Migration
             $table->integer('belt_id')->unsigned();
             $table->string('status');
             $table->text('comment')->nullable();
+            $table->integer('gym_id');
 
             //graduation
             $table->integer('total_attendance')->default(0);

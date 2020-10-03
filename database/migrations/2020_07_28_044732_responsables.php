@@ -20,6 +20,7 @@ class Responsables extends Migration
             $table->text('phoneNumber');
             $table->string('kinship');
             $table->integer('student_id')->unsigned();
+            $table->integer('gym_id');
 
             $table->timestamps();
         });

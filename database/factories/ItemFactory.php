@@ -6,6 +6,7 @@ use App\Model;
 
 use App\Item;
 use App\Subcategory;
+use App\Gym;
 
 use Faker\Generator as Faker;
 
@@ -17,6 +18,9 @@ $factory->define(Item::class, function (Faker $faker) {
             'name'           => $faker->name,
             'value'          => $faker->numberBetween($min = 50, $max = 100),
             'sell'           => $faker->numberBetween($min = 100, $max = 200),
-            'identifier'     => $faker->randomElement(['c', 'p', 'cp']) //c = cost | p = payment | cp = both
+            'identifier'     => $faker->randomElement(['c', 'p', 'cp']), //c = cost | p = payment | cp = both
+            'gym_id'         => function(){
+                return Gym::all()->random();
+            },
     ];
 });

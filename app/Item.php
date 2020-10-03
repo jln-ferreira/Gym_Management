@@ -13,15 +13,18 @@ class Item extends Model
     {
         return $this->hasMany(Paymment::class);
     }
-
     public function cost()
     {
         return $this->hasMany(Cost::class);
     }
-
     // Item < subcategory
     public function subcategory()
     {
         return $this->belongsTo(Subcategory::class);
+    }
+    // item < gym
+    public function gym()
+    {
+        return $this->belongsTo(Gym::class);
     }
 }
