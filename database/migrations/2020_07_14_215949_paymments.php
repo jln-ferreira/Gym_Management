@@ -22,6 +22,7 @@ class Paymments extends Migration
             $table->double('final_value');
             $table->text('comment')->nullable();
             $table->integer('gym_id');
+            $table->smallInteger('active');
 
             $table->timestamps();
         });

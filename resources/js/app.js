@@ -13,8 +13,6 @@ Vue.prototype.$userId = document.querySelector("meta[name='user_id']").getAttrib
 // ----------
 
 
-
-
 const app = new Vue({
     el: '#app',
     components:{

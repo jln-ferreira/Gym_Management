@@ -20,5 +20,6 @@ $factory->define(Graduation::class, function (Faker $faker) {
         'gym_id' => function(){
         	return Gym::all()->random();
         },
+        'active' => 1,
     ];
 });

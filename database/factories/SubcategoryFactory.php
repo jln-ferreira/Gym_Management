@@ -15,5 +15,6 @@ $factory->define(Subcategory::class, function (Faker $faker) {
             'gym_id' => function(){
                 return Gym::all()->random();
             },
+            'active' => 1,
     ];
 });

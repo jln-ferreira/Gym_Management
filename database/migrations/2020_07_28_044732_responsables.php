@@ -21,6 +21,7 @@ class Responsables extends Migration
             $table->string('kinship');
             $table->integer('student_id')->unsigned();
             $table->integer('gym_id');
+            $table->smallInteger('active');
 
             $table->timestamps();
         });

@@ -18,6 +18,7 @@ class Belts extends Migration
             $table->string('name');
             $table->integer('days_graduation');
             $table->integer('gym_id');
+            $table->smallInteger('active');
 
             $table->timestamps();
         });

@@ -33,9 +33,13 @@
 
 <script>
 export default {
+    // auth User
+    props: ['app'],
+
     data(){
         return{
-           studentList: Array,
+            user_id: this.$userId, //Auth comming from LARAVEL
+            studentList: Array, //all students from DB
         }
     },
     methods:{
@@ -44,9 +48,10 @@ export default {
         }
     },
     created(){
-        // Fetch all [Belts] from DB
+        // Fetch all [Students with Belts] from DB
         axios.get('/api/student')
         .then(response => {
+            console.log(this.$userId);
             this.studentList = response.data
             setTimeout(() => $('#table_student').DataTable(), 1000);
         })

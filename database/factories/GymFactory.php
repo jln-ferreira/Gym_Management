@@ -13,6 +13,7 @@ $factory->define(Gym::class, function (Faker $faker) {
         'address'  => $faker->address,
         'postcode' => $faker->postcode,
         'status'   => 1,
-        'comment'  => $faker->realText(180)
+        'comment'  => $faker->realText(180),
+        'active'   => 1,
     ];
 });

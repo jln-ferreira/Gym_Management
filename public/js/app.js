@@ -3459,9 +3459,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  // auth User
+  props: ['app'],
   data: function data() {
     return {
-      studentList: Array
+      user_id: this.$userId,
+      //Auth comming from LARAVEL
+      studentList: Array //all students from DB
+
     };
   },
   methods: {
@@ -3472,8 +3477,9 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    // Fetch all [Belts] from DB
+    // Fetch all [Students with Belts] from DB
     axios.get('/api/student').then(function (response) {
+      console.log(_this.$userId);
       _this.studentList = response.data;
       setTimeout(function () {
         return $('#table_student').DataTable();

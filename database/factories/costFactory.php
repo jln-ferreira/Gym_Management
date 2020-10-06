@@ -18,8 +18,9 @@ $factory->define(Cost::class, function (Faker $faker) {
         'quantity'      => $faker->numberBetween($min = 1, $max = 10),
         'final_value'   => $faker->numberBetween($min = 100, $max = 1500),
         'comment'       => $faker->text,
-        'gym_id'          => function(){
+        'gym_id'        => function(){
         	return Gym::all()->random();
         },
+        'active'        => 1,
     ];
 });
