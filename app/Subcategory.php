@@ -14,8 +14,8 @@ class Subcategory extends Model
         return $this->hasMany(Item::class);
     }
     // subcategory < gym
-    public function gym()
-    {
-        return $this->belongsTo(Gym::class);
-    }
+    // public function gym()
+    // {
+    //     return $this->belongsTo(Gym::class);
+    // }
 }

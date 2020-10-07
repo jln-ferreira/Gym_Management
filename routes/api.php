@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 // -----[STUDENTS]-----
 Route::resource('student', 'StudentController');
+
+Route::post('student', 'StudentController@store');
 Route::get('student/{student_id}/graduation', 'StudentController@GraduationProfile');
 Route::get('student/{student_id}/responsable', 'StudentController@StudentProfile');
 Route::get('student/{student_id}/paymment', 'StudentController@PaymmentProfile');

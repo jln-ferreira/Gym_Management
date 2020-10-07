@@ -17,9 +17,6 @@ $factory->define(Responsable::class, function (Faker $faker) {
         'student_id'  => function(){
         	return Student::all()->random();
         },
-        'gym_id'      => function(){
-        	return Gym::all()->random();
-        },
         'active'      => 1,
     ];
 });

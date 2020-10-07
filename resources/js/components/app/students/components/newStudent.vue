@@ -68,6 +68,7 @@
 
 <script>
 export default {
+        props: ['app'],
     data(){
         return{
             visibleNewStudent: false,
@@ -84,7 +85,8 @@ export default {
                 belt_id: "",
                 status: "",
                 databirth: "",
-                comment: ""
+                comment: "",
+                gym_id: this.$userId
             }
         }
     },
@@ -96,7 +98,7 @@ export default {
             return (this.visibleNewStudent == true) ? "fa fa-minus" : "fa fa-plus"
         },
         addNewPost(){ //-----[POST]------
-            axios.post('/api/student', this.FormStudent)
+            axios.post('/api/student', this.FormStudent) //API ROUTE
             .then(response => {
                 alert(response.data.message)
                 this.$router.push('/students/' + response.data.id);
@@ -105,8 +107,8 @@ export default {
         }
     },
     created(){
-        // Fetch all [Belts] from DB
-        axios.get('/api/belt')
+        // Fetch all [Belts of gym] from DB
+        axios.get('/belt') //WEB ROUTE
         .then(response => this.beltList = response.data)
         .catch(error => console.log(error))
     }

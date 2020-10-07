@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             //Login
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->smallInteger('active');
+            $table->smallInteger('active')->default('1');;
             $table->rememberToken();
             $table->timestamps();
         });

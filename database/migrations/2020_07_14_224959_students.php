@@ -31,7 +31,7 @@ class Students extends Migration
 
             //foreing key
 
-            $table->smallInteger('active');
+            $table->smallInteger('active')->default('1');
             $table->timestamps();
         });
     }

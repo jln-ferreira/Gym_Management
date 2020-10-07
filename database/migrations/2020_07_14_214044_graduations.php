@@ -17,8 +17,7 @@ class Graduations extends Migration
             $table->increments('id');
             $table->integer('student_id')->unsigned();
             $table->integer('belt_id')->unsigned();
-            $table->integer('gym_id');
-            $table->smallInteger('active');
+            $table->smallInteger('active')->default('1');;
 
             $table->timestamps();
         });

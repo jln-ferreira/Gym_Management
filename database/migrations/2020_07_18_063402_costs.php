@@ -20,8 +20,7 @@ class Costs extends Migration
             $table->integer('quantity');
             $table->double('final_value');
             $table->text('comment')->nullable();
-            $table->integer('gym_id');
-            $table->smallInteger('active');
+            $table->smallInteger('active')->default('1');
 
             $table->timestamps();
         });

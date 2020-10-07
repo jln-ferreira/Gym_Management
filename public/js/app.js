@@ -3460,11 +3460,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   // auth User
-  props: ['app'],
+  //props: ['app'],
   data: function data() {
     return {
-      user_id: this.$userId,
-      //Auth comming from LARAVEL
+      //user_id: this.$userId, //Auth comming from LARAVEL
       studentList: Array //all students from DB
 
     };
@@ -3477,9 +3476,9 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    // Fetch all [Students with Belts] from DB
-    axios.get('/api/student').then(function (response) {
-      console.log(_this.$userId);
+    // Fetch all [Students with Belts] from DB (same gym_id)
+    axios.get('/student') //web router
+    .then(function (response) {
       _this.studentList = response.data;
       setTimeout(function () {
         return $('#table_student').DataTable();
@@ -3570,6 +3569,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['app'],
   data: function data() {
     return {
       visibleNewStudent: false,
@@ -3585,7 +3585,8 @@ __webpack_require__.r(__webpack_exports__);
         belt_id: "",
         status: "",
         databirth: "",
-        comment: ""
+        comment: "",
+        gym_id: this.$userId
       }
     };
   },
@@ -3600,7 +3601,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       //-----[POST]------
-      axios.post('/api/student', this.FormStudent).then(function (response) {
+      axios.post('/api/student', this.FormStudent) //API ROUTE
+      .then(function (response) {
         alert(response.data.message);
 
         _this.$router.push('/students/' + response.data.id);
@@ -3612,8 +3614,9 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this2 = this;
 
-    // Fetch all [Belts] from DB
-    axios.get('/api/belt').then(function (response) {
+    // Fetch all [Belts of gym] from DB
+    axios.get('/belt') //WEB ROUTE
+    .then(function (response) {
       return _this2.beltList = response.data;
     })["catch"](function (error) {
       return console.log(error);

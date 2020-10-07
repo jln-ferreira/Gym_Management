@@ -16,8 +16,7 @@ class Subcategories extends Migration
         Schema::create('subcategories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('gym_id');
-            $table->smallInteger('active');
+            $table->smallInteger('active')->default('1');
 
             $table->timestamps();
         });

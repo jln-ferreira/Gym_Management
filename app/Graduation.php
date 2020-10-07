@@ -15,9 +15,9 @@ class Graduation extends Model
         return $this->belongsTo(Student::class);
     }
     // graduation < gym
-    public function gym()
-    {
-        return $this->belongsTo(Gym::class);
-    }
+    // public function gym()
+    // {
+    //     return $this->belongsTo(Gym::class);
+    // }
 }
 

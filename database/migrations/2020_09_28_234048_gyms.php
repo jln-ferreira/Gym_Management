@@ -21,7 +21,7 @@ class Gyms extends Migration
             $table->text('postcode');
             $table->string('status');
             $table->text('comment')->nullable();
-            $table->smallInteger('active');
+            $table->smallInteger('active')->default('1');;
 
             $table->timestamps();
         });

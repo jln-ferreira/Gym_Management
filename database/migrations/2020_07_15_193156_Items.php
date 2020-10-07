@@ -21,7 +21,7 @@ class Items extends Migration
             $table->integer('sell');
             $table->string('identifier'); //c = cost | p = payment | cp = both
             $table->integer('gym_id');
-            $table->smallInteger('active');
+            $table->smallInteger('active')->default('1');
 
             $table->timestamps();
         });

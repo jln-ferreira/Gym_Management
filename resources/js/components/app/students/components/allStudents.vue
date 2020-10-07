@@ -34,11 +34,11 @@
 <script>
 export default {
     // auth User
-    props: ['app'],
+    //props: ['app'],
 
     data(){
         return{
-            user_id: this.$userId, //Auth comming from LARAVEL
+            //user_id: this.$userId, //Auth comming from LARAVEL
             studentList: Array, //all students from DB
         }
     },
@@ -48,10 +48,9 @@ export default {
         }
     },
     created(){
-        // Fetch all [Students with Belts] from DB
-        axios.get('/api/student')
+        // Fetch all [Students with Belts] from DB (same gym_id)
+        axios.get('/student') //web router
         .then(response => {
-            console.log(this.$userId);
             this.studentList = response.data
             setTimeout(() => $('#table_student').DataTable(), 1000);
         })

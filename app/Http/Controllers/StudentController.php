@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Student;
 use App\Belt;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -17,7 +18,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return Student::with('belt')->orderBy('name')->get();
+        $student_Gym = Auth::user()->gym_id;
+        return Student::with('belt')->where("gym_id", "=", $student_Gym)->orderBy('name')->get();
     }
 
     // ----------[profile]----------
@@ -77,6 +79,7 @@ class StudentController extends Controller
             'status'                => $request->input('status'),
             'databirth'             => $request->input('databirth'),
             'comment'               => $request->input('comment'),
+            'gym_id'                => $request->input('gym_id'),
             'attendance_graduation' => $belt->days_graduation
         ]);
 
