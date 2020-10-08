@@ -19,16 +19,13 @@ class BeltController extends Controller
     public function index()
     {
         $student_Gym = Auth::user()->gym_id;
-
-        // $belts = DB::table('belts')
-        // ->select("belts.*")
-        // ->leftJoin('students', 'belts.id', '=', 'students.belt_id')
-        // ->where('students.gym_id', '=', $student_Gym)
-        // ->groupBy('belts.id')
-        // ->orderBy('belts.name')
-        // ->get();
-
         return Belt::all()->where('gym_id', '=', $student_Gym);
+    }
+
+    //fetch all belts from DB
+    public function allBelts()
+    {
+        return Belt::all();
     }
 
     /**

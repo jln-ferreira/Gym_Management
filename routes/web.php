@@ -27,3 +27,6 @@ Route::get('student', 'StudentController@index');
 
 // -----[BELTS]-----
 Route::get('belt', 'BeltController@index');
+
+// -----[ITEM]-----
+// Route::get('item', 'ItemController@index');

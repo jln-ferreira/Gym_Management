@@ -36,12 +36,12 @@
                 <div class="rounded-lg shadow-sm p-4">
                     <h3 class="font-weight-bolder text-center">Graduations:</h3>
                     <hr/>
-                    <div class="row">
+                     <div class="row" >
                         <small class="mx-auto" v-if="this.graduations == ''">There is no Graduation</small>
                         <div class="card-graduation card col-lg-3 col-4" v-for="(graduation, index) in this.graduations" v-bind:key="graduation.id" @click="modifyPost(index)">
-                            <img class="card-img-top" :src="'image/belts/' + beltList[graduation.belt_id -1].name + '.png'" alt="Card image">
+                            <img class="card-img-top" :src="'image/belts/' + All_belts_Db[graduation.belt_id -1].name + '.png'" alt="Card image">
                             <div>
-                                <p class="text-center mb-0"><b>{{ beltList[graduation.belt_id -1].name }}</b></p>
+                                <p class="text-center mb-0"><b>{{ All_belts_Db[graduation.belt_id -1].name }}</b></p>
                                 <p class="text-center mb-0">{{ graduation.created_at.slice(0,10) }}</p>
                             </div>
                         </div>
@@ -56,11 +56,13 @@
 <script>
 export default {
     props:{
-        beltList: "", //all belts
+        beltList: "", //all belts of gym
     },
     data(){
         return{
             graduations: "", //all graduation of expecific student (AXIOS)
+            All_belts_Db: "", //all belts DB
+
             visibleGraduation: true,
             graduationSave: true, //change buttons save to cancel/edit/ delete
 
@@ -149,8 +151,15 @@ export default {
         },
     },
     created(){
+        // Fetch all [Belts] from DB
+        axios.get('/api/belt/all') //API ROUTER
+        // .then(response => console.log(response.data))
+        .then(response => this.All_belts_Db = response.data)
+        .catch(error => console.log(error))
+
         // Fetch all graduation of especial student
-        axios.get('/api/student/' + this.$route.params.id + '/graduation')
+        axios.get('/api/student/' + this.$route.params.id + '/graduation') //API ROUTER
+        // .then(response => console.log(response.data))
         .then(response => this.graduations = response.data)
         .catch(error => alert(error))
     }

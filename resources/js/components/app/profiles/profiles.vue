@@ -73,8 +73,8 @@ export default {
         .then(response => this.student = response.data)
         .catch(error => console.log(error))
 
-        // Fetch all [Belts] from DB
-        axios.get('/api/belt')
+        // Fetch all [Belts] from DB of a gym
+        axios.get('/belt') //WEB ROUTER
         .then(response => this.beltList = response.data)
         .catch(error => console.log(error))
 
