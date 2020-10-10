@@ -4,7 +4,6 @@
         <div class="card-header text-white text-left" @click="toggleGraduation()">
             <i class="fa fa-graduation-cap" aria-hidden="true"></i> Student Graduation <i :class="[faChanging(), 'float-right']" aria-hidden="true"></i>
         </div>
-
         <div class="bg-white shadow-sm rounded p-2 mb-4 row" v-show="this.visibleGraduation">
             <div class="col-md-5">
                 <!-- ----------[ADD GRADUATION]------------ -->
@@ -30,18 +29,17 @@
                 </div>
             </div>
              <!-- [EDIT AND ADD BELT] -->
-
             <!-- [ALL GRADUATION OF THIS STUDENT] -->
             <div class="col-md-7">
                 <div class="rounded-lg shadow-sm p-4">
                     <h3 class="font-weight-bolder text-center">Graduations:</h3>
                     <hr/>
-                     <div class="row" >
+                    <div class="row">
                         <small class="mx-auto" v-if="this.graduations == ''">There is no Graduation</small>
                         <div class="card-graduation card col-lg-3 col-4" v-for="(graduation, index) in this.graduations" v-bind:key="graduation.id" @click="modifyPost(index)">
-                            <img class="card-img-top" :src="'image/belts/' + All_belts_Db[graduation.belt_id -1].name + '.png'" alt="Card image">
+                            <img class="card-img-top" :src="'image/belts/' + beltList[graduation.belt_id -1].name + '.png'" alt="Card image">
                             <div>
-                                <p class="text-center mb-0"><b>{{ All_belts_Db[graduation.belt_id -1].name }}</b></p>
+                                <p class="text-center mb-0"><b>{{ beltList[graduation.belt_id -1].name }}</b></p>
                                 <p class="text-center mb-0">{{ graduation.created_at.slice(0,10) }}</p>
                             </div>
                         </div>
@@ -52,20 +50,16 @@
         </div>
     </section>
 </template>
-
 <script>
 export default {
     props:{
-        beltList: "", //all belts of gym
+        beltList: "", //all belts
     },
     data(){
         return{
             graduations: "", //all graduation of expecific student (AXIOS)
-            All_belts_Db: "", //all belts DB
-
             visibleGraduation: true,
             graduationSave: true, //change buttons save to cancel/edit/ delete
-
             // [POST] - New Graduation
             FormGraduation:{
                 id: "",
@@ -143,7 +137,7 @@ export default {
                 this.resetForm()
                 this.graduationSave = true
             })
-            .catch(error => console.log(error.response.data))
+            .catch(error => console.log(error.response))
         },
         cancelGraduation(){ //------[CANCEL]-------
             this.graduationSave = true
@@ -151,34 +145,25 @@ export default {
         },
     },
     created(){
-        // Fetch all [Belts] from DB
-        axios.get('/api/belt/all') //API ROUTER
-        // .then(response => console.log(response.data))
-        .then(response => this.All_belts_Db = response.data)
-        .catch(error => console.log(error))
-
         // Fetch all graduation of especial student
-        axios.get('/api/student/' + this.$route.params.id + '/graduation') //API ROUTER
-        // .then(response => console.log(response.data))
+        axios.get('/api/student/' + this.$route.params.id + '/graduation')
         .then(response => this.graduations = response.data)
         .catch(error => alert(error))
     }
 }
 </script>
-
 <style scoped>
 /* header of loggles */
 .card-header{
+    background: rgb(107,55,0);
+    background: linear-gradient(90deg, rgba(107,55,0,1) 0%, rgba(107,55,0,1) 67%, rgba(0,0,0,1) 69%, rgba(0,0,0,1) 88%, rgba(107,55,0,1) 91%);
     background: rgb(22,20,17);
     background: linear-gradient(90deg, rgba(22,20,17,1) 0%, rgba(80,42,13,1) 48%, rgba(86,45,32,1) 67%, rgba(0,0,0,1) 71%, rgba(0,0,0,1) 86%, rgba(86,45,32,1) 91%);
 }
-
-
 /* thead of table */
 .thead-belt{
     background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
 }
-
 /* [card for each  graduation] */
 .card-graduation{
     cursor: pointer;
@@ -187,5 +172,4 @@ export default {
   opacity: 0.5;
   transition:all 0.5s ease;
 }
-
 </style>

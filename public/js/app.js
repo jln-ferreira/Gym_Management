@@ -2643,20 +2643,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    beltList: "" //all belts of gym
+    beltList: "" //all belts
 
   },
   data: function data() {
     return {
       graduations: "",
       //all graduation of expecific student (AXIOS)
-      All_belts_Db: "",
-      //all belts DB
       visibleGraduation: true,
       graduationSave: true,
       //change buttons save to cancel/edit/ delete
@@ -2757,7 +2752,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this3.graduationSave = true;
       })["catch"](function (error) {
-        return console.log(error.response.data);
+        return console.log(error.response);
       });
     },
     cancelGraduation: function cancelGraduation() {
@@ -2769,18 +2764,8 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this4 = this;
 
-    // Fetch all [Belts] from DB
-    axios.get('/api/belt/all') //API ROUTER
-    // .then(response => console.log(response.data))
-    .then(function (response) {
-      return _this4.All_belts_Db = response.data;
-    })["catch"](function (error) {
-      return console.log(error);
-    }); // Fetch all graduation of especial student
-
-    axios.get('/api/student/' + this.$route.params.id + '/graduation') //API ROUTER
-    // .then(response => console.log(response.data))
-    .then(function (response) {
+    // Fetch all graduation of especial student
+    axios.get('/api/student/' + this.$route.params.id + '/graduation').then(function (response) {
       return _this4.graduations = response.data;
     })["catch"](function (error) {
       return alert(error);
@@ -8188,7 +8173,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* header of loggles */\n.card-header[data-v-521ca4c9]{\n    background: rgb(22,20,17);\n    background: linear-gradient(90deg, rgba(22,20,17,1) 0%, rgba(80,42,13,1) 48%, rgba(86,45,32,1) 67%, rgba(0,0,0,1) 71%, rgba(0,0,0,1) 86%, rgba(86,45,32,1) 91%);\n}\n\n\n/* thead of table */\n.thead-belt[data-v-521ca4c9]{\n    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);\n}\n\n/* [card for each  graduation] */\n.card-graduation[data-v-521ca4c9]{\n    cursor: pointer;\n}\n.card-graduation[data-v-521ca4c9] :hover{\n  opacity: 0.5;\n  transition:all 0.5s ease;\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* header of loggles */\n.card-header[data-v-521ca4c9]{\n    background: rgb(107,55,0);\n    background: linear-gradient(90deg, rgba(107,55,0,1) 0%, rgba(107,55,0,1) 67%, rgba(0,0,0,1) 69%, rgba(0,0,0,1) 88%, rgba(107,55,0,1) 91%);\n    background: rgb(22,20,17);\n    background: linear-gradient(90deg, rgba(22,20,17,1) 0%, rgba(80,42,13,1) 48%, rgba(86,45,32,1) 67%, rgba(0,0,0,1) 71%, rgba(0,0,0,1) 86%, rgba(86,45,32,1) 91%);\n}\n/* thead of table */\n.thead-belt[data-v-521ca4c9]{\n    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);\n}\n/* [card for each  graduation] */\n.card-graduation[data-v-521ca4c9]{\n    cursor: pointer;\n}\n.card-graduation[data-v-521ca4c9] :hover{\n  opacity: 0.5;\n  transition:all 0.5s ease;\n}\n", ""]);
 
 // exports
 
@@ -41626,7 +41611,7 @@ var render = function() {
                         attrs: {
                           src:
                             "image/belts/" +
-                            _vm.All_belts_Db[graduation.belt_id - 1].name +
+                            _vm.beltList[graduation.belt_id - 1].name +
                             ".png",
                           alt: "Card image"
                         }
@@ -41636,9 +41621,7 @@ var render = function() {
                         _c("p", { staticClass: "text-center mb-0" }, [
                           _c("b", [
                             _vm._v(
-                              _vm._s(
-                                _vm.All_belts_Db[graduation.belt_id - 1].name
-                              )
+                              _vm._s(_vm.beltList[graduation.belt_id - 1].name)
                             )
                           ])
                         ]),
