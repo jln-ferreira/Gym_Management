@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Paymment;
 use App\Student;
+use DB;
+
+use Illuminate\Support\Facades\Auth;
 
 class PaymmentController extends Controller
 {
@@ -17,6 +20,17 @@ class PaymmentController extends Controller
     public function index()
     {
         return Paymment::with(['student','item'])->get();
+    }
+
+    public function indexAuth()
+    {
+        $student_Gym = Auth::user()->gym_id;
+
+        return Paymment::with(['student','item'])
+        ->whereHas('item', function($q) use($student_Gym) {
+            $q->where('gym_id', '=', $student_Gym);
+        })
+        ->get();
     }
 
     /**

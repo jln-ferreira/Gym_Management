@@ -2554,7 +2554,8 @@ __webpack_require__.r(__webpack_exports__);
     var _this4 = this;
 
     // Fetch all [paymments] from DB
-    axios.get('/api/paymment').then(function (response) {
+    axios.get('/paymment') //web ROUTER
+    .then(function (response) {
       _this4.paymmentList = response.data;
       setTimeout(function () {
         return $('#table_paymment').DataTable();
@@ -2563,13 +2564,15 @@ __webpack_require__.r(__webpack_exports__);
       return console.log(error);
     }); // Fetch [student] to show his profile from DB
 
-    axios.get('/api/student').then(function (response) {
+    axios.get('/student') //web ROUTER
+    .then(function (response) {
       return _this4.allStudents = response.data;
     })["catch"](function (error) {
       return console.log(error);
     }); // Fetch [Item] to show his profile from DB
 
-    axios.get('/api/item').then(function (response) {
+    axios.get('/item') //web ROUTER
+    .then(function (response) {
       response.data.forEach(function (element) {
         //push all itens are for selling (income)
         if (element.identifier == 'p' || element.identifier == 'cp') _this4.allItems.push(element);
@@ -2652,6 +2655,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       graduations: "",
       //all graduation of expecific student (AXIOS)
+      spencialbelt: "",
+      //all belt for this gym
       visibleGraduation: true,
       graduationSave: true,
       //change buttons save to cancel/edit/ delete
@@ -2766,7 +2771,15 @@ __webpack_require__.r(__webpack_exports__);
 
     // Fetch all graduation of especial student
     axios.get('/api/student/' + this.$route.params.id + '/graduation').then(function (response) {
-      return _this4.graduations = response.data;
+      // console.log(response.data);
+      _this4.graduations = response.data;
+    })["catch"](function (error) {
+      return alert(error);
+    }); // Fetch all belts of especial student
+
+    axios.get('/belt').then(function (response) {
+      // console.log(response.data);
+      _this4.spencialbelt = response.data;
     })["catch"](function (error) {
       return alert(error);
     });
@@ -2931,13 +2944,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    student: "",
-    //Student selected
-    beltList: "" //all belts
+    student: "" //Student selected
 
   },
   data: function data() {
     return {
+      spencialbelt: "",
+      //all belts of this gym
       visiblePersonal: true,
       statusList: ["Student", "Trial", "Professor"]
     };
@@ -2960,6 +2973,17 @@ __webpack_require__.r(__webpack_exports__);
         return alert(error.response.data);
       });
     }
+  },
+  created: function created() {
+    var _this = this;
+
+    // Fetch all belts of especial student
+    axios.get('/belt').then(function (response) {
+      // console.log(response.data);
+      _this.spencialbelt = response.data;
+    })["catch"](function (error) {
+      return alert(error);
+    });
   }
 });
 
@@ -3275,7 +3299,7 @@ __webpack_require__.r(__webpack_exports__);
       return console.log(error);
     }); // Fetch all [Belts] from DB of a gym
 
-    axios.get('/belt') //WEB ROUTER
+    axios.get('/api/belt') //WEB ROUTER
     .then(function (response) {
       return _this2.beltList = response.data;
     })["catch"](function (error) {
@@ -8173,7 +8197,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* header of loggles */\n.card-header[data-v-521ca4c9]{\n    background: rgb(107,55,0);\n    background: linear-gradient(90deg, rgba(107,55,0,1) 0%, rgba(107,55,0,1) 67%, rgba(0,0,0,1) 69%, rgba(0,0,0,1) 88%, rgba(107,55,0,1) 91%);\n    background: rgb(22,20,17);\n    background: linear-gradient(90deg, rgba(22,20,17,1) 0%, rgba(80,42,13,1) 48%, rgba(86,45,32,1) 67%, rgba(0,0,0,1) 71%, rgba(0,0,0,1) 86%, rgba(86,45,32,1) 91%);\n}\n/* thead of table */\n.thead-belt[data-v-521ca4c9]{\n    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);\n}\n/* [card for each  graduation] */\n.card-graduation[data-v-521ca4c9]{\n    cursor: pointer;\n}\n.card-graduation[data-v-521ca4c9] :hover{\n  opacity: 0.5;\n  transition:all 0.5s ease;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* header of loggles */\n.card-header[data-v-521ca4c9]{\n    background: rgb(107,55,0);\n    background: linear-gradient(90deg, rgba(107,55,0,1) 0%, rgba(107,55,0,1) 67%, rgba(0,0,0,1) 69%, rgba(0,0,0,1) 88%, rgba(107,55,0,1) 91%);\n    background: rgb(22,20,17);\n    background: linear-gradient(90deg, rgba(22,20,17,1) 0%, rgba(80,42,13,1) 48%, rgba(86,45,32,1) 67%, rgba(0,0,0,1) 71%, rgba(0,0,0,1) 86%, rgba(86,45,32,1) 91%);\n}\n/* thead of table */\n.thead-belt[data-v-521ca4c9]{\n    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);\n}\n/* [card for each  graduation] */\n.card-graduation[data-v-521ca4c9]{\n    cursor: pointer;\n}\n.card-graduation[data-v-521ca4c9] :hover{\n  opacity: 0.5;\n  transition:all 0.5s ease;\n}\n", ""]);
 
 // exports
 
@@ -8211,7 +8235,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* header of loggles */\n.card-header[data-v-35d55bed]{\n    background: rgb(22,20,17);\n    background: linear-gradient(90deg, rgba(22,20,17,1) 0%, rgba(122,36,36,1) 48%, rgba(142,11,11,1) 67%, rgba(0,0,0,1) 71%, rgba(0,0,0,1) 86%, rgba(142,11,11,1) 91%);\n}\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* header of loggles */\n.card-header[data-v-35d55bed]{\n    background: rgb(22,20,17);\n    background: linear-gradient(90deg, rgba(22,20,17,1) 0%, rgba(122,36,36,1) 48%, rgba(142,11,11,1) 67%, rgba(0,0,0,1) 71%, rgba(0,0,0,1) 86%, rgba(142,11,11,1) 91%);\n}\n\n\n", ""]);
 
 // exports
 
@@ -41439,7 +41463,7 @@ var render = function() {
                         }
                       }
                     },
-                    _vm._l(_vm.beltList, function(belt) {
+                    _vm._l(_vm.spencialbelt, function(belt) {
                       return _c("option", {
                         key: belt.id,
                         domProps: {
@@ -42012,7 +42036,7 @@ var render = function() {
                       }
                     }
                   },
-                  _vm._l(_vm.beltList, function(belt) {
+                  _vm._l(_vm.spencialbelt, function(belt) {
                     return _c("option", {
                       key: belt.id,
                       domProps: {
@@ -42614,9 +42638,7 @@ var render = function() {
       _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
-      _c("personal", {
-        attrs: { student: _vm.student, beltList: _vm.beltList }
-      }),
+      _c("personal", { attrs: { student: _vm.student } }),
       _vm._v(" "),
       _c("responsable"),
       _vm._v(" "),

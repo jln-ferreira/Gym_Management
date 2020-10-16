@@ -214,7 +214,7 @@ export default {
     },
     created(){
         // Fetch all [paymments] from DB
-        axios.get('/api/paymment')
+        axios.get('/paymment') //web ROUTER
         .then(response => {
             this.paymmentList = response.data
             setTimeout(() => $('#table_paymment').DataTable(), 1000);
@@ -222,12 +222,12 @@ export default {
         .catch(error => console.log(error))
 
         // Fetch [student] to show his profile from DB
-        axios.get('/api/student')
+        axios.get('/student') //web ROUTER
         .then(response => this.allStudents = response.data)
         .catch(error => console.log(error))
 
         // Fetch [Item] to show his profile from DB
-        axios.get('/api/item')
+        axios.get('/item') //web ROUTER
         .then(response => {
             response.data.forEach(element => { //push all itens are for selling (income)
                 if (element.identifier == 'p' || element.identifier == 'cp') this.allItems.push(element)

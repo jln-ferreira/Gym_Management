@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 // model
 use App\Belt;
 use App\Student;
+use App\Gym;
+
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -18,14 +20,13 @@ class BeltController extends Controller
      */
     public function index()
     {
-        $student_Gym = Auth::user()->gym_id;
-        return Belt::all()->where('gym_id', '=', $student_Gym);
+        return Belt::all();
     }
 
-    //fetch all belts from DB
-    public function allBelts()
+    public function indexAuth()
     {
-        return Belt::all();
+        $student_Gym = Auth::user()->gym_id;
+        return Gym::find($student_Gym)->belt;
     }
 
     /**

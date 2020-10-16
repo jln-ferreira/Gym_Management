@@ -8,7 +8,7 @@
         <!-- end HEADER -->
         <hr/>
 
-        <personal :student='student' :beltList='beltList'/>
+        <personal :student='student'/>
 
         <responsable />
 
@@ -74,7 +74,7 @@ export default {
         .catch(error => console.log(error))
 
         // Fetch all [Belts] from DB of a gym
-        axios.get('/belt') //WEB ROUTER
+        axios.get('/api/belt') //WEB ROUTER
         .then(response => this.beltList = response.data)
         .catch(error => console.log(error))
 

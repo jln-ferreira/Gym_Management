@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Item;
+use App\Gym;
 
 class ItemController extends Controller
 {
@@ -16,6 +17,14 @@ class ItemController extends Controller
     public function index()
     {
         $allItens = Item::with('subcategory')->get();
+        return $allItens;
+    }
+
+    public function indexAuth()
+    {
+        $student_Gym = Auth::user()->gym_id;
+        $allItens = Gym::find($student_Gym)->item;
+
         return $allItens;
     }
 

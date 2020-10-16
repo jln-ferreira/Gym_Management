@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 // model
 use App\Student;
 use App\Belt;
+use App\gym;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;

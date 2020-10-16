@@ -12,7 +12,7 @@
                         <div class="form-group">
                             <label for="belt_graduation">Belt</label>
                             <select id="belt_graduation" class="form-control" v-model="FormGraduation.belt_id" required>
-                                <option v-for='belt in beltList' v-text='belt.name' v-bind:key="belt.id" :value="belt.id"></option>
+                                <option v-for='belt in spencialbelt' v-text='belt.name' v-bind:key="belt.id" :value="belt.id"></option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -58,6 +58,7 @@ export default {
     data(){
         return{
             graduations: "", //all graduation of expecific student (AXIOS)
+            spencialbelt: "", //all belt for this gym
             visibleGraduation: true,
             graduationSave: true, //change buttons save to cancel/edit/ delete
             // [POST] - New Graduation
@@ -147,7 +148,18 @@ export default {
     created(){
         // Fetch all graduation of especial student
         axios.get('/api/student/' + this.$route.params.id + '/graduation')
-        .then(response => this.graduations = response.data)
+        .then(response => {
+            // console.log(response.data);
+            this.graduations = response.data
+        })
+        .catch(error => alert(error))
+
+        // Fetch all belts of especial student
+        axios.get('/belt')
+        .then(response => {
+            // console.log(response.data);
+            this.spencialbelt = response.data
+        })
         .catch(error => alert(error))
     }
 }

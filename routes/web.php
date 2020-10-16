@@ -26,9 +26,12 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 Route::get('student', 'StudentController@index');
 
 // -----[BELTS]-----
-Route::get('belt', 'BeltController@index');
+Route::get('belt', 'BeltController@indexAuth');
 
 // -----[ITEM]-----
-// Route::get('item', 'ItemController@index');
+Route::get('item', 'ItemController@indexAuth');
+
+// -----[FINANCE]-----
+Route::get('paymment', 'PaymmentController@indexAuth');
 
 

@@ -23,8 +23,7 @@ Route::get('student/{student_id}/responsable', 'StudentController@StudentProfile
 Route::get('student/{student_id}/paymment', 'StudentController@PaymmentProfile');
 
 // -----[BELTS]-----
-Route::get('belt/all', 'BeltController@allBelts'); //all belts
-// Route::resource('belt', 'BeltController');
+Route::resource('belt', 'BeltController');
 
 // -----[GRADUATION]-----
 Route::resource('graduation', 'GraduationController');

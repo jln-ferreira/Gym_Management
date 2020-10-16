@@ -37,7 +37,7 @@
                     <div class="form-group col-md-6">
                         <label for="belt">Belt</label>
                         <select id="belt" class="form-control" v-model="student.belt_id" required>
-                             <option v-for='belt in beltList' v-text='belt.name' v-bind:key="belt.id" :value="belt.id"></option>
+                             <option v-for='belt in spencialbelt' v-text='belt.name' v-bind:key="belt.id" :value="belt.id"></option>
                         </select>
                     </div>
                     <div class="form-group col-md-2">
@@ -69,10 +69,11 @@
 export default {
     props:{
         student: "", //Student selected
-        beltList: "", //all belts
     },
     data(){
         return{
+            spencialbelt: "", //all belts of this gym
+
             visiblePersonal: true,
             statusList: ["Student", "Trial", "Professor"]
         }
@@ -93,6 +94,15 @@ export default {
             .catch(error => alert(error.response.data))
         }
     },
+    created(){
+        // Fetch all belts of especial student
+        axios.get('/belt')
+        .then(response => {
+            // console.log(response.data);
+            this.spencialbelt = response.data
+        })
+        .catch(error => alert(error))
+    }
 }
 </script>
 
