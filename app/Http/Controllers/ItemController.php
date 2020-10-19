@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Item;
 use App\Gym;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {

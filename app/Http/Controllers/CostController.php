@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Cost;
 
+use Illuminate\Support\Facades\Auth;
+
 class CostController extends Controller
 {
     /**
@@ -16,6 +18,17 @@ class CostController extends Controller
     public function index()
     {
         return Cost::with('item')->get();
+    }
+
+    public function indexAuth()
+    {
+        $student_Gym = Auth::user()->gym_id;
+
+        return Cost::with('item')
+        ->whereHas('item', function($q) use($student_Gym) {
+            $q->where('gym_id', '=', $student_Gym);
+        })
+        ->get();
     }
 
     /**
@@ -86,6 +99,7 @@ class CostController extends Controller
         $editCost->item_id       = $request->modifyCost['item'];
         $editCost->quantity      = $request->modifyCost['quantity'];
         $editCost->final_value   = $request->modifyCost['value'];
+        $editCost->comment       = $request->modifyCost['comment'];
         $editCost->save();
 
         return response('Cost Updated!', 200);

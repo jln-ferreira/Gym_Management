@@ -103,6 +103,7 @@ class PaymmentController extends Controller
         $editPaymment->item_id       = $request->modifyPaymment['item'];
         $editPaymment->quantity      = $request->modifyPaymment['quantity'];
         $editPaymment->final_value   = $request->modifyPaymment['value'];
+        $editPaymment->comment       = $request->modifyPaymment['comment'];
         $editPaymment->save();
 
         return response('Payment Updated!', 200);

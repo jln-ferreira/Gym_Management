@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Responsable;
 use App\Student;
+use Illuminate\Support\Facades\Auth;
 
 class ResponsableController extends Controller
 {

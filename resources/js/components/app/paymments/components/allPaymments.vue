@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label for="value">Value</label>
-                        <input type="number" class="form-control" id="value"  :value="FormPaymment.value" required>
+                        <input type="number" class="form-control" id="value"  v-model="FormPaymment.value" required>
                         <div class="text-center" v-show="this.value_exp_show">
                             <small><b>Expected value: </b></small><small class="badge badge-primary" @click="use_value_exp(value_exp)">{{ value_exp }}</small>
                         </div>

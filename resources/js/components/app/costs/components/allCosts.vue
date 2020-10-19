@@ -199,7 +199,7 @@ export default {
     },
     created(){
         // Fetch all [Cost] from DB
-        axios.get('/api/cost')
+        axios.get('/cost')
         .then(response => {
             this.costList = response.data
             setTimeout(() => $('#table_cost').DataTable(), 1000);
@@ -207,7 +207,7 @@ export default {
         .catch(error => console.log(error))
 
         // Fetch [Item] to show his profile from DB
-        axios.get('/api/item')
+        axios.get('/item')
         .then(response => {
             response.data.forEach(element => { //push all itens are for selling (income)
                 if (element.identifier == 'c') this.allItems.push(element)

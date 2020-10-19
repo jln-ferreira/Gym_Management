@@ -2231,7 +2231,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this4 = this;
 
     // Fetch all [Cost] from DB
-    axios.get('/api/cost').then(function (response) {
+    axios.get('/cost').then(function (response) {
       _this4.costList = response.data;
       setTimeout(function () {
         return $('#table_cost').DataTable();
@@ -2240,7 +2240,7 @@ __webpack_require__.r(__webpack_exports__);
       return console.log(error);
     }); // Fetch [Item] to show his profile from DB
 
-    axios.get('/api/item').then(function (response) {
+    axios.get('/item').then(function (response) {
       response.data.forEach(function (element) {
         //push all itens are for selling (income)
         if (element.identifier == 'c') _this4.allItems.push(element);
@@ -41125,9 +41125,25 @@ var render = function() {
                 _c("label", { attrs: { for: "value" } }, [_vm._v("Value")]),
                 _vm._v(" "),
                 _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.FormPaymment.value,
+                      expression: "FormPaymment.value"
+                    }
+                  ],
                   staticClass: "form-control",
                   attrs: { type: "number", id: "value", required: "" },
-                  domProps: { value: _vm.FormPaymment.value }
+                  domProps: { value: _vm.FormPaymment.value },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.FormPaymment, "value", $event.target.value)
+                    }
+                  }
                 }),
                 _vm._v(" "),
                 _c(

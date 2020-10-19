@@ -34,4 +34,7 @@ Route::get('item', 'ItemController@indexAuth');
 // -----[FINANCE]-----
 Route::get('paymment', 'PaymmentController@indexAuth');
 
+// -----[COST]-----
+Route::get('cost', 'CostController@indexAuth');
+
 
