@@ -37,4 +37,7 @@ Route::get('paymment', 'PaymmentController@indexAuth');
 // -----[COST]-----
 Route::get('cost', 'CostController@indexAuth');
 
+// -----[GYM]-----
+Route::get('gym', 'GymController@indexAuth');
+
 

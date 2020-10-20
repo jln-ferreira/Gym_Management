@@ -30,7 +30,7 @@
 
                 </div>
                  <!-- COMPONENTs -->
-                <div class="col-md-9 col-sm-6">
+                <div class="col-md-9 col-sm-8">
                     <gymProfile/>
                 </div>
 
