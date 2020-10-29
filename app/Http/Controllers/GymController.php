@@ -76,7 +76,15 @@ class GymController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $myGym = Gym::find($id);
+        $myGym->name     = $request->myGym['name'];
+        $myGym->country  = $request->myGym['country'];
+        $myGym->address  = $request->myGym['address'];
+        $myGym->postcode = $request->myGym['postcode'];
+        $myGym->comment  = $request->myGym['comment'];
+        $myGym->save();
+
+        return 'Gym Edited!';
     }
 
     /**

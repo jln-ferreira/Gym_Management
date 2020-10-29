@@ -1,6 +1,6 @@
 <template>
     <section class="bg-white shadow-sm rounded p-2 mb-4 row">
-        <form method="post" class="col-sm-12">
+        <form method="post" class="col-sm-12" @submit.prevent="Gym_edit">
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="name">Name</label>
@@ -37,6 +37,18 @@ export default {
     data(){
         return{
             myGym: Object,
+            errors: {},
+        }
+    },
+    methods:{
+        //[EDIT GYM INFORMATION]
+        Gym_edit(){
+            axios.post('/api/gym/' + this.myGym.id, {
+                myGym: this.myGym,
+                _method: 'patch'
+                })
+                .then(response => alert(response.data))
+                .catch(error => this.errors = error.response.data.errors)
         }
     },
     created(){

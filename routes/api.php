@@ -39,3 +39,6 @@ Route::resource('cost', 'costController');
 
 // -----[ITEM]-----
 Route::resource('item', 'ItemController');
+
+// -----[GYM]-----
+Route::resource('gym', 'GymController');

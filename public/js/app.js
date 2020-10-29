@@ -3430,16 +3430,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      myGym: Object
+      myGym: Object,
+      errors: {}
     };
   },
+  methods: {
+    //[EDIT GYM INFORMATION]
+    Gym_edit: function Gym_edit() {
+      var _this = this;
+
+      axios.post('/api/gym/' + this.myGym.id, {
+        myGym: this.myGym,
+        _method: 'patch'
+      }).then(function (response) {
+        return alert(response.data);
+      })["catch"](function (error) {
+        return _this.errors = error.response.data.errors;
+      });
+    }
+  },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     // Fetch exatly my gym
     axios.get('/gym') //WEB ROUTE
     .then(function (response) {
-      return _this.myGym = response.data;
+      return _this2.myGym = response.data;
     })["catch"](function (error) {
       return console.log(error);
     });
@@ -42889,151 +42905,166 @@ var render = function() {
     "section",
     { staticClass: "bg-white shadow-sm rounded p-2 mb-4 row" },
     [
-      _c("form", { staticClass: "col-sm-12", attrs: { method: "post" } }, [
-        _c("div", { staticClass: "form-row" }, [
-          _c("div", { staticClass: "form-group col-md-12" }, [
-            _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.myGym.name,
-                  expression: "myGym.name"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", id: "name", required: "" },
-              domProps: { value: _vm.myGym.name },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+      _c(
+        "form",
+        {
+          staticClass: "col-sm-12",
+          attrs: { method: "post" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.Gym_edit($event)
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "form-row" }, [
+            _c("div", { staticClass: "form-group col-md-12" }, [
+              _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.myGym.name,
+                    expression: "myGym.name"
                   }
-                  _vm.$set(_vm.myGym, "name", $event.target.value)
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", id: "name", required: "" },
+                domProps: { value: _vm.myGym.name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.myGym, "name", $event.target.value)
+                  }
                 }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-row" }, [
-          _c("div", { staticClass: "form-group col-md-12" }, [
-            _c("label", { attrs: { for: "inputAddress" } }, [
-              _vm._v("Address")
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-row" }, [
+            _c("div", { staticClass: "form-group col-md-12" }, [
+              _c("label", { attrs: { for: "inputAddress" } }, [
+                _vm._v("Address")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.myGym.address,
+                    expression: "myGym.address"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "address",
+                  placeholder: "1234 Main St"
+                },
+                domProps: { value: _vm.myGym.address },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.myGym, "address", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-row" }, [
+            _c("div", { staticClass: "form-group col-md-4" }, [
+              _c("label", { attrs: { for: "coutry" } }, [_vm._v("Country")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.myGym.country,
+                    expression: "myGym.country"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", id: "country", placeholder: "Brazil" },
+                domProps: { value: _vm.myGym.country },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.myGym, "country", $event.target.value)
+                  }
+                }
+              })
             ]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.myGym.address,
-                  expression: "myGym.address"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                type: "text",
-                id: "address",
-                placeholder: "1234 Main St"
-              },
-              domProps: { value: _vm.myGym.address },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+            _c("div", { staticClass: "form-group col-md-3" }, [
+              _c("label", { attrs: { for: "postcode" } }, [
+                _vm._v("Post-Code")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.myGym.postcode,
+                    expression: "myGym.postcode"
                   }
-                  _vm.$set(_vm.myGym, "address", $event.target.value)
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", id: "postcode" },
+                domProps: { value: _vm.myGym.postcode },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.myGym, "postcode", $event.target.value)
+                  }
                 }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-row" }, [
-          _c("div", { staticClass: "form-group col-md-4" }, [
-            _c("label", { attrs: { for: "coutry" } }, [_vm._v("Country")]),
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "comments" } }, [_vm._v("Comments")]),
             _vm._v(" "),
-            _c("input", {
+            _c("textarea", {
               directives: [
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.myGym.country,
-                  expression: "myGym.country"
+                  value: _vm.myGym.comment,
+                  expression: "myGym.comment"
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text", id: "country", placeholder: "Brazil" },
-              domProps: { value: _vm.myGym.country },
+              attrs: { id: "comments", rows: "3" },
+              domProps: { value: _vm.myGym.comment },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.myGym, "country", $event.target.value)
+                  _vm.$set(_vm.myGym, "comment", $event.target.value)
                 }
               }
             })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-3" }, [
-            _c("label", { attrs: { for: "postcode" } }, [_vm._v("Post-Code")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.myGym.postcode,
-                  expression: "myGym.postcode"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", id: "postcode" },
-              domProps: { value: _vm.myGym.postcode },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.myGym, "postcode", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "comments" } }, [_vm._v("Comments")]),
-          _vm._v(" "),
-          _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.myGym.comment,
-                expression: "myGym.comment"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { id: "comments", rows: "3" },
-            domProps: { value: _vm.myGym.comment },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.myGym, "comment", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _vm._m(0)
-      ])
+          _vm._m(0)
+        ]
+      )
     ]
   )
 }
