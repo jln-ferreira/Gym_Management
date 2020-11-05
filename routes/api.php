@@ -16,29 +16,3 @@ use Illuminate\Support\Facades\Route;
 
 // -----[STUDENTS]-----
 Route::resource('student', 'StudentController');
-
-Route::post('student', 'StudentController@store');
-Route::get('student/{student_id}/graduation', 'StudentController@GraduationProfile');
-Route::get('student/{student_id}/responsable', 'StudentController@StudentProfile');
-Route::get('student/{student_id}/paymment', 'StudentController@PaymmentProfile');
-
-// -----[BELTS]-----
-Route::resource('belt', 'BeltController');
-
-// -----[GRADUATION]-----
-Route::resource('graduation', 'GraduationController');
-
-// -----[RESPONSABLE]-----
-Route::resource('responsable', 'ResponsableController');
-
-// -----[FINANCE]-----
-Route::resource('paymment', 'PaymmentController');
-
-// -----[COST]-----
-Route::resource('cost', 'costController');
-
-// -----[ITEM]-----
-Route::resource('item', 'ItemController');
-
-// -----[GYM]-----
-Route::resource('gym', 'GymController');
