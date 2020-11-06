@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// -----[STUDENTS]-----
-Route::resource('student', 'StudentController');
+//mailing -- CONTACT --
+Route::post('mail_contact', 'mailController@mailContact');

@@ -2045,25 +2045,40 @@ __webpack_require__.r(__webpack_exports__);
         name: "",
         email: "",
         comments: ""
-      }
+      },
+      //REGEX
+      regex_Email: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
+      regex_name: /^([A-Za-zéàë]{2,40} ?)+$/
     };
   },
   methods: {
+    // VALIDATE FORM
+    isEmailValid: function isEmailValid() {
+      return this.contact.email == "" ? "" : this.regex_Email.test(this.contact.email) ? 'has-success' : 'has-error';
+    },
+    isNameValid: function isNameValid() {
+      return this.contact.name == "" ? "" : this.regex_name.test(this.contact.name) ? 'has-success' : 'has-error';
+    },
+    AllowSend: function AllowSend() {
+      return this.isEmailValid() == 'has-success' && this.isNameValid() == 'has-success' ? "" : 'block-send';
+    },
+    // END VALIDATE FORM
+    cleanContact: function cleanContact() {
+      contact.name = "";
+      contact.email = "";
+      contact.comments = "";
+    },
     submitContact: function submitContact() {
       //-----[POST]------
       console.log("before axios");
-      axios.post('/mail_contact.php', this.contact) //API ROUTE
+      axios.post('/api/mail_contact', this.contact) //API ROUTE
       .then(function (response) {
-        return alert(response.data);
+        alert(response.data);
+        cleanContact();
       })["catch"](function (error) {
         return alert(error.response.data);
       });
     }
-  },
-  mounted: function mounted() {
-    axios.get("https://jsonplaceholder.typicode.com/todos/").then(function (response) {
-      return console.log(response);
-    });
   }
 });
 
@@ -2081,6 +2096,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_carousel_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/carousel.vue */ "./resources/js/components/welcome_Page/components/carousel.vue");
 /* harmony import */ var _components_contact_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/contact.vue */ "./resources/js/components/welcome_Page/components/contact.vue");
 /* harmony import */ var _components_ankle_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/ankle.vue */ "./resources/js/components/welcome_Page/components/ankle.vue");
+//
 //
 //
 //
@@ -6606,7 +6622,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n@media screen and (max-width: 768px) {\n.imgContact {\n    display: none;\n}\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* [VALIDATION FORM REGEX] */\n.block-send{\n    opacity: 0.6;\n    cursor: not-allowed;\n    pointer-events: none;\n}\n.has-error{\n    border: none;\n    background-color: #fcdcdc;\n    font-weight: bolder;\n}\n.has-success{\n    border-color: green;\n    font-weight: bolder;\n}\n/* ======----======= */\n@media screen and (max-width: 768px) {\n.imgContact {\n    display: none;\n}\n}\n\n\n", ""]);
 
 // exports
 
@@ -38626,9 +38642,9 @@ var render = function() {
       { staticClass: "container bg-white shadow rounded p-2 mb-4 mt-4" },
       [
         _c("div", { staticClass: "row" }, [
-          _vm._m(0),
-          _vm._v(" "),
           _c("div", { staticClass: "col-md-7 col-xs-12" }, [
+            _vm._m(0),
+            _vm._v(" "),
             _c(
               "form",
               {
@@ -38655,7 +38671,7 @@ var render = function() {
                           expression: "contact.name"
                         }
                       ],
-                      staticClass: "form-control",
+                      class: ["form-control", _vm.isNameValid()],
                       attrs: {
                         type: "text",
                         id: "name",
@@ -38686,7 +38702,7 @@ var render = function() {
                           expression: "contact.email"
                         }
                       ],
-                      staticClass: "form-control",
+                      class: ["form-control", _vm.isEmailValid()],
                       attrs: {
                         type: "text",
                         id: "email",
@@ -38740,12 +38756,22 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm._m(1)
+                _c(
+                  "button",
+                  {
+                    class: ["btn", "btn-danger", _vm.AllowSend()],
+                    attrs: { type: "submit", name: "submit" }
+                  },
+                  [
+                    _c("i", { staticClass: "far fa-paper-plane" }),
+                    _vm._v(" Send")
+                  ]
+                )
               ]
             )
           ]),
           _vm._v(" "),
-          _vm._m(2)
+          _vm._m(1)
         ])
       ]
     )
@@ -38759,19 +38785,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-sm-12 mb-3 text-center" }, [
       _c("h2", [_vm._v("Contact Us")])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-danger",
-        attrs: { type: "submit", name: "submit" }
-      },
-      [_c("i", { staticClass: "far fa-paper-plane" }), _vm._v(" Send")]
-    )
   },
   function() {
     var _vm = this
@@ -51128,19 +51141,6 @@ __webpack_require__(/*! ./jquery.dataTables.min.js */ "./resources/js/jquery.dat
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
-// import Echo from 'laravel-echo';
-// window.Pusher = require('pusher-js');
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     forceTLS: true
-// });
 
 /***/ }),
 

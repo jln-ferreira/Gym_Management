@@ -27,6 +27,7 @@
         </div>
       </div>
     </nav>
+
     <body style="padding-top: 70px;">
       <!------------ END NAVBAR --------->
     <!------------ carousel  ---------->
