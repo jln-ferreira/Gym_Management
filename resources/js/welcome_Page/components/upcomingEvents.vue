@@ -35,7 +35,7 @@
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <form method="post"  @submit.prevent="submitPreschreduling" class="col-sm-12">
+                        <form method="post" @submit.prevent="submitPreschreduling" class="col-sm-12">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="name">Name</label>
@@ -160,22 +160,22 @@ export default {
             }
         },
         cleanForm(){
-                register.name = ""
-                register.weight = ""
-                register.email = ""
-                register.gender = ""
-                register.phonenumber = ""
-                register.gym = ""
-                register.rank = ""
-                register.CheckAgree = ""
-                register.CheckRead =""
+                this.register.name = ""
+                this.register.weight = ""
+                this.register.email = ""
+                this.register.gender = ""
+                this.register.phonenumber = ""
+                this.register.gym = ""
+                this.register.rank = ""
+                this.register.CheckAgree = ""
+                this.register.CheckRead =""
         },
         submitPreschreduling(){ //-----[POST]------
-        console.log("before axios");
             axios.post('/api/mail_prescheduling', this.register) //API ROUTE
             .then(response =>{
                 alert(response.data)
                 this.cleanForm()
+                setTimeout(() => $('#myModal').modal('hide'), 1000);
             })
             // .catch(alert("Something went wrong, please contact us"))
         }

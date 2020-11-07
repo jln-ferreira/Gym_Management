@@ -2063,9 +2063,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     // END VALIDATE FORM
     cleanContact: function cleanContact() {
-      contact.name = "";
-      contact.email = "";
-      contact.comments = "";
+      this.contact.name = "";
+      this.contact.email = "";
+      this.contact.comments = "";
     },
     submitContact: function submitContact() {
       var _this = this;
@@ -2263,26 +2263,29 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     cleanForm: function cleanForm() {
-      register.name = "";
-      register.weight = "";
-      register.email = "";
-      register.gender = "";
-      register.phonenumber = "";
-      register.gym = "";
-      register.rank = "";
-      register.CheckAgree = "";
-      register.CheckRead = "";
+      this.register.name = "";
+      this.register.weight = "";
+      this.register.email = "";
+      this.register.gender = "";
+      this.register.phonenumber = "";
+      this.register.gym = "";
+      this.register.rank = "";
+      this.register.CheckAgree = "";
+      this.register.CheckRead = "";
     },
     submitPreschreduling: function submitPreschreduling() {
       var _this = this;
 
       //-----[POST]------
-      console.log("before axios");
       axios.post('/api/mail_prescheduling', this.register) //API ROUTE
       .then(function (response) {
         alert(response.data);
 
         _this.cleanForm();
+
+        setTimeout(function () {
+          return $('#myModal').modal('hide');
+        }, 1000);
       }); // .catch(alert("Something went wrong, please contact us"))
     }
   }

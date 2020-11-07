@@ -62,9 +62,9 @@ export default {
         // END VALIDATE FORM
 
         cleanContact(){
-            contact.name = "";
-            contact.email = "";
-            contact.comments = "";
+            this.contact.name = "";
+            this.contact.email = "";
+            this.contact.comments = "";
         },
         submitContact(){ //-----[POST]------
         console.log("before axios");
