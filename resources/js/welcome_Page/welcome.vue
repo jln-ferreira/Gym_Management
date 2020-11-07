@@ -18,7 +18,7 @@
               <a class="nav-link" href="#">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Services</a>
+              <a class="nav-link" href="#">Upcoming Events</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#contact">Contact</a>
@@ -29,10 +29,13 @@
     </nav>
 
     <body style="padding-top: 70px;">
-      <!------------ END NAVBAR --------->
+    <!------------ END NAVBAR --------->
     <!------------ carousel  ---------->
     <carousel/>
     <!------------ END carousel  ------>
+    <!------------ upcomingEvents  ---->
+    <upcomingEvents/>
+    <!------------ END upcomingEvents -->
     <!------------ CONTACT  ---------->
     <contact id="contact"/>
     <!------------ END CONTACT  ------>
@@ -50,6 +53,7 @@
 
 <script>
 import carousel from './components/carousel.vue'
+import upcomingEvents from './components/upcomingEvents.vue'
 import contact from './components/contact.vue'
 import ankle from './components/ankle.vue'
 
@@ -57,6 +61,7 @@ export default {
   name: 'App',
   components: {
     carousel,
+    upcomingEvents,
     contact,
     ankle
   },

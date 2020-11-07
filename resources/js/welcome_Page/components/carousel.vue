@@ -8,13 +8,12 @@
       </ul>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="image/regional_2020/Banner-Regionals_2020.jpg" alt="Los Angeles" class="img-fluid">
+          <img src="image/regional_2020/Banner-Regionals_2020.jpg" alt="Vancouver" class="img-fluid">
           <div class="carousel-caption">
-            <h3>Los Angeles</h3>
-            <p>We had such a great time in LA!</p>
+            <h3>Vancouver/BC</h3>
           </div>
         </div>
-        <div class="carousel-item">
+        <!-- <div class="carousel-item">
           <img src="image/example.jpg" alt="Chicago" class="img-fluid">
           <div class="carousel-caption">
             <h3>Chicago</h3>
@@ -27,7 +26,7 @@
             <h3>New York</h3>
             <p>We love the Big Apple!</p>
           </div>
-        </div>
+        </div> -->
       </div>
       <a class="carousel-control-prev" href="#carousel" data-slide="prev">
         <span class="carousel-control-prev-icon"></span>

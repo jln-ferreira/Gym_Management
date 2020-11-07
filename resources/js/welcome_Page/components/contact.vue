@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="p-5">
         <div class="container bg-white shadow rounded p-2 mb-4 mt-4">
             <div class="row">
                 <div class="col-md-7 col-xs-12">
