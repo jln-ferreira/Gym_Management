@@ -12,6 +12,8 @@
     <p><b>phonenumber</b> - {{ $data['phonenumber'] }}</p>
     <p><b>gym</b> - {{ $data['gym'] }}</p>
     <p><b>rank</b> - {{ $data['rank'] }}</p>
+    <p><b>division</b> - {{ $data['division'] }}</p>
+    <p><b>belt</b> - {{ $data['belt'] }}</p>
     <p><b>CheckAgree</b> - {{ $data['CheckAgree'] }}</p>
     <p><b>CheckRead</b> - {{ $data['CheckRead'] }}</p>
   </body>

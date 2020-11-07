@@ -36,6 +36,8 @@ class mailController extends Controller
             'CheckRead'   => $request['CheckRead'],
             'name'        => $request['name'],
             'email'       => $request['email'],
+            'division'    => $request['division'],
+            'belt'        => $request['belt'],
         );
 
         Mail::to('jln-ferreira@outlook.com')->send(new sendEmail_prescheduling($data));

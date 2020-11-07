@@ -2219,6 +2219,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2231,6 +2246,8 @@ __webpack_require__.r(__webpack_exports__);
         phonenumber: "",
         gym: "",
         rank: "",
+        division: "",
+        belt: "",
         CheckAgree: "",
         CheckRead: ""
       },
@@ -2251,12 +2268,51 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         id: 2,
         name: 'Male'
+      }],
+      divisionList: [{
+        id: 1,
+        name: 'Teen'
+      }, {
+        id: 2,
+        name: 'Adult'
+      }],
+      AdultbeltList: [{
+        id: 1,
+        name: "White"
+      }, {
+        id: 2,
+        name: "Blue"
+      }, {
+        id: 3,
+        name: "Purple"
+      }, {
+        id: 4,
+        name: "Brown"
+      }, {
+        id: 5,
+        name: "Black"
+      }],
+      TeenbeltList: [{
+        id: 1,
+        name: "white"
+      }, {
+        id: 2,
+        name: "Gray"
+      }, {
+        id: 3,
+        name: "Yellow"
+      }, {
+        id: 4,
+        name: "Orange"
+      }, {
+        id: 5,
+        name: "Green"
       }]
     };
   },
   methods: {
     displayTerm: function displayTerm() {
-      if (this.register.name != "" && this.register.weight != "" && this.register.email != "" && this.register.gender != "" && this.register.phonenumber != "" && this.register.rank != "") {
+      if (this.register.name != "" && this.register.weight != "" && this.register.email != "" && this.register.gender != "" && this.register.phonenumber != "" && this.register.gym != "" && this.register.division != "" && this.register.belt != "") {
         return 'd-block';
       } else {
         return 'd-none';
@@ -2272,6 +2328,8 @@ __webpack_require__.r(__webpack_exports__);
       this.register.rank = "";
       this.register.CheckAgree = "";
       this.register.CheckRead = "";
+      this.register.division = "";
+      this.register.belt = "";
     },
     submitPreschreduling: function submitPreschreduling() {
       var _this = this;
@@ -39199,7 +39257,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-row" }, [
-                  _c("div", { staticClass: "form-group col-md-6" }, [
+                  _c("div", { staticClass: "form-group col-md-4" }, [
                     _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
                     _vm._v(" "),
                     _c("input", {
@@ -39231,7 +39289,7 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group col-md-6" }, [
+                  _c("div", { staticClass: "form-group col-md-4" }, [
                     _c("label", { attrs: { for: "phonenumber" } }, [
                       _vm._v("Phone Number")
                     ]),
@@ -39266,39 +39324,9 @@ var render = function() {
                         }
                       }
                     })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-row" }, [
-                  _c("div", { staticClass: "form-group col-md-6" }, [
-                    _c("label", { attrs: { for: "gym" } }, [
-                      _vm._v("Gym Name")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.register.gym,
-                          expression: "register.gym"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "text", id: "gym", name: "gym" },
-                      domProps: { value: _vm.register.gym },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.register, "gym", $event.target.value)
-                        }
-                      }
-                    })
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group col-md-6" }, [
+                  _c("div", { staticClass: "form-group col-md-4" }, [
                     _c("label", { attrs: { for: "rank" } }, [
                       _vm._v("Experience/ Rank")
                     ]),
@@ -39347,6 +39375,190 @@ var render = function() {
                       }),
                       0
                     )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-row" }, [
+                  _c("div", { staticClass: "form-group col-md-6" }, [
+                    _c("label", { attrs: { for: "gym" } }, [
+                      _vm._v("Gym Name")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.register.gym,
+                          expression: "register.gym"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "gym",
+                        name: "gym",
+                        required: ""
+                      },
+                      domProps: { value: _vm.register.gym },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.register, "gym", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-md-3" }, [
+                    _c("label", { attrs: { for: "division" } }, [
+                      _vm._v("Division")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.register.division,
+                            expression: "register.division"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { id: "division", required: "" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.register,
+                              "division",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      _vm._l(_vm.divisionList, function(division) {
+                        return _c("option", {
+                          key: division.id,
+                          domProps: {
+                            value: division.name,
+                            textContent: _vm._s(division.name)
+                          }
+                        })
+                      }),
+                      0
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-md-3" }, [
+                    _c("label", { attrs: { for: "belt" } }, [_vm._v("Belt")]),
+                    _vm._v(" "),
+                    _vm.register.division == "Adult"
+                      ? _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.register.belt,
+                                expression: "register.belt"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { id: "belt", required: "" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.register,
+                                  "belt",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          _vm._l(_vm.AdultbeltList, function(belt) {
+                            return _c("option", {
+                              key: belt.id,
+                              domProps: {
+                                value: belt.name,
+                                textContent: _vm._s(belt.name)
+                              }
+                            })
+                          }),
+                          0
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.register.division == "Teen"
+                      ? _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.register.belt,
+                                expression: "register.belt"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { id: "belt", required: "" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.register,
+                                  "belt",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          _vm._l(_vm.TeenbeltList, function(belt) {
+                            return _c("option", {
+                              key: belt.id,
+                              domProps: {
+                                value: belt.name,
+                                textContent: _vm._s(belt.name)
+                              }
+                            })
+                          }),
+                          0
+                        )
+                      : _vm._e()
                   ])
                 ]),
                 _vm._v(" "),

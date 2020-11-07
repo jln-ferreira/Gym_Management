@@ -53,24 +53,39 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label for="email">Email</label>
                                     <input type="email" class='form-control' id="email" name="email" placeholder="your-email@example.com" v-model="register.email" required>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label for="phonenumber">Phone Number</label>
                                     <input type="number" class='form-control' id="phonenumber" name="phonenumber" placeholder="Numbers only" v-model="register.phonenumber">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="rank">Experience/ Rank</label>
+                                    <select id="rank" class="form-control" v-model="register.rank" required>
+                                        <option v-for='rank in rankList' v-text='rank.name' v-bind:key="rank.id" :value="rank.name"></option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="gym">Gym Name</label>
-                                    <input type="text" class="form-control" id="gym" name="gym" v-model="register.gym">
+                                    <input type="text" class="form-control" id="gym" name="gym" v-model="register.gym" required>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label for="rank">Experience/ Rank</label>
-                                    <select id="rank" class="form-control" v-model="register.rank" required>
-                                        <option v-for='rank in rankList' v-text='rank.name' v-bind:key="rank.id" :value="rank.name"></option>
+                                <div class="form-group col-md-3">
+                                    <label for="division">Division</label>
+                                    <select id="division" class="form-control" v-model="register.division" required>
+                                        <option v-for='division in divisionList' v-text='division.name' v-bind:key="division.id" :value="division.name"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="belt">Belt</label>
+                                    <select v-if="register.division == 'Adult'" id="belt" class="form-control" v-model="register.belt" required>
+                                        <option v-for='belt in AdultbeltList' v-text='belt.name' v-bind:key="belt.id" :value="belt.name"></option>
+                                    </select>
+                                    <select v-if="register.division == 'Teen'" id="belt" class="form-control" v-model="register.belt" required>
+                                        <option v-for='belt in TeenbeltList' v-text='belt.name' v-bind:key="belt.id" :value="belt.name"></option>
                                     </select>
                                 </div>
                             </div>
@@ -135,6 +150,8 @@ export default {
                 phonenumber: "",
                 gym: "",
                 rank: "",
+                division: "",
+                belt:"",
                 CheckAgree: "",
                 CheckRead:""
             },
@@ -149,11 +166,29 @@ export default {
                 {id:1,name:'Female'},
                 {id:2,name:'Male'}
             ],
+            divisionList: [
+                {id:1,name:'Teen'},
+                {id:2,name:'Adult'}
+            ],
+            AdultbeltList:[
+                {id:1,name:"White"},
+                {id:2,name:"Blue"},
+                {id:3,name:"Purple"},
+                {id:4,name:"Brown"},
+                {id:5,name:"Black"},
+            ],
+            TeenbeltList:[
+                {id:1,name:"white"},
+                {id:2,name:"Gray"},
+                {id:3,name:"Yellow"},
+                {id:4,name:"Orange"},
+                {id:5,name:"Green"}
+            ]
         }
     },
     methods:{
         displayTerm(){
-            if(this.register.name != "" && this.register.weight != "" && this.register.email != "" && this.register.gender != "" && this.register.phonenumber != "" && this.register.rank != ""){
+            if(this.register.name != "" && this.register.weight != "" && this.register.email != "" && this.register.gender != "" && this.register.phonenumber != "" && this.register.gym != ""  && this.register.division != ""  && this.register.belt != ""){
                 return 'd-block';
             }else{
                 return 'd-none';
@@ -169,6 +204,8 @@ export default {
                 this.register.rank = ""
                 this.register.CheckAgree = ""
                 this.register.CheckRead =""
+                this.register.division =""
+                this.register.belt =""
         },
         submitPreschreduling(){ //-----[POST]------
             axios.post('/api/mail_prescheduling', this.register) //API ROUTE
