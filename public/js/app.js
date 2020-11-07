@@ -2068,12 +2068,15 @@ __webpack_require__.r(__webpack_exports__);
       contact.comments = "";
     },
     submitContact: function submitContact() {
+      var _this = this;
+
       //-----[POST]------
       console.log("before axios");
       axios.post('/api/mail_contact', this.contact) //API ROUTE
       .then(function (response) {
         alert(response.data);
-        cleanContact();
+
+        _this.cleanContact();
       })["catch"](function (error) {
         return alert(error.response.data);
       });
@@ -2258,6 +2261,29 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         return 'd-none';
       }
+    },
+    cleanForm: function cleanForm() {
+      register.name = "";
+      register.weight = "";
+      register.email = "";
+      register.gender = "";
+      register.phonenumber = "";
+      register.gym = "";
+      register.rank = "";
+      register.CheckAgree = "";
+      register.CheckRead = "";
+    },
+    submitPreschreduling: function submitPreschreduling() {
+      var _this = this;
+
+      //-----[POST]------
+      console.log("before axios");
+      axios.post('/api/mail_prescheduling', this.register) //API ROUTE
+      .then(function (response) {
+        alert(response.data);
+
+        _this.cleanForm();
+      }); // .catch(alert("Something went wrong, please contact us"))
     }
   }
 });
@@ -6789,7 +6815,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.footer{\n    /* background: rgb(0,117,218);\n    background: linear-gradient(90deg, rgba(0,117,218,1) 0%, rgba(0,96,180,1) 32%, rgba(0,69,129,1) 75%, rgba(0,31,57,1) 99%); */\n    background: rgb(255,200,200);\n    background: linear-gradient(90deg, rgba(255,200,200,1) 0%, rgba(255,73,73,1) 26%, rgba(129,0,0,1) 69%, rgba(57,0,0,1) 99%);\n}\nhr{\n    border-top: 1px solid gold;\n}\n\n/* ---------[Media Icons]-------*/\n.social-buttons a{\n    display: inline-flex;\n    text-decoration: none;\n    font-size: 30px;\n    width: 60px;\n    height: 60px;\n    color: #fff;\n    justify-content: center;\n    align-items: center;\n    position: relative;\n    margin: 0 5px;\n}\n.social-buttons a:hover .fa-facebook{\n    color: #4267B2;\n}\n.social-buttons a:hover .fa-instagram{\n    color: #E1306C;\n}\n.social-buttons a:hover .fa-youtube{\n    color: #FF0000;\n}\n\n", ""]);
+exports.push([module.i, "\n.footer{\n    /* background: rgb(0,117,218);\n    background: linear-gradient(90deg, rgba(0,117,218,1) 0%, rgba(0,96,180,1) 32%, rgba(0,69,129,1) 75%, rgba(0,31,57,1) 99%); */\n    /* background: rgb(255,200,200);\n    background: linear-gradient(90deg, rgba(255,200,200,1) 0%, rgba(255,73,73,1) 26%, rgba(129,0,0,1) 69%, rgba(57,0,0,1) 99%); */\n    background-color: #000000;\nbackground-image: linear-gradient(147deg, #000000 0%, #04619f 74%);\n}\nhr{\n    border-top: 1px solid gold;\n}\n\n/* ---------[Media Icons]-------*/\n.social-buttons a{\n    display: inline-flex;\n    text-decoration: none;\n    font-size: 30px;\n    width: 60px;\n    height: 60px;\n    color: #fff;\n    justify-content: center;\n    align-items: center;\n    position: relative;\n    margin: 0 5px;\n}\n.social-buttons a:hover .fa-facebook{\n    color: #4267B2;\n}\n.social-buttons a:hover .fa-instagram{\n    color: #E1306C;\n}\n.social-buttons a:hover .fa-youtube{\n    color: #FF0000;\n}\n\n", ""]);
 
 // exports
 
@@ -6846,7 +6872,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#navbar[data-v-0fe8f086]{\n  /* background: rgb(0,117,218);\n  background: linear-gradient(90deg, rgba(0,117,218,1) 0%, rgba(0,96,180,1) 32%, rgba(0,69,129,1) 75%, rgba(0,31,57,1) 99%); */\n  background: rgb(255,200,200);\n  background: linear-gradient(90deg, rgba(255,200,200,1) 0%, rgba(255,73,73,1) 26%, rgba(129,0,0,1) 69%, rgba(57,0,0,1) 99%);\n}\n.navbar-toggler[data-v-0fe8f086] {\n  border: none;\n  background: transparent !important;\n}\n.navbar-toggler[data-v-0fe8f086]:focus {\n  outline: none;\n  background: transparent !important;\n}\n.navbar-toggler .icon-bar[data-v-0fe8f086] {\n  background-color: #fff;\n  transform: rotate(0deg) translate(0px, 0px);\n  transition: ease all .2s;\n}\n.navbar-toggler .icon-bar[data-v-0fe8f086] {\n  display: block;\n  width: 22px;\n  height: 2px;\n  border-radius: 1px;\n}\n.navbar-toggler .icon-bar+.icon-bar[data-v-0fe8f086] {\n  margin-top: 4px;\n}\n.icon-bar[data-v-0fe8f086]:nth-child(2) {\n  width: 16px;\n  transition: ease all .2s;\n}\n.navbar-toggler:hover>.icon-bar[data-v-0fe8f086]:nth-child(2) {\n  width: 22px;\n  transition: ease all .2s;\n}\n.navbar-toggler:active>.icon-bar[data-v-0fe8f086]:nth-child(2) {\n  width: 22px;\n  transition: ease all .2s;\n}\n.navbar-toggler:not(.collapsed) .icon-bar[data-v-0fe8f086]:nth-child(1) {\n  transform: rotate(45deg) translate(5px, 4px);\n  transition: ease all .2s;\n}\n.navbar-toggler:not(.collapsed) .icon-bar[data-v-0fe8f086]:nth-child(2) {\n  opacity: 0;\n  transition: ease all .2s;\n}\n.navbar-toggler:not(.collapsed) .icon-bar[data-v-0fe8f086]:nth-child(3) {\n  transform: rotate(-45deg) translate(4px, -4px);\n  transition: ease all .2s;\n}\n\n\n\n", ""]);
+exports.push([module.i, "\n#navbar[data-v-0fe8f086]{\n  /* background: rgb(0,117,218);\n  background: linear-gradient(90deg, rgba(0,117,218,1) 0%, rgba(0,96,180,1) 32%, rgba(0,69,129,1) 75%, rgba(0,31,57,1) 99%); */\n  /* background: rgb(255,200,200);\n  background: linear-gradient(90deg, rgba(255,200,200,1) 0%, rgba(255,73,73,1) 26%, rgba(129,0,0,1) 69%, rgba(57,0,0,1) 99%); */\n  background-color: #000000;\n  background-image: linear-gradient(147deg, #000000 0%, #04619f 74%);\n}\n.navbar-toggler[data-v-0fe8f086] {\n  border: none;\n  background: transparent !important;\n}\n.navbar-toggler[data-v-0fe8f086]:focus {\n  outline: none;\n  background: transparent !important;\n}\n.navbar-toggler .icon-bar[data-v-0fe8f086] {\n  background-color: #fff;\n  transform: rotate(0deg) translate(0px, 0px);\n  transition: ease all .2s;\n}\n.navbar-toggler .icon-bar[data-v-0fe8f086] {\n  display: block;\n  width: 22px;\n  height: 2px;\n  border-radius: 1px;\n}\n.navbar-toggler .icon-bar+.icon-bar[data-v-0fe8f086] {\n  margin-top: 4px;\n}\n.icon-bar[data-v-0fe8f086]:nth-child(2) {\n  width: 16px;\n  transition: ease all .2s;\n}\n.navbar-toggler:hover>.icon-bar[data-v-0fe8f086]:nth-child(2) {\n  width: 22px;\n  transition: ease all .2s;\n}\n.navbar-toggler:active>.icon-bar[data-v-0fe8f086]:nth-child(2) {\n  width: 22px;\n  transition: ease all .2s;\n}\n.navbar-toggler:not(.collapsed) .icon-bar[data-v-0fe8f086]:nth-child(1) {\n  transform: rotate(45deg) translate(5px, 4px);\n  transition: ease all .2s;\n}\n.navbar-toggler:not(.collapsed) .icon-bar[data-v-0fe8f086]:nth-child(2) {\n  opacity: 0;\n  transition: ease all .2s;\n}\n.navbar-toggler:not(.collapsed) .icon-bar[data-v-0fe8f086]:nth-child(3) {\n  transform: rotate(-45deg) translate(4px, -4px);\n  transition: ease all .2s;\n}\n\n\n\n", ""]);
 
 // exports
 
@@ -38694,7 +38720,11 @@ var staticRenderFns = [
         _c("div", { staticClass: "row justify-content-center" }, [
           _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
             _c("img", {
-              attrs: { src: "image/logo.png", alt: "logo", width: "100" }
+              attrs: {
+                src: "image/LogoVertical.png",
+                alt: "logo",
+                width: "100"
+              }
             })
           ])
         ]),
@@ -39037,7 +39067,16 @@ var render = function() {
           _c("div", { staticClass: "modal-body" }, [
             _c(
               "form",
-              { staticClass: "col-sm-12", attrs: { method: "post" } },
+              {
+                staticClass: "col-sm-12",
+                attrs: { method: "post" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.submitPreschreduling($event)
+                  }
+                }
+              },
               [
                 _c("div", { staticClass: "form-row" }, [
                   _c("div", { staticClass: "form-group col-md-6" }, [
@@ -39710,7 +39749,7 @@ var render = function() {
       [
         _c("carousel"),
         _vm._v(" "),
-        _c("upcomingEvents"),
+        _c("upcomingEvents", { attrs: { id: "upcommingevents" } }),
         _vm._v(" "),
         _c("contact", { attrs: { id: "contact" } }),
         _vm._v(" "),
@@ -39735,7 +39774,11 @@ var staticRenderFns = [
         _c("div", { staticClass: "container" }, [
           _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
             _c("img", {
-              attrs: { src: "image/logo.png", alt: "logo", width: "120" }
+              attrs: {
+                src: "image/LogoHorizontal.png",
+                alt: "logo",
+                width: "120"
+              }
             })
           ]),
           _vm._v(" "),
@@ -39776,15 +39819,14 @@ var staticRenderFns = [
                 ]),
                 _vm._v(" "),
                 _c("li", { staticClass: "nav-item" }, [
-                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                    _vm._v("About")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "nav-item" }, [
-                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                    _vm._v("Upcoming Events")
-                  ])
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { href: "#upcommingevents" }
+                    },
+                    [_vm._v("Upcoming Events")]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("li", { staticClass: "nav-item" }, [

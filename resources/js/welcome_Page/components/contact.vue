@@ -71,7 +71,7 @@ export default {
             axios.post('/api/mail_contact', this.contact) //API ROUTE
             .then(response =>{
                 alert(response.data)
-                cleanContact();
+                this.cleanContact()
             })
             .catch(error => alert(error.response.data))
         }

@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 
 //mailing -- CONTACT --
 Route::post('mail_contact', 'mailController@mailContact');
+//pre scheduling
+Route::post('mail_prescheduling', 'mailController@mailPrescheduling');
